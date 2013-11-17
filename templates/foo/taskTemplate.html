@@ -1,0 +1,23 @@
+<div class="task" id="<%= data.id %>">
+	<% for (var i = 0; i < data.parentCount; i++) { %>
+		---
+	<% } %>
+	<span name="category" class="editable"><%= data.category %></span>
+	<span name="description" class="editable"><%= data.description %></span>
+	<span name="start" class="editable time"><%= data.start %></span>
+	<% if (data.end) { %>
+		<span name="end" class="editable time"><%= data.end %></span>
+		<span><%= data.duration %></span>
+	<% } else { %>
+		<button class="btn btn-small stop"><i class="icon-stop"></i></button>
+	<% } %>
+
+	<span class="toolWrapper">
+		<i class="toolIcon icon-star"></i>
+		<span class="tools">
+			<button class="btn btn-small clone"><i class="icon-share-alt"></i></button>
+			<button class="btn btn-small newChild"><i class="icon-plus"></i></button>
+			<button class="btn btn-small btn-danger delete"><i class="icon-remove"></i></button>
+		</span>
+	</span>
+</div>
