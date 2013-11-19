@@ -2,8 +2,8 @@
 	<% for (var i = 0; i < data.parentCount; i++) { %>
 		---
 	<% } %>
-	<span name="category" class="editable"><%= data.category %></span>
-	<span name="description" class="editable"><%= data.description %></span>
+	<span name="category" class="editable text"><%= data.category %></span>
+	<span name="description" class="editable text"><%= data.description %></span>
 	<span name="start" class="editable time"><%= data.start %></span>
 	<% if (data.end) { %>
 		<span name="end" class="editable time"><%= data.end %></span>

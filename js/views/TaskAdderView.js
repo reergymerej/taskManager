@@ -30,12 +30,21 @@ define([
           onBeforeEdit: function () {
             return this.html() !== '';
           },
-          // getEditField: function (value) {
-          //   return $('<input />', {
-          //     value: 'hello',
-          //     backgroundColor: 'pink'
-          //   });
-          // },
+          getEditField: function (value) {
+            var fieldName = this.attr('name'),
+              editField = $('<input />', {
+                value: value
+              });
+
+            // TODO Change this to use getAutoComplete
+            if (this.is('.text')) {
+              editField.autocomplete({
+                source: _.uniq(taskCollection.pluck(fieldName)).sort()
+              });
+            }
+
+            return editField;
+          },
           getEditValue: function () {
             // if (this.is('.time')) {
             //   return TaskModel.getDateFromTimeString(this.html());
@@ -135,7 +144,8 @@ define([
             parentTaskEl = this.getTaskElById(modelData.parentTaskId);
             parentTaskEl.after(viewEl);
           } else {
-            viewEl.appendTo('#taskHolder');
+            // viewEl.appendTo('#taskHolder');
+            viewEl.prependTo('#taskHolder');
           }
         }
 
@@ -143,6 +153,15 @@ define([
           el: viewEl,
           model: model
         });
+      },
+
+      /**
+      * @param {String} field
+      * @return {String[]}
+      */
+      getAutoComplete: function (field) {
+        return ['a', 'aa', 'bbb', 'aaaa'];
+        // return taskCollection.pluck(field);
       }
     });
 

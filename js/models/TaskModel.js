@@ -60,6 +60,7 @@ define([
   	// @return {Number}
   	getDateFromTimeString: function (timeString) {
   		var d = new Date(),
+        timeString = this.convertTextTimeToTime(timeString),
   			timeParts = timeString.split(':');
 
   		timeParts[0] = parseInt(timeParts[0], 10);
@@ -68,6 +69,20 @@ define([
   		d.setMinutes(timeParts[1]);
   		return d.getTime();
   	},
+
+    // converts lazy times ('1234', '1408', '703') to time string ('12:34')
+    convertTextTimeToTime: function (textTime) {
+      var parts = [];
+      if (textTime.indexOf(':') === -1) {
+        parts = /([\d]{1,2})([\d]{2})/.exec(textTime);
+        if (!parts) {
+          console.error('invalid time', textTime);
+        } else {
+          textTime = parts[1] + ':' + parts[2];
+        }
+      }
+      return textTime;
+    },
 
   	// @return {Object}
   	getTemplateData: function () {
