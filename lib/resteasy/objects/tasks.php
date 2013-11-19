@@ -15,5 +15,20 @@ class Rest extends RestEasy {
 		$this->add('duration', 'number');
 		$this->add('inProgress', 'boolean');
 	}
+
+	public function getWhereParams () {
+		$p = $this->request->params;
+		$params = [];
+
+		if (isset($p['from']) && $val = $p['from']) {
+			array_push($params, "start >= " . $this->valueForField($val, 'start'));
+		}
+
+		if (isset($p['to']) && $val = $p['to']) {
+			array_push($params, "end <= " . $this->valueForField($val, 'end'));
+		}
+
+		return implode(' AND ', $params);
+	}
 }
 ?>

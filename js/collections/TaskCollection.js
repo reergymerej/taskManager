@@ -11,6 +11,7 @@ function(
   TaskModel
 ){
   var TaskCollection = Backbone.Collection.extend({
+    url: 'lib/resteasy/api/tasks',
     model: TaskModel,
     initialize: function(){}
   });

@@ -22,6 +22,19 @@ define([
       el: $("#page"),
 
       initialize: function () {
+        this.$el.on('submit', 'form', function (event) {
+          var form = $(this),
+            from = form.find('[name="from"]').val(),
+            to = form.find('[name="to"]').val();
+
+          taskCollection.fetch({
+            data: {
+              from: from,
+              to: to
+            }
+          });
+          return false;
+        });
       },
 
       render: function () {
