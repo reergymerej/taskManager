@@ -2,7 +2,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/foo/fooTemplate.html',
+  'text!templates/taskAdderTemplate.html',
   'views/TaskView',
   'models/TaskModel',
   'collections/TaskCollection'
@@ -11,7 +11,7 @@ define([
     $,
     _,
     Backbone,
-    fooTemplate,
+    taskAdderTemplate,
     TaskView,
     TaskModel,
     TaskCollection
@@ -101,7 +101,7 @@ define([
       },
 
       render: function () {
-        var compiledTemplate = _.template(fooTemplate, {});
+        var compiledTemplate = _.template(taskAdderTemplate, {});
         $('.menu li').removeClass('active');
         $('.menu li a[href="' + window.location.hash + '"]').parent().addClass('active');
         this.$el.html(compiledTemplate);

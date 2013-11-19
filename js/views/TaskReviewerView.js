@@ -4,7 +4,8 @@ define([
   'backbone',
   'models/TaskModel',
   'collections/TaskCollection',
-  'text!templates/foo/taskReviewerTemplate.html'
+  'text!templates/taskReviewerTemplate.html',
+  'views/TaskCollectionView'
 ],
   function (
     $,
@@ -12,16 +13,19 @@ define([
     Backbone,
     TaskModel,
     TaskCollection,
-    taskReviewerTemplate
+    taskReviewerTemplate,
+    TaskCollectionView
   ) {
 
     var taskCollection = new TaskCollection();
-    window.taskCollection = taskCollection;
+    
 
     var TaskReviewerView = Backbone.View.extend({
       el: $("#page"),
 
       initialize: function () {
+        var me = this;
+
         this.$el.on('submit', 'form', function (event) {
           var form = $(this),
             from = form.find('[name="from"]').val(),
@@ -31,6 +35,12 @@ define([
             data: {
               from: from,
               to: to
+            },
+            success: function (collection, response, options) {
+              var view = new TaskCollectionView({
+                el: me.$el.find('#tasks')[0],
+                collection: collection
+              });
             }
           });
           return false;

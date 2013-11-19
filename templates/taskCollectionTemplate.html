@@ -1,0 +1,17 @@
+<table class="table table-striped table-bordered table-condensed">
+	<tbody>
+
+	<% collection.each(function (model, index, collection) { 
+	  var data = model.getTemplateData(); %>
+	  <tr>
+	  	<td> <%= data.category %> </td>
+	  	<td> <%= data.description %> </td>
+	  	<td> <%= data.start %> </td>
+	  	<td> <%= data.end %> </td>
+	  	<td> <%= data.duration %> </td>
+	  	<td> <%= data.parentTaskId %> </td>
+	  </tr>
+	<% }); %>
+
+	</tbody>
+</table>
