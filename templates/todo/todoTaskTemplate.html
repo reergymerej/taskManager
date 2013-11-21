@@ -1,0 +1,16 @@
+<div id="<%= data.id %>" class="todoTask">
+	<span class="tree-branches">
+		<% for (var i = 0; i < data.parentCount; i++) { %>
+			<span class="branch <% if (i === 0) { %>first<% } %>"></span>
+		<% } %>
+	</span>
+	<span class="todoTaskWrapper">
+		<input type="checkbox" <%= data.checked %> />
+		<span class="task-label editable <%= data.cls %>"><%= data.label %></span>
+		<span class="buttons">
+			<button class="btn btn-mini downstream"><i class="icon-arrow-up"></i></button>
+			<button class="btn btn-mini upstream"><i class="icon-arrow-down"></i></button>
+			<button class="btn btn-mini btn-danger destroy"><i class="icon-remove"></i></button>
+		</span>
+	</span>
+</div>

@@ -4,8 +4,8 @@ define([
   'backbone',
   'models/TaskModel',
   'collections/TaskCollection',
-  'text!templates/taskReviewerTemplate.html',
-  'views/TaskCollectionView'
+  'text!templates/done/taskReviewerTemplate.html',
+  'views/done/TaskCollectionView'
 ],
   function (
     $,
@@ -18,7 +18,6 @@ define([
   ) {
 
     var taskCollection = new TaskCollection();
-    
 
     var TaskReviewerView = Backbone.View.extend({
       el: $("#page"),

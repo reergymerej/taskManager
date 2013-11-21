@@ -322,3 +322,37 @@ h1{
     color: blue;
   }
 }
+
+
+/************************/
+
+.todoTask {
+  .tree-branches {
+    .branch {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-bottom: 1px solid red;
+      &.first {
+        border-left: 1px solid red;
+      }
+    }
+  }
+
+  .todoTaskWrapper {
+    display: inline-block;
+    width: 200px;
+    border: 1px solid #666;
+    border-radius: 4px;
+    padding: 5px;
+
+    .task-label {
+      &.complete {
+        text-decoration: line-through;
+      }
+    }
+    .buttons {
+      margin-left: 5px;
+    }
+  }
+}

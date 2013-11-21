@@ -2,8 +2,8 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/taskAdderTemplate.html',
-  'views/TaskView',
+  'text!templates/doing/taskAdderTemplate.html',
+  'views/doing/TaskView',
   'models/TaskModel',
   'collections/TaskCollection'
 ],
@@ -21,7 +21,6 @@ define([
     window.taskCollection = taskCollection;
 
     var TaskAdderView = Backbone.View.extend({
-      el: $("#page"),
 
       initialize: function () {
         var me = this;

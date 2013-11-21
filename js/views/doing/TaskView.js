@@ -2,7 +2,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/taskTemplate.html'
+  'text!templates/doing/taskTemplate.html'
 ],
   function (
     $,

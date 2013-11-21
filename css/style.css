@@ -267,3 +267,22 @@ h1 {
   cursor: pointer;
   background-color: rgba(0, 100, 255, 0.5);
   color: blue; }
+
+/************************/
+.todoTask .tree-branches .branch {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-bottom: 1px solid red; }
+  .todoTask .tree-branches .branch.first {
+    border-left: 1px solid red; }
+.todoTask .todoTaskWrapper {
+  display: inline-block;
+  width: 200px;
+  border: 1px solid #666666;
+  border-radius: 4px;
+  padding: 5px; }
+  .todoTask .todoTaskWrapper .task-label.complete {
+    text-decoration: line-through; }
+  .todoTask .todoTaskWrapper .buttons {
+    margin-left: 5px; }
