@@ -14,8 +14,6 @@ function (
       url: 'lib/resteasy/api/todotasks',
       model: TodoTaskModel,
       initialize: function(){
-        // TODO This should represent an object in the db.
-        this.id = Date.now();
       },
 
       getDownstreamTasks: function (model) {

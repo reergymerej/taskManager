@@ -3,6 +3,8 @@ define([
   'underscore',
   'backbone',
   'text!templates/todo/todoTemplate.html',
+  'views/todo/TodoListView',
+  'models/todo/TodoListModel',
   'collections/todo/TodoCollection',
   'models/todo/TodoTaskModel',
   'views/todo/TodoTaskView'
@@ -12,6 +14,8 @@ define([
     _,
     Backbone,
     todoTemplate,
+    TodoListView,
+    TodoListModel,
     TodoCollection,
     TodoTaskModel,
     TodoTaskView
@@ -34,18 +38,30 @@ define([
         });
 
         this.$el.on('click', 'button.add', function (event) {
-          todoCollection.create({
-            todoCollectionId: todoCollection.id
-          });
+          if (todoCollection.id) {
+            todoCollection.create({
+              todoCollectionId: todoCollection.id
+            });
+          }
         });
       },
 
       render: function () {
         var me = this,
-          compiledTemplate = _.template(todoTemplate, {});
+          compiledTemplate = _.template(todoTemplate, {}),
+          todoListCollectionView;
 
         // render the items in the collection
         this.$el.html(compiledTemplate);
+
+        todoListCollectionView = new TodoListView({
+          el: $('#todoListCollection')
+        });
+        todoListCollectionView.render();
+        todoListCollectionView.on('swaplist', function (id) {
+          todoCollection.id = id;
+          console.log('load the tasks for this collection', id);
+        })
 
         todoCollection.each(function (model, index, collection) {
           me.attachTaskView(model);
