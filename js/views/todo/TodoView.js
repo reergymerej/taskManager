@@ -1,3 +1,6 @@
+// This contains a view for managing todolists
+// and a view for the todotasks in the selected todolist.
+
 define([
   'jquery',
   'underscore',
@@ -60,8 +63,31 @@ define([
         todoListCollectionView.render();
         todoListCollectionView.on('swaplist', function (id) {
           todoCollection.id = id;
-          console.log('load the tasks for this collection', id);
-        })
+
+          todoCollection.fetch({
+            data: {
+              todoCollectionId: id
+            },
+            success: function () {
+              me.renderTasks();
+            },
+            error: function () {
+              console.error('unable to fetch todo collection', id);
+            }
+          }, {
+            reset: true
+          });
+        });
+
+        me.renderTasks();
+      },
+
+      // renders the TodoTasks for the current TodoList
+      renderTasks: function () {
+        var me = this;
+
+        // empty existing
+        $('.tasks', this.$el).empty();
 
         todoCollection.each(function (model, index, collection) {
           me.attachTaskView(model);

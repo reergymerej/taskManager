@@ -19,12 +19,8 @@ class Rest extends RestEasy {
 		$p = $this->request->params;
 		$params = [];
 
-		if (isset($p['from']) && $val = $p['from']) {
-			array_push($params, "start >= " . $this->valueForField($val, 'start'));
-		}
-
-		if (isset($p['to']) && $val = $p['to']) {
-			array_push($params, "end <= " . $this->valueForField($val, 'end'));
+		if (isset($p['todoCollectionId']) && $val = $p['todoCollectionId']) {
+			array_push($params, "todoCollectionId = " . $this->valueForField($val, 'todoCollectionId'));
 		}
 
 		return implode(' AND ', $params);

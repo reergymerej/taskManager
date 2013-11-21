@@ -80,7 +80,7 @@ define([
         } else if (templateData[0]) {
           templateData[0].selected = 'selected="selected"';
           this.currentList = templateData[0].id;
-          me.trigger('swaplist', this.currentList);
+          // me.trigger('swaplist', this.currentList);
         }
 
         compiledTemplate = _.template(todoListCollectionTemplate, {
