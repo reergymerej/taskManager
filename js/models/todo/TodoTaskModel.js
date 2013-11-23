@@ -23,8 +23,11 @@ define([
 
     	initialize: function () {
         this.on('destroy', function (model, collection, options) {
-          console.warn('need to destroy upstream');
-        });        
+          var upstream = this.collection.getUpstreamTasks(model);
+          _.each(upstream, function (taskModel) {
+            taskModel.destroy();
+          });
+        });
       },
 
       getTemplateData: function () {

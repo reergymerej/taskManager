@@ -47,6 +47,31 @@ define([
           });
         });
 
+        // Create a new model in place of this one.  Add this model
+        // as an upstream model.
+        this.$el.on('click', 'button.downstream', function (event) {
+
+          require(['models/todo/TodoTaskModel'], function (TodoTaskModel) {
+            var newModel = new TodoTaskModel();
+
+            newModel.save(
+              {
+                downstreamTaskId: me.model.get('downstreamTaskId'),
+                todoCollectionId: me.model.get('todoCollectionId')
+              },
+              {
+                success: function (model) {
+                  me.model.set({
+                    downstreamTaskId: model.get('id')
+                  });
+
+                  me.model.collection.add(model);
+                }
+              }
+            );
+          });
+        });
+
         this.$el.on('change', 'input[type="checkbox"]', function (event) {
           me.model.set({
             isComplete: $(this).prop('checked')
@@ -67,16 +92,7 @@ define([
           data: templateData
         });
 
-        // render the items in the collection
         this.$el.html(compiledTemplate);
-
-        // add event listeners
-
-
-
-        // $('.menu li').removeClass('active');
-        // $('.menu li a[href="' + window.location.hash + '"]').parent().addClass('active');
-
       }
     });
 

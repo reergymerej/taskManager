@@ -2,7 +2,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'models/TaskModel'
+  'models/doing/TaskModel'
 ], 
 function(
   $, 

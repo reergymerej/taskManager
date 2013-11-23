@@ -30,11 +30,12 @@ define([
         this.todoLists = new TodoListCollection();
         this.todoLists.fetch({
           success: function (collection, response, options) {
-            me.render();
+            me.trigger('loaded:todolists', me);
           }
         });
 
         this.todoLists.on('sync', function (collection, response, options) {
+          console.log('sync complete');
           me.render();
         });
 
@@ -44,7 +45,6 @@ define([
         this.$el.on('change', '#todo-lists', function (event) {
           var id = parseInt($(this).val(), 10);
           me.currentList = id;
-          console.log('change todo list', me.currentList);
           me.trigger('swaplist', id);
         });
 

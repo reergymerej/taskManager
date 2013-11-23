@@ -7,10 +7,8 @@ define([
   'backbone',
   'text!templates/todo/todoTemplate.html',
   'views/todo/TodoListView',
-  'models/todo/TodoListModel',
   'collections/todo/TodoCollection',
-  'models/todo/TodoTaskModel',
-  'views/todo/TodoTaskView'
+  'models/todo/TodoTaskModel'
 ],
   function (
     $,
@@ -18,10 +16,8 @@ define([
     Backbone,
     todoTemplate,
     TodoListView,
-    TodoListModel,
     TodoCollection,
-    TodoTaskModel,
-    TodoTaskView
+    TodoTaskModel
   ) {
 
     var todoCollection = new TodoCollection();
@@ -37,14 +33,19 @@ define([
 
 
         todoCollection.on('add remove', function (model, collection, options) {
-          me.render();
+          me.renderTasks();
         });
 
         this.$el.on('click', 'button.add', function (event) {
           if (todoCollection.id) {
-            todoCollection.create({
-              todoCollectionId: todoCollection.id
-            });
+            todoCollection.create(
+              {
+                todoCollectionId: todoCollection.id
+              },
+              {
+                wait: true
+              }
+            );
           }
         });
       },
@@ -60,7 +61,11 @@ define([
         todoListCollectionView = new TodoListView({
           el: $('#todoListCollection')
         });
-        todoListCollectionView.render();
+
+        todoListCollectionView.on('loaded:todolists', function (todoListCollectionView) {
+          todoListCollectionView.render();
+        });
+
         todoListCollectionView.on('swaplist', function (id) {
           todoCollection.id = id;
 
@@ -71,8 +76,12 @@ define([
             success: function () {
               me.renderTasks();
             },
-            error: function () {
-              console.error('unable to fetch todo collection', id);
+            error: function (collection) {
+              // TODO This is probably a new list.  For now, let's
+              // just assume this is the case and the fetch tasks
+              // response returned a 404.
+              collection.reset();
+              me.renderTasks();
             }
           }, {
             reset: true
@@ -89,29 +98,39 @@ define([
         // empty existing
         $('.tasks', this.$el).empty();
 
-        todoCollection.each(function (model, index, collection) {
+        // Group the collection by downstreamTaskId so attachTaskView
+        // is able to find what it's looking for.
+        console.warn('make sure these are in the proper order so the downstream tasks are added before upstream');
+        _.each(todoCollection.sortBy('downstreamTaskId'), function (model, index, collection) {
+          console.log(model.id);
           me.attachTaskView(model);
         });
 
         // highlight those with no upstream
       },
 
+      // This adds a TodoTaskView relative to its parent's view.
       attachTaskView: function (model) {
-        // find the parent
-        var downstreamEl = this.getTaskElByModelId(model.get('downstreamTaskId')),
-          el = $('<div />'),
-          taskView = new TodoTaskView({
-            el: el,
-            model: model
-          });
 
-        if (downstreamEl) {
-          downstreamEl.after(el);
-        } else {
-          $('.tasks', this.$el).append(el);
-        }
+        var me = this;
 
-        taskView.render();
+        require(['views/todo/TodoTaskView'], function (TodoTaskView) {
+          // find the parent
+          var downstreamEl = me.getTaskElByModelId(model.get('downstreamTaskId')),
+            el = $('<div />'),
+            taskView = new TodoTaskView({
+              el: el,
+              model: model
+            });
+
+          if (downstreamEl) {
+            downstreamEl.after(el);
+          } else {
+            $('.tasks', me.$el).append(el);
+          }
+
+          taskView.render();
+        });
       },
 
       getTaskElByModelId: function (id) {

@@ -27,6 +27,16 @@ function (
         } while (model);
         
         return tasks;
+      },
+
+      getUpstreamTasks: function (model) {
+        var tasks = [];
+        this.each(function (task) {
+         if (task.get('downstreamTaskId') === model.get('id')) {
+          tasks.push(task);
+         }
+        });
+        return tasks;
       }
     });
 

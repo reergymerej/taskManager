@@ -4,8 +4,8 @@ define([
   'backbone',
   'text!templates/doing/taskAdderTemplate.html',
   'views/doing/TaskView',
-  'models/TaskModel',
-  'collections/TaskCollection'
+  'models/doing/TaskModel',
+  'collections/doing/TaskCollection'
 ],
   function (
     $,

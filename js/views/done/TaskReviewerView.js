@@ -2,8 +2,8 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'models/TaskModel',
-  'collections/TaskCollection',
+  'models/doing/TaskModel',
+  'collections/doing/TaskCollection',
   'text!templates/done/taskReviewerTemplate.html',
   'views/done/TaskCollectionView'
 ],
