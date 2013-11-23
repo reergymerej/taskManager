@@ -20,7 +20,7 @@ define([
     var taskCollection = new TaskCollection();
     window.taskCollection = taskCollection;
 
-    var TaskAdderView = Backbone.View.extend({
+    var DoingView = Backbone.View.extend({
       el: $("#page"),
 
       initialize: function () {
@@ -165,5 +165,5 @@ define([
       }
     });
 
-    return TaskAdderView;
+    return DoingView;
   });

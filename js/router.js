@@ -5,7 +5,7 @@ define([
   'backbone',
   'views/home/HomeView',
   'views/todo/TodoView',
-  'views/doing/TaskAdderView',
+  'views/doing/DoingView',
   'views/done/TaskReviewerView'
 ],
   function (
@@ -14,7 +14,7 @@ define([
     Backbone,
     HomeView,
     TodoView,
-    TaskAdderView,
+    DoingView,
     TaskReviewerView
   ) {
 
@@ -22,8 +22,8 @@ define([
       routes: {
         home: 'showHome',
         todo: 'showTodo',
-        taskAdder: 'showTaskAdder',
-        taskViewer: 'showTaskReviewer',
+        doing: 'showTaskAdder',
+        done: 'showTaskReviewer',
         // Default
         '*actions': 'showHome'
       }
@@ -43,7 +43,7 @@ define([
       });
 
       app_router.on('route:showTaskAdder', function () {
-        var taskAdderView = new TaskAdderView({
+        var taskAdderView = new DoingView({
           el: $('#page')
         });
         taskAdderView.render();

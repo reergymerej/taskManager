@@ -4,7 +4,7 @@ define([
   'backbone',
   'text!templates/home/homeTemplate.html',
   'views/todo/TodoView',
-  'views/doing/TaskAdderView'
+  'views/doing/DoingView'
 ],
   function (
     $,
@@ -12,7 +12,7 @@ define([
     Backbone,
     homeTemplate,
     TodoView,
-    TaskAdderView
+    DoingView
   ) {
 
     var HomeView = Backbone.View.extend({
@@ -35,7 +35,7 @@ define([
           el: $('#todo')
         });
 
-        doing = new TaskAdderView({
+        doing = new DoingView({
           el: $('#doing')
         });
         doing.render();
