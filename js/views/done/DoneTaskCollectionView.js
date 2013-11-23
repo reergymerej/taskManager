@@ -11,7 +11,7 @@ define([
     taskCollectionTemplate
   ) {
 
-    var TaskCollectionView = Backbone.View.extend({
+    var DoneTaskCollectionView = Backbone.View.extend({
 
       initialize: function (config) {
         var me = this;
@@ -37,5 +37,5 @@ define([
       }
     });
 
-    return TaskCollectionView;
+    return DoneTaskCollectionView;
   });

@@ -6,7 +6,7 @@ define([
   'views/home/HomeView',
   'views/todo/TodoView',
   'views/doing/DoingView',
-  'views/done/TaskReviewerView'
+  'views/done/DoneView'
 ],
   function (
     $,
@@ -15,7 +15,7 @@ define([
     HomeView,
     TodoView,
     DoingView,
-    TaskReviewerView
+    DoneView
   ) {
 
     var AppRouter = Backbone.Router.extend({
@@ -50,7 +50,7 @@ define([
       });
 
       app_router.on('route:showTaskReviewer', function () {
-        var view = new TaskReviewerView();
+        var view = new DoneView();
         view.render();
       });
 

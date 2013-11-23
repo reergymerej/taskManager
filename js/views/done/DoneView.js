@@ -19,7 +19,7 @@ define([
 
     var taskCollection = new TaskCollection();
 
-    var TaskReviewerView = Backbone.View.extend({
+    var DoneView = Backbone.View.extend({
       el: $("#page"),
 
       initialize: function () {
@@ -54,5 +54,5 @@ define([
       }
     });
 
-    return TaskReviewerView;
+    return DoneView;
   });

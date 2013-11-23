@@ -31,6 +31,11 @@ define([
         this.todoLists.fetch({
           success: function (collection, response, options) {
             me.trigger('loaded:todolists', me);
+          },
+          error: function () {
+            // TODO This should not assume that there were just no lists available.
+            console.error('unable to fetch todo lists');
+            me.trigger('loaded:todolists', me);
           }
         });
 

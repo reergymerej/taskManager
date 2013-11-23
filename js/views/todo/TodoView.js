@@ -100,9 +100,7 @@ define([
 
         // Group the collection by downstreamTaskId so attachTaskView
         // is able to find what it's looking for.
-        console.warn('make sure these are in the proper order so the downstream tasks are added before upstream');
         _.each(todoCollection.sortBy('downstreamTaskId'), function (model, index, collection) {
-          console.log(model.id);
           me.attachTaskView(model);
         });
 
