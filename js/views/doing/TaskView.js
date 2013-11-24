@@ -22,7 +22,8 @@ define([
           var time = Date.now();
 
           me.model.set({
-            end: time
+            end: time,
+            inProgress: false
           });
         });
 

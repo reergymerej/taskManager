@@ -16,6 +16,7 @@ define([
   			start: Date.now(),
   			end: undefined,
   			duration: 0,
+        inProgress: true,
   			parentTaskId: undefined
   		};
   	},

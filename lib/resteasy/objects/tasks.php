@@ -28,6 +28,11 @@ class Rest extends RestEasy {
 			array_push($params, "start <= " . $this->valueForField($val, 'end'));
 		}
 
+		if (isset($p['inProgress'])) {
+			$val = $p['inProgress'] === 'true';
+			array_push($params, "inProgress = " . $this->valueForField($val, 'inProgress'));
+		}
+
 		return implode(' AND ', $params);
 	}
 }

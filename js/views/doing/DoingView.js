@@ -77,6 +77,20 @@ define([
           }
         });
 
+        // fetch the current inprogress tasks
+        taskCollection.fetch({
+          data: {
+            inProgress: true
+          },
+          success: function (collection, response, options) {
+            me.render();
+          },
+          error: function () {
+            console.error('no data');
+            me.render();
+          }
+        });
+
         this.$el.on('click', '#newTask', function () {
           me.newTask();
         });
@@ -92,29 +106,35 @@ define([
             delete data.duration;
             me.newTask(data);
           }
-
         });
 
-        this.$el.on('click', '.newChild', function () {
-          var parentTaskEl = $(this).closest('.task'),
-            parentId = me.getTaskIdFromElement(this),
-            el = $('<div>');
+        // this.$el.on('click', '.newChild', function () {
+        //   var parentTaskEl = $(this).closest('.task'),
+        //     parentId = me.getTaskIdFromElement(this),
+        //     el = $('<div>');
 
-          parentTaskEl.parent().after(el);
-          me.newTask({ parentTaskId: parentId }, el);
-        });
+        //   parentTaskEl.parent().after(el);
+        //   me.newTask({ parentTaskId: parentId }, el);
+        // });
 
         this.$el.on('click', '.toolIcon', function () {
           var el = $(this);
           el.next('.tools').toggle();
         });
+
+        $('.menu li').removeClass('active');
+        $('.menu li a[href="' + window.location.hash + '"]').parent().addClass('active');
       },
 
       render: function () {
-        var compiledTemplate = _.template(taskAdderTemplate, {});
-        $('.menu li').removeClass('active');
-        $('.menu li a[href="' + window.location.hash + '"]').parent().addClass('active');
+        var me = this,
+          compiledTemplate = _.template(taskAdderTemplate, {});
+
         this.$el.html(compiledTemplate);
+
+        taskCollection.each(function (model, index, collection) {
+          me.createTaskView(model);
+        });
       },
 
       getTaskIdFromElement: function (el) {
@@ -132,27 +152,20 @@ define([
       },
 
       newTask: function (modelData, viewEl) {
-        var model = new TaskModel(modelData),
-          view,
-          parentTaskEl;
+        var model = new TaskModel(modelData);
+
         model.save();
-
         taskCollection.add(model);
+        this.createTaskView(model);
+      },
 
-        if (!viewEl) {
-          viewEl = $('<div>');
-          if (modelData && modelData.parentTaskId) {
-            parentTaskEl = this.getTaskElById(modelData.parentTaskId);
-            parentTaskEl.after(viewEl);
-          } else {
-            // viewEl.appendTo('#taskHolder');
-            viewEl.prependTo('#taskHolder');
-          }
-        }
+      createTaskView: function (taskModel) {
+        var viewEl = $('<div>');
 
+        viewEl.prependTo('#taskHolder');
         view = new TaskView({
           el: viewEl,
-          model: model
+          model: taskModel
         });
       },
 

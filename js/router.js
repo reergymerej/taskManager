@@ -43,10 +43,9 @@ define([
       });
 
       app_router.on('route:showTaskAdder', function () {
-        var taskAdderView = new DoingView({
+        var doingView = new DoingView({
           el: $('#page')
         });
-        taskAdderView.render();
       });
 
       app_router.on('route:showTaskReviewer', function () {
