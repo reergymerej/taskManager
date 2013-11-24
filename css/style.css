@@ -250,6 +250,11 @@ h1 {
   padding: 0px; }
 
 /************************/
+.editable:hover {
+  cursor: pointer;
+  background-color: rgba(0, 100, 255, 0.5);
+  color: blue; }
+
 .task > span {
   display: inline-block;
   padding: 2px 1em;
@@ -263,10 +268,6 @@ h1 {
     box-shadow: 5px 5px 5px;
     background-color: #ccc;
     padding: 1em; }
-.task .editable:hover {
-  cursor: pointer;
-  background-color: rgba(0, 100, 255, 0.5);
-  color: blue; }
 
 /************************/
 .todoTask .tree-branches .branch {
@@ -278,7 +279,7 @@ h1 {
     border-left: 1px solid red; }
 .todoTask .todoTaskWrapper {
   display: inline-block;
-  width: 200px;
+  min-width: 200px;
   border: 1px solid #666666;
   border-radius: 4px;
   padding: 5px; }

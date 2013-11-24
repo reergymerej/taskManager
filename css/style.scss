@@ -289,6 +289,12 @@ h1{
 
 /************************/
 
+.editable:hover {
+  cursor: pointer;
+  background-color: rgba(0, 100, 255, 0.5);
+  color: blue;
+}
+
 .task {
 
   & > span {
@@ -316,12 +322,8 @@ h1{
     }
   }
 
-  .editable:hover {
-    cursor: pointer;
-    background-color: rgba(0, 100, 255, 0.5);
-    color: blue;
-  }
 }
+
 
 
 /************************/
@@ -341,7 +343,7 @@ h1{
 
   .todoTaskWrapper {
     display: inline-block;
-    width: 200px;
+    min-width: 200px;
     border: 1px solid #666;
     border-radius: 4px;
     padding: 5px;
