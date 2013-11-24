@@ -21,13 +21,14 @@ define([
   ) {
 
     var todoCollection = new TodoCollection();
-    window.c = todoCollection;
 
     var TodoView = Backbone.View.extend({
       el: $("#page"),
 
       initialize: function () {
         var me = this;
+
+        this.$el.empty().off();
 
         // load the collection (either load a saved one or create a new one)
 
@@ -54,6 +55,9 @@ define([
         var me = this,
           compiledTemplate = _.template(todoTemplate, {}),
           todoListCollectionView;
+
+        $('.menu li').removeClass('active');
+        $('.menu li a[href="' + window.location.hash + '"]').parent().addClass('active');
 
         // render the items in the collection
         this.$el.html(compiledTemplate);

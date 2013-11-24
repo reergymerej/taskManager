@@ -25,7 +25,7 @@ class Rest extends RestEasy {
 		}
 
 		if (isset($p['to']) && $val = $p['to']) {
-			array_push($params, "end <= " . $this->valueForField($val, 'end'));
+			array_push($params, "start <= " . $this->valueForField($val, 'end'));
 		}
 
 		return implode(' AND ', $params);

@@ -27,8 +27,8 @@ define([
         console.log(data);
 
         this.collection.each(function (model, index, collection) {
-          console.log(arguments);
-          console.log(model.getTemplateData());
+          // console.log(arguments);
+          // console.log(model.getTemplateData());
         });
 
         this.$el.html(_.template(taskCollectionTemplate, {

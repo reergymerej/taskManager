@@ -18,13 +18,15 @@ define([
   ) {
 
     var taskCollection = new TaskCollection();
-    window.taskCollection = taskCollection;
 
     var DoingView = Backbone.View.extend({
 
       initialize: function () {
         var me = this;
 
+        this.$el.empty().off();
+
+        // set up editable plugin
         this.$el.editable({
           onBeforeEdit: function () {
             return this.html() !== '';
