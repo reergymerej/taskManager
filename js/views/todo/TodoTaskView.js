@@ -1,3 +1,5 @@
+// This is the view for a single TodoTask.
+
 define([
   'jquery',
   'underscore',

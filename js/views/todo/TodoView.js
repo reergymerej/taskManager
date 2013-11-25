@@ -104,11 +104,33 @@ define([
 
         // Group the collection by downstreamTaskId so attachTaskView
         // is able to find what it's looking for.
-        _.each(todoCollection.sortBy('downstreamTaskId'), function (model, index, collection) {
+        _.each(me.sortCollectionWithDownstreamFirst(), function (model) {
           me.attachTaskView(model);
         });
 
         // highlight those with no upstream
+      },
+
+      sortCollectionWithDownstreamFirst: function () {
+        var sorted = [];
+
+        todoCollection.each(function (model) {
+          var ds = model.get('downstreamTaskId'),
+            index = 0;
+
+          // Is this task's downstream already sorted?
+          _.each(sorted, function (task, i) {
+            var id = task.get('id');
+            if (id === ds) {
+              index = i;
+              return false;
+            }
+          });
+
+          sorted.splice(index + 1, 0, model);
+        });
+
+        return sorted;
       },
 
       // This adds a TodoTaskView relative to its parent's view.
@@ -119,7 +141,7 @@ define([
         require(['views/todo/TodoTaskView'], function (TodoTaskView) {
           // find the parent
           var downstreamEl = me.getTaskElByModelId(model.get('downstreamTaskId')),
-            el = $('<div />'),
+            el = $('<div />').addClass('todoTaskEl'),
             taskView = new TodoTaskView({
               el: el,
               model: model
@@ -128,10 +150,36 @@ define([
           if (downstreamEl) {
             downstreamEl.after(el);
           } else {
+            if (model.get('downstreamTaskId')) {
+              console.error('unable to find the downstream task');
+              console.warn('Ensure all downstream tasks have been attached first.');
+            }
             $('.tasks', me.$el).append(el);
           }
 
           taskView.render();
+
+          // configure draggable
+          taskView.$el.draggable({
+            revert: 'invalid'
+          });
+
+          taskView.$el.droppable({
+            drop: function (event, ui) {
+              var targetTaskId = $(this).find('.todoTask').attr('id'),
+                droppedTaskId = ui.draggable.find('.todoTask').attr('id');
+
+              targetTaskId = parseInt(targetTaskId, 10);
+              droppedTaskId = parseInt(droppedTaskId, 10);
+
+              if (!isNaN(targetTaskId) && !isNaN(droppedTaskId)) {
+                todoCollection.get(droppedTaskId).set('downstreamTaskId', targetTaskId);
+              }
+
+              me.renderTasks();
+            },
+            accept: '.todoTaskEl'
+          });
         });
       },
 
