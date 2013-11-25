@@ -278,6 +278,7 @@ h1 {
   .todoTask .tree-branches .branch.first {
     border-left: 1px solid red; }
 .todoTask .todoTaskWrapper {
+  background-color: rgba(89, 36, 202, 0.31);
   display: inline-block;
   min-width: 200px;
   border: 1px solid #666666;
