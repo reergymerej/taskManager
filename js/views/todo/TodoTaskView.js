@@ -2,14 +2,14 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/todo/todoTaskTemplate.html',
+  'text!templates/todo/todoTemplate.html',
   'models/todo/TodoTaskModel'
 ],
   function (
     $,
     _,
     Backbone,
-    todoTaskTemplate,
+    todoTemplate,
     TodoCollection,
     TodoTaskModel
   ) {
@@ -88,7 +88,7 @@ define([
         var templateData = this.model.getTemplateData(),
           compiledTemplate;
 
-        compiledTemplate = _.template(todoTaskTemplate, {
+        compiledTemplate = _.template(todoTemplate, {
           data: templateData
         });
 

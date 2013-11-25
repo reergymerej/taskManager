@@ -2,7 +2,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/doing/taskAdderTemplate.html',
+  'text!templates/doing/doingTemplate.html',
   'views/doing/TaskView',
   'models/doing/TaskModel',
   'collections/doing/TaskCollection'
@@ -11,7 +11,7 @@ define([
     $,
     _,
     Backbone,
-    taskAdderTemplate,
+    doingTemplate,
     TaskView,
     TaskModel,
     TaskCollection
@@ -128,7 +128,7 @@ define([
 
       render: function () {
         var me = this,
-          compiledTemplate = _.template(taskAdderTemplate, {});
+          compiledTemplate = _.template(doingTemplate, {});
 
         this.$el.html(compiledTemplate);
 

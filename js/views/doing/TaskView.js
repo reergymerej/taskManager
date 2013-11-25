@@ -2,13 +2,13 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/doing/taskTemplate.html'
+  'text!templates/doing/doingTaskTemplate.html'
 ],
   function (
     $,
     _,
     Backbone,
-    taskTemplate
+    doingTaskTemplate
   ) {
 
     var TaskView = Backbone.View.extend({
@@ -43,7 +43,7 @@ define([
       },
 
       render: function () {
-        this.$el.html(_.template(taskTemplate, {
+        this.$el.html(_.template(doingTaskTemplate, {
           data: this.model.getTemplateData()
         }));
       }

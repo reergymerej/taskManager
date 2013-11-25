@@ -24,7 +24,6 @@ define([
 
       render: function () {
         var data = this.collection.toJSON();
-        console.log(data);
 
         this.collection.each(function (model, index, collection) {
           // console.log(arguments);
