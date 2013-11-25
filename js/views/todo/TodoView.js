@@ -152,7 +152,6 @@ define([
           } else {
             if (model.get('downstreamTaskId')) {
               console.error('unable to find the downstream task');
-              console.warn('Ensure all downstream tasks have been attached first.');
             }
             $('.tasks', me.$el).append(el);
           }
@@ -167,16 +166,28 @@ define([
           taskView.$el.droppable({
             drop: function (event, ui) {
               var targetTaskId = $(this).find('.todoTask').attr('id'),
-                droppedTaskId = ui.draggable.find('.todoTask').attr('id');
+                droppedTaskId = ui.draggable.find('.todoTask').attr('id'),
+                droppedTaskModel,
+                taskPath;
 
               targetTaskId = parseInt(targetTaskId, 10);
               droppedTaskId = parseInt(droppedTaskId, 10);
 
               if (!isNaN(targetTaskId) && !isNaN(droppedTaskId)) {
-                todoCollection.get(droppedTaskId).set('downstreamTaskId', targetTaskId);
-              }
 
-              me.renderTasks();
+                // Make sure we didn't just drop a task on one of it's upstream tasks.
+                droppedTaskModel = todoCollection.get(droppedTaskId);
+                taskPath = todoCollection.getTaskPath(targetTaskId);
+
+                if (taskPath.indexOf(droppedTaskId) === -1) {
+                  droppedTaskModel.set('downstreamTaskId', targetTaskId);
+                  me.renderTasks();
+                } else {
+                  console.error('You cannot drop it on its own upstream task.');
+                  // TODO change this to revert.
+                  ui.draggable.css({top: 0, left: 0});
+                }
+              }
             },
             accept: '.todoTaskEl'
           });
