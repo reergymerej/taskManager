@@ -68,13 +68,33 @@ define([
       },
 
       render: function () {
-        var compiledTemplate = _.template(doneTemplate, {});
+        var compiledTemplate = _.template(doneTemplate, {}),
+          day,
+          month,
+          year,
+          today = new Date();
+
         $('.menu li').removeClass('active');
         $('.menu li a[href="' + window.location.hash + '"]').parent().addClass('active');
         this.$el.html(compiledTemplate);
 
         // apply date picker
         this.$el.find('.date').datepicker();
+
+        // set default date
+        day = this.pad(today.getDate());
+        month = this.pad(today.getMonth() + 1);
+        year = today.getFullYear();
+
+        this.$el.find('[name="from"]').val(month + '/' + day + '/' + year);
+      },
+
+      pad: function (val) {
+        val = String(val);
+        while (val.length > 2) {
+          val = '0' + val;
+        }
+        return val;
       },
 
       isValidDate: function (date) {
