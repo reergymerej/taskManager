@@ -36,8 +36,8 @@ define([
           cls: data.isComplete ? 'complete' : '',
           checked: data.isComplete ? 'checked="checked"' : '',
           downstreamCount: this.collection.getDownstreamTasks(this).length,
-          upstreamCount: this.collection.getUpstreamTasks(this).length,
-          upstreamIncomplete: this.collection.getUpstreamIncomplete(this).length
+
+          highlight: this.collection.getUpstreamIncomplete(this).length === 0 && !data.isComplete
         });
       }
     });

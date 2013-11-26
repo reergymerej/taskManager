@@ -331,6 +331,7 @@ $todoTaskBackground: #A3A8A2;
 $todoTaskHighlight: transparentize($todoTaskBackground, .6);
 
 .todoTask {
+
   .tree-branches {
     .branch {
       display: inline-block;
@@ -346,7 +347,7 @@ $todoTaskHighlight: transparentize($todoTaskBackground, .6);
   .todoTaskWrapper {
     background-color: $todoTaskBackground;
 
-    &.noUpstream {
+    &.highlight {
       background-color: $todoTaskHighlight;
     }
     display: inline-block;

@@ -4,7 +4,7 @@
 			<span class="branch <% if (i === data.downstreamCount - 1) { %>last<% } %>"></span>
 		<% } %>
 	</span>
-	<span class="todoTaskWrapper <% if (data.upstreamIncomplete === 0 && !data.isComplete) { %>noUpstream<% } %>">
+	<span class="todoTaskWrapper <% if (data.highlight) { %>highlight<% } %>">
 		<input type="checkbox" <%= data.checked %> />
 		<span class="task-label editable <%= data.cls %>"><%= data.label %></span>
 		<span class="buttons">
