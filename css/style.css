@@ -273,18 +273,22 @@ h1 {
 .todoTask .tree-branches .branch {
   display: inline-block;
   width: 20px;
-  height: 20px;
-  border-bottom: 1px solid red; }
-  .todoTask .tree-branches .branch.first {
+  height: 20px; }
+  .todoTask .tree-branches .branch.last {
+    border-bottom: 1px solid red;
     border-left: 1px solid red; }
 .todoTask .todoTaskWrapper {
-  background-color: rgba(89, 36, 202, 0.31);
+  background-color: #a3a8a2;
   display: inline-block;
   min-width: 200px;
   border: 1px solid #666666;
   border-radius: 4px;
   padding: 5px; }
-  .todoTask .todoTaskWrapper .task-label.complete {
-    text-decoration: line-through; }
+  .todoTask .todoTaskWrapper.noUpstream {
+    background-color: rgba(163, 168, 162, 0.4); }
+  .todoTask .todoTaskWrapper .task-label {
+    padding: 0 1em; }
+    .todoTask .todoTaskWrapper .task-label.complete {
+      text-decoration: line-through; }
   .todoTask .todoTaskWrapper .buttons {
     margin-left: 5px; }

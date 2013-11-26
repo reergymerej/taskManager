@@ -327,21 +327,28 @@ h1{
 
 
 /************************/
+$todoTaskBackground: #A3A8A2;
+$todoTaskHighlight: transparentize($todoTaskBackground, .6);
+
 .todoTask {
   .tree-branches {
     .branch {
       display: inline-block;
       width: 20px;
       height: 20px;
-      border-bottom: 1px solid red;
-      &.first {
+      &.last {
+        border-bottom: 1px solid red;
         border-left: 1px solid red;
       }
     }
   }
 
   .todoTaskWrapper {
-    background-color: rgba(89, 36, 202, 0.31);
+    background-color: $todoTaskBackground;
+
+    &.noUpstream {
+      background-color: $todoTaskHighlight;
+    }
     display: inline-block;
     min-width: 200px;
     border: 1px solid #666;
@@ -349,6 +356,7 @@ h1{
     padding: 5px;
 
     .task-label {
+      padding: 0 1em;
       &.complete {
         text-decoration: line-through;
       }

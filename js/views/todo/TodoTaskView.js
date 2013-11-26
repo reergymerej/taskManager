@@ -78,6 +78,8 @@ define([
           me.model.set({
             isComplete: $(this).prop('checked')
           });
+
+          console.log('We need to tell the related tasks to rerender.');
         });
 
         this.model.on('change', function (model, options) {

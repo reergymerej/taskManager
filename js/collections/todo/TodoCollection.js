@@ -16,6 +16,7 @@ function (
       initialize: function(){
       },
 
+      // TODO These should be optimized or maybe even cached.
       getDownstreamTasks: function (model) {
         var tasks = []
           emergency = 100;
@@ -34,6 +35,7 @@ function (
         return tasks;
       },
 
+      // TODO These should be optimized or maybe even cached.
       getUpstreamTasks: function (model) {
         var tasks = [];
         this.each(function (task) {
@@ -42,6 +44,16 @@ function (
          }
         });
         return tasks;
+      },
+
+      getUpstreamIncomplete: function (model) {
+        var upstream = this.getUpstreamTasks(model);
+        _.each(upstream, function (task, index, collection) {
+          if (task.get('isComplete')) {
+            collection.splice(index, 1);
+          }
+        });
+        return upstream;
       },
 
       // returns a delimited string of task ids from a task all the way to root

@@ -35,7 +35,9 @@ define([
         return _.extend(data, {
           cls: data.isComplete ? 'complete' : '',
           checked: data.isComplete ? 'checked="checked"' : '',
-          parentCount: this.collection.getDownstreamTasks(this).length
+          downstreamCount: this.collection.getDownstreamTasks(this).length,
+          upstreamCount: this.collection.getUpstreamTasks(this).length,
+          upstreamIncomplete: this.collection.getUpstreamIncomplete(this).length
         });
       }
     });

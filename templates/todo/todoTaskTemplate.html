@@ -1,10 +1,10 @@
 <div id="<%= data.id %>" class="todoTask">
 	<span class="tree-branches">
-		<% for (var i = 0; i < data.parentCount; i++) { %>
-			<span class="branch <% if (i === 0) { %>first<% } %>"></span>
+		<% for (var i = 0; i < data.downstreamCount; i++) { %>
+			<span class="branch <% if (i === data.downstreamCount - 1) { %>last<% } %>"></span>
 		<% } %>
 	</span>
-	<span class="todoTaskWrapper">
+	<span class="todoTaskWrapper <% if (data.upstreamIncomplete === 0 && !data.isComplete) { %>noUpstream<% } %>">
 		<input type="checkbox" <%= data.checked %> />
 		<span class="task-label editable <%= data.cls %>"><%= data.label %></span>
 		<span class="buttons">
