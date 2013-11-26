@@ -115,19 +115,19 @@ define([
         var sorted = [];
 
         todoCollection.each(function (model) {
-          var ds = model.get('downstreamTaskId'),
+          var modelsDownstreamTaskId = model.get('downstreamTaskId'),
             index = 0;
 
           // Is this task's downstream already sorted?
           _.each(sorted, function (task, i) {
             var id = task.get('id');
-            if (id === ds) {
-              index = i;
+            if (id === modelsDownstreamTaskId) {
+              index = i + 1;
               return false;
             }
           });
 
-          sorted.splice(index + 1, 0, model);
+          sorted.splice(index, 0, model);
         });
 
         return sorted;
