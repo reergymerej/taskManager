@@ -205,7 +205,6 @@ define([
 
       setVisibilityForCompleted: function (visible) {
         var me = this;
-        console.log('setVisibilityForCompleted', visible);
         todoCollection.each(function (model) {
           if (model.get('isComplete')) {
             if (visible) {

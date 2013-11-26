@@ -32,13 +32,16 @@ define([
 
       getTemplateData: function () {
         var data = this.toJSON();
-        return _.extend(data, {
+        _.extend(data, {
           cls: data.isComplete ? 'complete' : '',
           checked: data.isComplete ? 'checked="checked"' : '',
           downstreamCount: this.collection.getDownstreamTasks(this).length,
 
+          // Highlight those with no upstream incomplete which are incomplete themselves.
           highlight: this.collection.getUpstreamIncomplete(this).length === 0 && !data.isComplete
         });
+
+        return data;
       }
     });
 

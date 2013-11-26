@@ -79,16 +79,21 @@ define([
             isComplete: $(this).prop('checked')
           });
 
-          console.log('We need to tell the related tasks to rerender.');
+          me.renderRelatedTasks();
         });
 
         this.model.on('change', function (model, options) {
           model.save();
           me.render();
         });
+
+        this.model.on('request:rerender', function (model) {
+          me.render();
+        });
       },
 
       render: function () {
+        console.log('I am rendering', this.model.get('label'));
         var templateData = this.model.getTemplateData(),
           compiledTemplate;
 
@@ -97,6 +102,14 @@ define([
         });
 
         this.$el.html(compiledTemplate);
+      },
+
+      renderRelatedTasks: function () {
+        // me.model.collection.getUpstreamTasks(me.model)
+        var taskModels = this.model.collection.getRelatedTasks(this.model);
+        _.each(taskModels, function (taskModel) {
+          taskModel.trigger('request:rerender', taskModel);
+        });
       }
     });
 

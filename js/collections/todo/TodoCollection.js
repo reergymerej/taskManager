@@ -47,13 +47,14 @@ function (
       },
 
       getUpstreamIncomplete: function (model) {
-        var upstream = this.getUpstreamTasks(model);
+        var upstream = this.getUpstreamTasks(model),
+          incomplete = [];
         _.each(upstream, function (task, index, collection) {
-          if (task.get('isComplete')) {
-            collection.splice(index, 1);
+          if (!task.get('isComplete')) {
+            incomplete.push(task);
           }
         });
-        return upstream;
+        return incomplete;
       },
 
       // returns a delimited string of task ids from a task all the way to root
@@ -70,6 +71,14 @@ function (
         }
 
         return downstream.join(delimiter);
+      },
+
+      // returns an array of all up and downstream tasks
+      getRelatedTasks: function (model) {
+        var related = [];
+        related = related.concat(this.getUpstreamTasks(model));
+        related = related.concat(this.getDownstreamTasks(model));
+        return related;
       }
     });
 
