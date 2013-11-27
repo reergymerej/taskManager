@@ -4,7 +4,8 @@ define([
   'backbone',
   'text!templates/home/homeTemplate.html',
   'views/todo/TodoView',
-  'views/doing/DoingView'
+  'views/doing/DoingView',
+  'views/done/DoneView'
 ],
   function (
     $,
@@ -12,7 +13,8 @@ define([
     Backbone,
     homeTemplate,
     TodoView,
-    DoingView
+    DoingView,
+    DoneView
   ) {
 
     var HomeView = Backbone.View.extend({
@@ -27,18 +29,26 @@ define([
           doing,
           done;
 
-        $('.menu li').removeClass('active');
-        $('.menu li a[href="#"]').parent().addClass('active');
+        
         this.$el.html(compiledTemplate);
 
         todo = new TodoView({
           el: $('#todo')
         });
+        todo.render();
 
         doing = new DoingView({
           el: $('#doing')
         });
         doing.render();
+
+        done = new DoneView({
+          el: $('#done')
+        });
+        done.render();
+
+        $('.menu li').removeClass('active');
+        $('.menu li a[href="#"]').parent().addClass('active');
       }
     });
 
