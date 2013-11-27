@@ -82,8 +82,6 @@ define([
               todoCollectionId: id
             },
             success: function () {
-              console.log('collection reloaded');
-              window.todoCollection = todoCollection;
               me.renderTasks();
             },
             error: function (collection) {
@@ -108,12 +106,9 @@ define([
         // empty existing
         $('.tasks', this.$el).empty();
 
-        this.describeCollection(todoCollection);
         _.each(me.sortCollectionWithDownstreamFirst(), function (model) {
           me.attachTaskView(model);
         });
-        this.describeCollection(todoCollection);
-
       },
 
       // DEBUG
@@ -134,32 +129,15 @@ define([
         // be present.  To ensure this, sort the collection with the downstream tasks first.
 
         var me = this,
-          sorted = [];
-
-        console.log('need to fix sorting');
-        this.describeCollection(todoCollection);
+          sorted = [],
+          emergency = 10;
 
         todoCollection.each(function (model) {
-          // var modelsDownstreamTaskId = model.get('downstreamTaskId'),
-          //   index = 0;
-
-          // if (modelsDownstreamTaskId !== 0) {
-          //   // Is this task's downstream already sorted?
-          //   _.each(sorted, function (task, i) {
-          //     var id = task.get('id');
-          //     if (id === modelsDownstreamTaskId) {
-          //       index = i + 1;
-          //       return false;
-          //     }
-          //   });
-          // }
-
-          // sorted.splice(index, 0, model);
           sorted.push(model);
         });
 
-        if (!this.areAllDownstreamFirst(sorted)) {
-
+        while (!this.areAllDownstreamFirst(sorted) && emergency) {
+          emergency--;
           _.each(sorted, function (model, index, sorted) {
             // What is this tasks downstream id?
             var downstreamTaskId = model.get('downstreamTaskId'),
@@ -176,13 +154,14 @@ define([
 
             if (downstreamTaskIndex !== undefined) {
               if (index < downstreamTaskIndex) {
-                console.log('We need to move the downstream task before the upstream.');
-                me.describe(sorted);
                 me.swapPositions(sorted, index, downstreamTaskIndex);
-                me.describe(sorted);
               }
             }
           });
+        }
+
+        if (!emergency) {
+          console.error('Something went wrong with sorting these by downstream first.');
         }
 
         return sorted;
@@ -234,8 +213,7 @@ define([
           arr.splice(indexB, 0, itemA[0]);
           arr.splice(indexA, 0, itemB[0]);
         }
-
-        return arr;  
+        return arr;
       },
 
       // This adds a TodoTaskView relative to its parent's view.
@@ -257,7 +235,6 @@ define([
           } else {
             if (model.get('downstreamTaskId')) {
               console.error('unable to find the downstream task');
-              debugger;
             }
             $('.tasks', me.$el).append(el);
           }
