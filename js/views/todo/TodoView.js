@@ -50,7 +50,7 @@ define([
           }
         });
 
-        this.$el.on('change', '[name="hide-complete"]', function (event) {
+        this.$el.on('change', '#hide-complete', function (event) {
           me.setVisibilityForCompleted(!$(this).prop('checked'));
         });
       },
@@ -283,16 +283,13 @@ define([
       },
 
       setVisibilityForCompleted: function (visible) {
-        var me = this;
-        todoCollection.each(function (model) {
-          if (model.get('isComplete')) {
-            if (visible) {
-              me.getTaskElByModelId(model.get('id')).show();
-            } else {
-              me.getTaskElByModelId(model.get('id')).hide();
-            }
-          }
-        });
+        var taskContainer = this.$el.find('.tasks'),
+          visiblityClass = 'hide-complete';
+        if (visible) {
+          taskContainer.removeClass(visiblityClass);
+        } else {
+          taskContainer.addClass(visiblityClass);
+        }
       }
     });
 

@@ -106,40 +106,53 @@ h1{
 $todoTaskBackground: #A3A8A2;
 $todoTaskHighlight: transparentize($todoTaskBackground, .6);
 
-.todoTask {
+.tasks {
 
-  .tree-branches {
-    .branch {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      &.last {
-        border-bottom: 1px solid red;
-        border-left: 1px solid red;
-      }
+  &.hide-complete {
+    .todoTask.complete {
+      display: none;
     }
   }
 
-  .todoTaskWrapper {
-    background-color: $todoTaskBackground;
+  .todoTask {
 
-    &.highlight {
-      background-color: $todoTaskHighlight;
-    }
-    display: inline-block;
-    min-width: 200px;
-    border: 1px solid #666;
-    border-radius: 4px;
-    padding: 5px;
-
-    .task-label {
-      padding: 0 1em;
-      &.complete {
+    &.complete {
+      .task-label {
         text-decoration: line-through;
+      }      
+    }
+
+    .tree-branches {
+      .branch {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        &.last {
+          border-bottom: 1px solid red;
+          border-left: 1px solid red;
+        }
       }
     }
-    .buttons {
-      margin-left: 5px;
+
+    .todoTaskWrapper {
+      background-color: $todoTaskBackground;
+
+      &.highlight {
+        background-color: $todoTaskHighlight;
+      }
+      display: inline-block;
+      min-width: 200px;
+      border: 1px solid #666;
+      border-radius: 4px;
+      padding: 5px;
+
+      .task-label {
+        padding: 0 1em;
+      }
+
+      .buttons {
+        margin-left: 5px;
+      }
     }
   }
 }

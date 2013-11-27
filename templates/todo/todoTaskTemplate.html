@@ -1,4 +1,4 @@
-<div id="<%= data.id %>" class="todoTask">
+<div id="<%= data.id %>" class="todoTask <% if (data.isComplete) { %>complete<% } %>">
 	<span class="tree-branches">
 		<% for (var i = 0; i < data.downstreamCount; i++) { %>
 			<span class="branch <% if (i === data.downstreamCount - 1) { %>last<% } %>"></span>

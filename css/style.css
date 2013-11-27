@@ -67,25 +67,27 @@ h1 {
     padding: 1em; }
 
 /************************/
-.todoTask .tree-branches .branch {
+.tasks.hide-complete .todoTask.complete {
+  display: none; }
+.tasks .todoTask.complete .task-label {
+  text-decoration: line-through; }
+.tasks .todoTask .tree-branches .branch {
   display: inline-block;
   width: 20px;
   height: 20px; }
-  .todoTask .tree-branches .branch.last {
+  .tasks .todoTask .tree-branches .branch.last {
     border-bottom: 1px solid red;
     border-left: 1px solid red; }
-.todoTask .todoTaskWrapper {
+.tasks .todoTask .todoTaskWrapper {
   background-color: #a3a8a2;
   display: inline-block;
   min-width: 200px;
   border: 1px solid #666666;
   border-radius: 4px;
   padding: 5px; }
-  .todoTask .todoTaskWrapper.highlight {
+  .tasks .todoTask .todoTaskWrapper.highlight {
     background-color: rgba(163, 168, 162, 0.4); }
-  .todoTask .todoTaskWrapper .task-label {
+  .tasks .todoTask .todoTaskWrapper .task-label {
     padding: 0 1em; }
-    .todoTask .todoTaskWrapper .task-label.complete {
-      text-decoration: line-through; }
-  .todoTask .todoTaskWrapper .buttons {
+  .tasks .todoTask .todoTaskWrapper .buttons {
     margin-left: 5px; }
