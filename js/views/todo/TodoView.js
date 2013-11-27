@@ -82,6 +82,8 @@ define([
               todoCollectionId: id
             },
             success: function () {
+              console.log('collection reloaded');
+              window.todoCollection = todoCollection;
               me.renderTasks();
             },
             error: function (collection) {
@@ -106,39 +108,134 @@ define([
         // empty existing
         $('.tasks', this.$el).empty();
 
-        // Group the collection by downstreamTaskId so attachTaskView
-        // is able to find what it's looking for.
+        this.describeCollection(todoCollection);
         _.each(me.sortCollectionWithDownstreamFirst(), function (model) {
           me.attachTaskView(model);
         });
+        this.describeCollection(todoCollection);
 
-        // highlight those with no upstream
+      },
+
+      // DEBUG
+      describeCollection: function (collection) {
+        collection.each(function (model, index) {
+          console.log(index, model.get('id'), model.get('downstreamTaskId'));
+        });
+      },
+
+      describe: function (arr) {
+        _.each(arr, function (model, index) {
+          console.log(index, model.get('id'), model.get('downstreamTaskId'));
+        });
       },
 
       sortCollectionWithDownstreamFirst: function () {
-        var sorted = [];
+        // In order to append elements in the right location, a task's downstream task must already
+        // be present.  To ensure this, sort the collection with the downstream tasks first.
+
+        var me = this,
+          sorted = [];
 
         console.log('need to fix sorting');
+        this.describeCollection(todoCollection);
 
         todoCollection.each(function (model) {
-          var modelsDownstreamTaskId = model.get('downstreamTaskId'),
-            index = 0;
+          // var modelsDownstreamTaskId = model.get('downstreamTaskId'),
+          //   index = 0;
 
-          if (modelsDownstreamTaskId !== 0) {
-            // Is this task's downstream already sorted?
-            _.each(sorted, function (task, i) {
-              var id = task.get('id');
-              if (id === modelsDownstreamTaskId) {
-                index = i + 1;
-                return false;
-              }
-            });
-          }
+          // if (modelsDownstreamTaskId !== 0) {
+          //   // Is this task's downstream already sorted?
+          //   _.each(sorted, function (task, i) {
+          //     var id = task.get('id');
+          //     if (id === modelsDownstreamTaskId) {
+          //       index = i + 1;
+          //       return false;
+          //     }
+          //   });
+          // }
 
-          sorted.splice(index, 0, model);
+          // sorted.splice(index, 0, model);
+          sorted.push(model);
         });
 
+        if (!this.areAllDownstreamFirst(sorted)) {
+
+          _.each(sorted, function (model, index, sorted) {
+            // What is this tasks downstream id?
+            var downstreamTaskId = model.get('downstreamTaskId'),
+              downstreamTaskIndex;
+
+            // Where is this downstream task?
+            _.each(sorted, function (model, index) {
+              if (downstreamTaskIndex === undefined) {
+                if (model.get('id') === downstreamTaskId) {
+                  downstreamTaskIndex = index;
+                }
+              }
+            });
+
+            if (downstreamTaskIndex !== undefined) {
+              if (index < downstreamTaskIndex) {
+                console.log('We need to move the downstream task before the upstream.');
+                me.describe(sorted);
+                me.swapPositions(sorted, index, downstreamTaskIndex);
+                me.describe(sorted);
+              }
+            }
+          });
+        }
+
         return sorted;
+      },
+
+      // returns true if all dowstream tasks are listed before
+      // their upstream references
+      // @param {TaskModel[]} tasks
+      areAllDownstreamFirst: function (tasks) {
+        var result = true;
+
+        _.each(tasks, function (task, index) {
+          var downstreamTaskId,
+            downstreamTaskIndex;
+
+          if (result) {
+            downstreamTaskId = task.get('downstreamTaskId');
+
+            _.each(tasks, function (task, index) {
+              if (downstreamTaskIndex === undefined) {
+                if (task.get('id') === downstreamTaskId) {
+                  downstreamTaskIndex = index;
+                }
+              }
+            });
+
+            // Is this task after its downstream?
+            if (downstreamTaskIndex !== undefined) {
+              result = index > downstreamTaskIndex;
+            }
+          }
+        });
+
+        return result;
+      },
+
+      // Swap the position of two items in an array.
+      swapPositions: function (arr, indexA, indexB) {
+        var itemA, itemB;
+
+        if (indexA < indexB) {
+          itemB = arr.splice(indexB, 1);
+          itemA = arr.splice(indexA, 1);
+          arr.splice(indexA, 0, itemB[0]);
+          arr.splice(indexB, 0, itemA[0]);
+        } else {
+          itemA = arr.splice(indexA, 1);
+          itemB = arr.splice(indexB, 1);
+          arr.splice(indexB, 0, itemA[0]);
+          arr.splice(indexA, 0, itemB[0]);
+        }
+
+        return arr;  
       },
 
       // This adds a TodoTaskView relative to its parent's view.

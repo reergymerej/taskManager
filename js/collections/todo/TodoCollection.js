@@ -3,22 +3,23 @@ define([
   'underscore',
   'backbone',
   'models/todo/TodoTaskModel'
-], 
-function (
-  $, 
-  _, 
-  Backbone, 
-  TodoTaskModel
-){
+],
+  function (
+    $,
+    _,
+    Backbone,
+    TodoTaskModel
+  ) {
     var TodoCollection = Backbone.Collection.extend({
       url: 'lib/resteasy/api/todotasks',
       model: TodoTaskModel,
-      initialize: function(){
+
+      initialize: function () {
       },
 
       // TODO These should be optimized or maybe even cached.
       getDownstreamTasks: function (model) {
-        var tasks = []
+        var tasks = [],
           emergency = 100;
 
         do {
@@ -28,7 +29,7 @@ function (
           }
           emergency--;
         } while (model && emergency);
-        
+
         if (!emergency) {
           console.error('What the hell?');
         }
@@ -39,9 +40,9 @@ function (
       getUpstreamTasks: function (model) {
         var tasks = [];
         this.each(function (task) {
-         if (task.get('downstreamTaskId') === model.get('id')) {
-          tasks.push(task);
-         }
+          if (task.get('downstreamTaskId') === model.get('id')) {
+            tasks.push(task);
+          }
         });
         return tasks;
       },
@@ -83,4 +84,4 @@ function (
     });
 
     return TodoCollection;
-});
+  });
