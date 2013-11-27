@@ -118,18 +118,22 @@ define([
       sortCollectionWithDownstreamFirst: function () {
         var sorted = [];
 
+        console.log('need to fix sorting');
+
         todoCollection.each(function (model) {
           var modelsDownstreamTaskId = model.get('downstreamTaskId'),
             index = 0;
 
-          // Is this task's downstream already sorted?
-          _.each(sorted, function (task, i) {
-            var id = task.get('id');
-            if (id === modelsDownstreamTaskId) {
-              index = i + 1;
-              return false;
-            }
-          });
+          if (modelsDownstreamTaskId !== 0) {
+            // Is this task's downstream already sorted?
+            _.each(sorted, function (task, i) {
+              var id = task.get('id');
+              if (id === modelsDownstreamTaskId) {
+                index = i + 1;
+                return false;
+              }
+            });
+          }
 
           sorted.splice(index, 0, model);
         });
@@ -156,6 +160,7 @@ define([
           } else {
             if (model.get('downstreamTaskId')) {
               console.error('unable to find the downstream task');
+              debugger;
             }
             $('.tasks', me.$el).append(el);
           }

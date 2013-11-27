@@ -93,7 +93,6 @@ define([
       },
 
       render: function () {
-        console.log('I am rendering', this.model.get('label'));
         var templateData = this.model.getTemplateData(),
           compiledTemplate;
 

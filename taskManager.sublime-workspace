@@ -4,6 +4,98 @@
 		"selected_items":
 		[
 			[
+				"getT",
+				"getTaskElByModelId"
+			],
+			[
+				"todoT",
+				"todoTaskWrapper"
+			],
+			[
+				"todoTa",
+				"todoTaskHighlight"
+			],
+			[
+				"todoCo",
+				"todoCollection"
+			],
+			[
+				"getU",
+				"getUpstreamTasks"
+			],
+			[
+				"tod",
+				"todoTaskHighlight"
+			],
+			[
+				"downstre",
+				"downstreamTaskId"
+			],
+			[
+				"down",
+				"downstream"
+			],
+			[
+				"downS",
+				"downstream"
+			],
+			[
+				"drop",
+				"droppedTaskId"
+			],
+			[
+				"dropT",
+				"droppedTaskModel"
+			],
+			[
+				"downST",
+				"downstreamTasks"
+			],
+			[
+				"todoC",
+				"todoCollection"
+			],
+			[
+				"sor",
+				"sorted"
+			],
+			[
+				"downs",
+				"downstreamTaskId"
+			],
+			[
+				"todoli",
+				"todoListCollectionView"
+			],
+			[
+				"todoList",
+				"todoListCollectionView"
+			],
+			[
+				"rend",
+				"renderTasks"
+			],
+			[
+				"todoLis",
+				"todoListCollectionView"
+			],
+			[
+				"curre",
+				"currentList"
+			],
+			[
+				"cu",
+				"currentList"
+			],
+			[
+				"todoL",
+				"todoList"
+			],
+			[
+				"Ta",
+				"TodoTaskModel"
+			],
+			[
 				"headers",
 				"headers_sent"
 			],
@@ -58,10 +150,6 @@
 			[
 				"ta",
 				"taskCollection"
-			],
-			[
-				"getT",
-				"getTimeDiff"
 			],
 			[
 				"timeIn",
@@ -336,10 +424,6 @@
 				"questionBank"
 			],
 			[
-				"curre",
-				"currentQuestion"
-			],
-			[
 				"onCo",
 				"onColl"
 			],
@@ -440,31 +524,66 @@
 	},
 	"file_history":
 	[
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/TaskCollectionView.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/taskCollectionTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/clock/index.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/collections/todo/TodoCollection.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/todo/TodoView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/models/todo/TodoTaskModel.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/todo/TodoTaskView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/todo/todoTaskTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/css/style.scss",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/todo/todoTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/todo/TodoListView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/RestEasy.php",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/todo/todoListCollectionTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/done/DoneView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/done/doneTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/doing/doingTaskTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/done/DoneTaskCollectionView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/doing/doingTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/doing/DoingView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/doing/TaskView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/doing/todoTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/doing/todoTaskTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/models/doing/TaskModel.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/router.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/objects/tasks.php",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/index.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/done/taskReviewerTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/done/taskCollectionTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/done/TaskAdderView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/done/TaskReviewerView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/done/TaskCollectionView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/home/HomeView.js",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/collections/TaskCollection.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/taskTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/doing/TaskAdderView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/objects/todotasks.php",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/models/todo/TodoListModel.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/collections/todo/TodoListCollection.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/objects/todolists.php",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/collections/TodoListCollection.js",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/models/TaskModel.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/home/homeTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/todo/todoViewTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/TaskAdderView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/TaskView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/TaskCollectionView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/TaskReviewerView.js",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/taskTemplate.html",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/jquery-ui-1.10.3/themes/base/jquery-ui.css",
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/taskCollectionTemplate.html",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/config.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/taskReviewerTemplate.html",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/router.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/TaskView.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/TaskAdderView.js",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/fooTemplate.html",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/Response.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/RestEasy.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/objects/tasks.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/foo/taskReviewerTemplate.html",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/api.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/Messageable.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/Response.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/Request.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/index.html",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/.gitignore",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/FooView.js",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/main.js",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/editable.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/css/style.scss",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/foo/taskTemplate.html",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/foo/fooTemplate.html",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/css/style.css",
@@ -532,42 +651,7 @@
 		"/C/xampp/htdocs/reergymerej.com/dev/a2b/php/delete.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/TODO.md",
 		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/get.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/php/api.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/rest/Slim/Router.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/php/test.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/test.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/php/get.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/timecard/php/post.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/rest/test.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/rest/index.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/css/main.scss",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/rest/Slim/Slim.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/TODO.md",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/rest/Slim/Middleware.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/rest/Slim/View.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/index.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/rubikscube/js/Rube.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/rubikscube/js/Cube.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/rubikscube/js/main.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/rubikscube/index.html",
-		"/C/xampp/htdocs/reergymerej.com/dev/tools/index.html",
-		"/C/xampp/htdocs/reergymerej.com/dev/tools/js/main.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/rubikscube/css/main.css",
-		"/C/Users/blurd/AppData/Roaming/Sublime Text 3/Packages/JSLint/JSLint.sublime-build",
-		"/C/xampp/htdocs/reergymerej.com/dev/constitution/js/main.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/constitution/css/main.css",
-		"/C/xampp/htdocs/reergymerej.com/dev/constitution/index.html",
-		"/C/xampp/htdocs/reergymerej.com/anim2/js/util.js",
-		"/C/xampp/htdocs/reergymerej.com/baby/app/styles/index.css",
-		"/C/xampp/htdocs/reergymerej.com/baby/main.js",
-		"/C/xampp/htdocs/reergymerej.com/baby/baby.js",
-		"/C/xampp/htdocs/reergymerej.com/baby/index.html",
-		"/C/xampp/htdocs/reergymerej.com/baby/test/jasmine/spec/example.spec.js",
-		"/C/xampp/htdocs/reergymerej.com/baby/app/app.js",
-		"/C/Users/blurd/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/blurd/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/xampp/htdocs/reergymerej.com/baby/backbone-boilerplate/LICENSE",
-		"/C/xampp/htdocs/reergymerej.com/anim2/js/anim.Actor.js"
+		"/C/xampp/htdocs/reergymerej.com/dev/a2b/php/api.php"
 	],
 	"find":
 	{
@@ -578,6 +662,8 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"C:\\xampp\\htdocs\\reergymerej.com\\dev\\taskManager\\",
+			"C:\\xampp\\htdocs\\reergymerej.com\\dev\\taskManager\\js",
 			"C:\\xampp\\htdocs\\reergymerej.com\\dev\\taskManager",
 			"C:\\xampp\\htdocs\\reergymerej.com\\dev\\modular-backbone\\js",
 			"C:\\xampp\\htdocs\\reergymerej.com\\dev\\resteasy",
@@ -587,9 +673,129 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"time",
+			"value",
+			"which",
+			"h",
+			"pad",
+			"setValue",
+			"updateClock",
+			"h",
+			">:\n",
+			"sortCollectionWithDownstreamFirst",
+			"attachTaskView",
+			"getUpstreamIncomplete",
+			"rerender",
+			"task",
+			"Tasks",
+			"tasks",
+			"downstreamCount",
+			"upstreamCount",
+			"upstreamIncomplete",
+			");\n",
+			"model.collection",
+			"collection",
+			"ds",
+			"downstreamTasks",
+			"attachTaskView",
+			"renderTasks",
+			"attachTaskView",
+			"sortCollectionWithDownstreamFirst",
+			"downstreamTask",
+			"renderTasks",
+			"todoCollection",
+			"targetTaskId",
+			"todoTemplate",
+			"attachTaskView",
+			"renderTasks",
+			"add",
+			"todoTemplate",
+			"add",
+			"toolWrapper",
+			"doingTaskTemplate",
+			"todoTaskTemplate",
+			"taskTemplate",
+			"taskAdderTemplate",
+			"render",
+			"fetch",
+			"newTask",
+			"fetch",
+			"newTask",
+			"taskAdderTemplate",
+			"taskAdderView",
+			"DoingView",
+			"fetch",
+			"taskCollection",
+			">",
+			"taskReviewerTemplate",
+			"TaskReviewerView",
+			"TaskAdderView",
+			"TaskCollectionView",
+			"TaskView",
+			"taskViewer",
+			"taskAdder",
+			"TaskAdderView",
+			"doing/TaskAdderView",
+			"TaskAdderView",
+			"collections/TaskCollection",
+			"TaskCollection",
+			"TaskModel",
+			"models/TaskModel",
+			"TaskModel",
+			"TodoTaskModel",
+			"this",
+			"TodoTaskView",
+			"TodoTaskModel",
+			"attachTaskView",
+			"render",
+			"todoListCollectionView",
+			"TodoListView",
+			"TodoListModel",
+			"todoTemplate",
+			"todoListCollectionView",
+			"swaplist",
+			"collection",
+			"attachTaskView",
+			"todoCollection",
+			"TodoTaskModel",
+			"todoCollection",
+			"div",
+			"models/TodoListModel",
+			"TaskCollection",
+			"TaskModel",
+			"TodoTaskView",
+			"todoTaskTemplate",
+			"TodoTaskModel",
+			"div",
+			"this.model",
+			"small",
+			"TodoView",
+			"todoTemplate",
+			"TaskModel",
+			"category",
+			"TaskCollection",
+			"TaskAdderView",
+			"taskAdderTemplate",
+			"showTodo",
+			"TaskCollectionView",
+			"view/TaskCollectionView",
+			"views/TaskView",
+			"TaskView",
+			"TaskAdderView",
+			"TaskReviewerView",
+			"taskReviewerTemplate.html",
+			"taskCollectionTemplate",
+			"taskCollectionTemplate.html",
+			"taskTemplate.html",
+			"taskAdderTemplate.html",
+			"TaskAdderView",
+			"taskAdderTemplate",
+			"\\\\",
+			"getAutoComplete",
+			"taskCollection",
 			"TaskView",
 			"taskTemplate",
 			"taskAdderTemplate",
@@ -597,127 +803,7 @@
 			"foo/",
 			"foo",
 			"fetch",
-			"404",
-			"process",
-			"204",
-			"getHeader",
-			"process\nprocess",
-			"process",
-			"setResponseCode",
-			"http://reergymerej/dev/taskManager/lib/resteasy/api/tasks?to=3&from=1",
-			"setResponseCode",
-			"getSQL",
-			"getSSQL",
-			"getWhereI",
-			"this->request->params",
-			"getSQL",
-			"getWhereClause",
-			"valueForField",
-			"getWhereClause",
-			"getWhereIdParam",
-			"getWhereClause",
-			"where",
-			"down",
-			"from",
-			"fooTemplate",
-			"\\)\\{",
-			"function\\(",
-			"[\\s]+$",
-			"^[\\s]+\\n",
-			"TaskAdderView",
-			"showFoo",
-			"FooView",
-			"duration",
-			"getTimeDif",
-			"duration",
-			"getContainer",
-			"getEditField",
-			"getTimeDiff",
-			"duration",
-			"label",
-			"editable",
-			"originalValue",
-			"errorSty",
-			"onKeyDownHandler",
-			"onBlurHandler",
-			"onKeyDownHandler",
-			"onBlurHandler",
-			"getError",
-			"errorStyle",
-			"getEditField",
-			"getError",
-			"getEditField",
-			"isValid",
-			"e.",
-			"e",
-			"editable",
-			"onEdit",
-			"^[\\s]+$",
-			"\\)\\{",
-			"204",
-			"newTask",
-			"after",
-			"clone",
-			"getTaskIdFromElement",
-			"function ([\\w]+) \\(",
-			" \\)",
-			"\\( ",
-			"^[\\s]+\\n",
-			"function\\(",
-			"\\)\\{",
-			"function\\(",
-			"\\)\\{",
-			"taskTemplate2",
-			"viewsView",
-			"views/foo",
-			"();\n",
-			"ProjectsCollection",
-			"ProjectModel",
-			",",
-			"start",
-			"modelData",
-			"><",
-			"FooView",
-			"0",
-			"=",
-			",",
-			"start",
-			"<div",
-			"<div class=\"editable",
-			"<%= model",
-			"<div",
-			"value",
-			"description",
-			"ProjectModel",
-			"name",
-			"FooView",
-			"fooTemplate",
-			"FooterView",
-			"footerTemplate",
-			",",
-			"\\t",
-			"taskmodel",
-			"module",
-			"$this->add",
-			"\"js/",
-			"TaskModel",
-			"number",
-			"getWhereClause",
-			"getUpdateSnippet",
-			"getSQL",
-			"mysql_error",
-			"hasAllRequiredFields",
-			"getUpdateSnippet",
-			"update",
-			"process",
-			"setResponseCode",
-			"getSQL",
-			"getUpdateSnippet",
-			"have a default",
-			", false",
-			"^([\\d]{3}) (.*)$",
-			"^([\\d]){3} (.*)$",
-			"\\[.*\\]"
+			"404"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -725,6 +811,38 @@
 		"regex": true,
 		"replace_history":
 		[
+			"a",
+			"c",
+			"b",
+			"a",
+			"todoTaskTemplate",
+			"doingTemplate",
+			"todoTemplate",
+			"doingTaskTemplate",
+			"doingView",
+			"doneTemplate",
+			"DoneView",
+			"DoneTaskCollectionView",
+			"done",
+			"doing",
+			"DoingView",
+			"collections/doing/TaskCollection",
+			"models/doing/TaskModel",
+			"TodoListCollection",
+			"TodoListModel",
+			"TodoListView",
+			"todoListCollectionTemplate",
+			"TodoListModel",
+			"TodoTaskView",
+			"todoTaskTemplate",
+			"TodoTaskModel",
+			"TodoCollection",
+			"TodoView",
+			"todoTemplate",
+			"views/doing/TaskView",
+			"HomeView",
+			"homeTemplate",
+			"/",
 			"TaskCollectionView",
 			"taskCollectionTemplate",
 			"taskAdderTemplate",
@@ -839,7 +957,7 @@
 	"project": "taskManager.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -847,6 +965,318 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"coll/todo",
+				"js\\collections\\todo\\TodoCollection.js"
+			],
+			[
+				"modl/todo",
+				"js\\models\\todo\\TodoTaskModel.js"
+			],
+			[
+				"temp/tod",
+				"templates\\todo\\todoTaskTemplate.html"
+			],
+			[
+				"model/todo",
+				"js\\models\\todo\\TodoTaskModel.js"
+			],
+			[
+				"templ/todo",
+				"templates\\todo\\todoTemplate.html"
+			],
+			[
+				"template/todo",
+				"templates\\todo\\todoTaskTemplate.html"
+			],
+			[
+				"collection/",
+				"js\\collections\\todo\\TodoCollection.js"
+			],
+			[
+				"collec/todo",
+				"js\\collections\\todo\\TodoCollection.js"
+			],
+			[
+				"templ/todod",
+				"templates\\todo\\todoTaskTemplate.html"
+			],
+			[
+				"templa/todot",
+				"templates\\todo\\todoTaskTemplate.html"
+			],
+			[
+				".scs",
+				"css\\style.scss"
+			],
+			[
+				"collection",
+				"js\\collections\\todo\\TodoCollection.js"
+			],
+			[
+				"templ/todot",
+				"templates\\todo\\todoTaskTemplate.html"
+			],
+			[
+				"stys",
+				"css\\style.scss"
+			],
+			[
+				"colle/todo",
+				"js\\collections\\todo\\TodoCollection.js"
+			],
+			[
+				"model/todot",
+				"js\\models\\todo\\TodoTaskModel.js"
+			],
+			[
+				"view/todota",
+				"js\\views\\todo\\TodoTaskView.js"
+			],
+			[
+				"todoview",
+				"js\\views\\todo\\TodoView.js"
+			],
+			[
+				"restea/re",
+				"lib\\resteasy\\RestEasy.php"
+			],
+			[
+				"view/todotas",
+				"js\\views\\todo\\TodoTaskView.js"
+			],
+			[
+				"todo/todotemplate",
+				"templates\\todo\\todoTemplate.html"
+			],
+			[
+				"view/todov",
+				"js\\views\\todo\\TodoView.js"
+			],
+			[
+				"view/done",
+				"js\\views\\done\\DoneView.js"
+			],
+			[
+				"temp/don",
+				"templates\\done\\doneTemplate.html"
+			],
+			[
+				"css/sty.sc",
+				"css\\style.scss"
+			],
+			[
+				"donetaskco",
+				"js\\views\\done\\DoneTaskCollectionView.js"
+			],
+			[
+				"temp/todo",
+				"templates\\todo\\todoTaskTemplate.html"
+			],
+			[
+				"view/todo",
+				"js\\views\\todo\\TodoTaskView.js"
+			],
+			[
+				"stye.sc",
+				"css\\style.scss"
+			],
+			[
+				"model/ta",
+				"js\\models\\doing\\TaskModel.js"
+			],
+			[
+				"model/doin",
+				"js\\models\\doing\\TaskModel.js"
+			],
+			[
+				"doing/taskvi",
+				"js\\views\\doing\\TaskView.js"
+			],
+			[
+				"rest/obje",
+				"lib\\resteasy\\objects\\tasks.php"
+			],
+			[
+				"doneview",
+				"js\\views\\done\\DoneView.js"
+			],
+			[
+				"lib/rese/task",
+				"lib\\resteasy\\objects\\tasks.php"
+			],
+			[
+				"view/todv",
+				"js\\views\\todo\\TodoView.js"
+			],
+			[
+				"donetask",
+				"js\\views\\done\\DoneTaskCollectionView.js"
+			],
+			[
+				"view/todolis",
+				"js\\views\\todo\\TodoListView.js"
+			],
+			[
+				"view/todovi",
+				"js\\views\\todo\\TodoView.js"
+			],
+			[
+				"inde",
+				"index.html"
+			],
+			[
+				"templ/todotemplate",
+				"templates\\todo\\todoTemplate.html"
+			],
+			[
+				"todocol",
+				"js\\collections\\todo\\TodoCollection.js"
+			],
+			[
+				"model/todo/",
+				"js\\models\\todo\\TodoTaskModel.js"
+			],
+			[
+				"reste/obje",
+				"lib\\resteasy\\objects\\todotasks.php"
+			],
+			[
+				"restea/obj/",
+				"lib\\resteasy\\objects\\todolists.php"
+			],
+			[
+				"restea/obj",
+				"lib\\resteasy\\objects\\tasks.php"
+			],
+			[
+				"view/todol",
+				"js\\views\\todo\\TodoListView.js"
+			],
+			[
+				"colle/todol",
+				"js\\collections\\todo\\TodoListCollection.js"
+			],
+			[
+				"todocolle",
+				"js\\collections\\todo\\TodoCollection.js"
+			],
+			[
+				"template/todo/",
+				"templates\\todo\\todoListCollectionTemplate.html"
+			],
+			[
+				"colle/",
+				"js\\collections\\TaskCollection.js"
+			],
+			[
+				"todo/model",
+				"js\\models\\todo\\TodoListModel.js"
+			],
+			[
+				"todo/todote",
+				"templates\\todo\\todoTemplate.html"
+			],
+			[
+				"views/todo",
+				"js\\views\\todo\\TodoTaskView.js"
+			],
+			[
+				"restea/oje",
+				"lib\\resteasy\\objects\\tasks.php"
+			],
+			[
+				"model/",
+				"js\\models\\todo\\TodoTaskModel.js"
+			],
+			[
+				"",
+				"templates\\todo\\todoTemplate.html"
+			],
+			[
+				"index",
+				"index.html"
+			],
+			[
+				"tem/todo",
+				"templates\\todo\\todoTemplate.html"
+			],
+			[
+				"colle",
+				"js\\collections\\todo\\TodoCollection.js"
+			],
+			[
+				"doing/",
+				"js\\views\\doing\\TaskView.js"
+			],
+			[
+				"mode/ta",
+				"js\\models\\TaskModel.js"
+			],
+			[
+				"views/tasa",
+				"js\\views\\doing\\TaskAdderView.js"
+			],
+			[
+				"style",
+				"css\\style.scss"
+			],
+			[
+				"rest/obj",
+				"lib\\resteasy\\objects\\todotasks.php"
+			],
+			[
+				"colletodocol",
+				"js\\collections\\todo\\TodoCollection.js"
+			],
+			[
+				"model/todom",
+				"js\\models\\todo\\TodoTaskModel.js"
+			],
+			[
+				"temp/todo/",
+				"templates\\todo\\todoTemplate.html"
+			],
+			[
+				"view/home",
+				"js\\views\\home\\HomeView.js"
+			],
+			[
+				"view/todo/",
+				"js\\views\\todo\\TodoView.js"
+			],
+			[
+				"lib/resea/obj",
+				"lib\\resteasy\\objects\\tasks.php"
+			],
+			[
+				"taskaddvi",
+				"js\\views\\doing\\TaskAdderView.js"
+			],
+			[
+				"view/doin/",
+				"js\\views\\doing\\TaskAdderView.js"
+			],
+			[
+				"template/home",
+				"templates\\home\\homeTemplate.html"
+			],
+			[
+				"router",
+				"js\\router.js"
+			],
+			[
+				"taskmodel",
+				"js\\models\\TaskModel.js"
+			],
+			[
+				"templ/taskte",
+				"templates\\taskTemplate.html"
+			],
+			[
+				"views/",
+				"js\\views\\TaskAdderView.js"
+			],
 			[
 				"taskman/lib/rest/conf",
 				"dev\\taskManager\\lib\\resteasy\\config.php"
@@ -920,10 +1350,6 @@
 				"dev\\resteasy\\RestEasy.php"
 			],
 			[
-				"taskmodel",
-				"dev\\modular-backbone\\js\\models\\TaskModel.js"
-			],
-			[
 				"index.html",
 				"am\\index.html"
 			],
@@ -976,7 +1402,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 198.0,
 	"status_bar_visible": true,
 	"template_settings":
