@@ -19,6 +19,12 @@ define([
 
     var taskCollection = new TaskCollection();
 
+    taskCollection.on('all', function (eventType) {
+      console.log(eventType);
+      console.log('DoingView collection changed');
+      // We should emit an event to the home view so it can coordinate between views.
+    });
+
     var DoingView = Backbone.View.extend({
 
       initialize: function () {
