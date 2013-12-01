@@ -8,7 +8,7 @@ class RestEasy {
 	/**
 	* @param {Field[]} [$fields]
 	*/	
-	public function __construct($fields = []) {
+	public function __construct($fields = array()) {
 		if ($fields) {
 			foreach ($fields as $key => $value) {
 				$this->fields[$value->name] = $value;
@@ -61,7 +61,7 @@ class RestEasy {
 	* @return {String}
 	*/
 	public function getSelectSnippet() {
-		$fields = [];
+		$fields = array();
 
 		foreach($this->fields as $key => $index) {
 			array_push($fields, $key);
@@ -80,8 +80,8 @@ class RestEasy {
 			$postData = $this->request->payload;
 		}
 
-		$fieldPieces = [];
-		$valuePieces = [];
+		$fieldPieces = array();
+		$valuePieces = array();
 		$insert = '';
 
 		if ($this->hasAllRequiredFields($postData, true)) {
@@ -117,7 +117,7 @@ class RestEasy {
 			$putData = $this->request->payload;
 		}
 
-		$valuePieces = [];
+		$valuePieces = array();
 
 		if ($this->hasAllRequiredFields($putData)) {
 			foreach ($putData as $key => $val) {
@@ -207,7 +207,7 @@ class RestEasy {
 						break;
 					default:
 						if (mysql_num_rows($result) > 0) {
-							$rows = [];
+							$rows = array();
 							while ($row = mysql_fetch_assoc($result)) {
 								array_push($rows, $this->castRow($row));
 							}

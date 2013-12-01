@@ -3,11 +3,7 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "C:\\xampp\\htdocs\\reergymerej.com\\dev\\taskManager"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "C:\\xampp\\htdocs\\reergymerej.com\\dev\\clock"
+			"path": "/var/www/reergymerej/dev/taskManager"
 		}
 	]
 }

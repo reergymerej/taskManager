@@ -7,6 +7,7 @@ require('Request.php');
 require('Response.php');
 require('RestEasy.php');
 
+
 $request = new Request();
 $response = new Response($request);
 

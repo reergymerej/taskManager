@@ -18,7 +18,7 @@ class Rest extends RestEasy {
 
 	public function getWhereParams () {
 		$p = $this->request->params;
-		$params = [];
+		$params = array();
 
 		if (isset($p['from']) && $val = $p['from']) {
 			array_push($params, "start >= " . $this->valueForField($val, 'start'));

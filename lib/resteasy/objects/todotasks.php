@@ -17,7 +17,7 @@ class Rest extends RestEasy {
 
 	public function getWhereParams () {
 		$p = $this->request->params;
-		$params = [];
+		$params = array();
 
 		if (isset($p['todoCollectionId']) && $val = $p['todoCollectionId']) {
 			array_push($params, "todoCollectionId = " . $this->valueForField($val, 'todoCollectionId'));

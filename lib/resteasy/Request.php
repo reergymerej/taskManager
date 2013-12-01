@@ -6,14 +6,15 @@ class Request extends Messageable {
 	public $noun;
 	public $id;
 	public $parts;
-	public $params = [];
+	public $params = array();
 	public $payload;
 
 	public function __construct() {
 		$apiFile = $GLOBALS['api_file'];
 		
 		$this->verb = $_SERVER['REQUEST_METHOD'];
-		$this->url = explode('?', urldecode($_SERVER['REQUEST_URI']))[0];
+		$this->url = explode('?', urldecode($_SERVER['REQUEST_URI']));
+		$this->url = $this->url[0];
 		$this->parts = explode('/', substr( $this->url, strPos($this->url, $apiFile) + ( strlen($apiFile) + 1 ) ));
 		$this->noun = $this->parts[0];
 

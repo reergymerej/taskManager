@@ -1,9 +1,9 @@
 <?php
 class Messageable {
 	
-	private $messages = [];
+	private $messages = array();
 	private $responseCode;
-	private $codes = [
+	private $codes = array(
 		100 => "Continue",
 		101 => "Switching Protocols",
 		102 => "Processing",
@@ -88,7 +88,7 @@ class Messageable {
 		524 => "A timeout occurred",
 		598 => "Network read timeout error",
 		599 => "Network connect timeout error"
-	];
+	);
 
 	public function addMessage($str) {
 		array_push($this->messages, $str);
