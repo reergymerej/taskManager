@@ -35,7 +35,6 @@ define([
         this.model.on('change', function (model, options) {
           if (!options.changes.id) {
             if (!me.inEditMode) {
-              console.log('TaskView: saving model');
               this.save();
               me.render();
             }

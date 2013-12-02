@@ -17,16 +17,17 @@ define([
     TaskCollection
   ) {
 
-    var taskCollection = new TaskCollection();
-
-    taskCollection.on('change', function (model, options) {
-      console.log('DoingView: taskCollection changed');
-    });
+    var taskCollection;
 
     var DoingView = Backbone.View.extend({
 
       initialize: function () {
         var me = this;
+
+        taskCollection = new TaskCollection();
+        taskCollection.on('change add remove', function (model, options) {
+          me.trigger('change:view');
+        });
 
         this.$el.empty().off();
 
@@ -130,7 +131,7 @@ define([
         taskCollection.each(function (model, index, collection) {
           me.createTaskView(model);
         });
-        this.trigger('change:view');
+        
       },
 
       getTaskIdFromElement: function (el) {
@@ -156,7 +157,6 @@ define([
           success: function (model, response, options) {
             taskCollection.add(model);
             me.createTaskView(model);
-            me.trigger('change:view');
           }
         });
       },
