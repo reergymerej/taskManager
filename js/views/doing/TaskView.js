@@ -32,10 +32,13 @@ define([
           me.remove();
         });
 
-        this.model.on('change', function () {
-          if (!me.inEditMode) {
-            this.save();
-            me.render();
+        this.model.on('change', function (model, options) {
+          if (!options.changes.id) {
+            if (!me.inEditMode) {
+              console.log('TaskView: saving model');
+              this.save();
+              me.render();
+            }
           }
         });
 

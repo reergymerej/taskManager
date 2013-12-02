@@ -491,9 +491,17 @@
 	"build_system": "Packages/JSLint/JSLint.sublime-build",
 	"command_palette":
 	{
-		"height": 150.0,
+		"height": 96.0,
 		"selected_items":
 		[
+			[
+				"isnt",
+				"Package Control: Install Package"
+			],
+			[
+				"is pa",
+				"Package Control: List Packages"
+			],
 			[
 				"javas",
 				"Set Syntax: JavaScript"
@@ -543,13 +551,14 @@
 				"Preferences: Browse Packages"
 			]
 		],
-		"width": 400.0
+		"width": 449.0
 	},
 	"console":
 	{
 		"height": 126.0,
 		"history":
 		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())",
 			"import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')"
 		]
 	},
@@ -564,6 +573,18 @@
 	},
 	"file_history":
 	[
+		"/home/grizzle/.gvfs/SFTP for wordtoth on wordtotheblurd.com/home/wordtoth/access-logs/dev.wordtotheblurd.com",
+		"/home/grizzle/.gvfs/SFTP for wordtoth on wordtotheblurd.com/home/wordtoth/access-logs/ftp.wordtotheblurd.com-ftp_log",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/sql-test.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/todotasks.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/RestEasy.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Messageable.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/config.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Request.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/api.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/tasks.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/connect.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/.htaccess",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/.disk_usage",
 		"/C/Users/blurd/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
 		"/C/xampp/htdocs/reergymerej.com/dev/clock/index.html",
@@ -679,29 +700,19 @@
 		"/C/xampp/htdocs/reergymerej.com/dev/a2b/php/connect.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/Field.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/Messageable.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/api.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/objects/task.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/.gitignore",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/connect.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/Request.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/Messagable.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/task.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/.htaccess",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/php/put.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/php/post.php",
-		"/C/xampp/htdocs/reergymerej.com/auth/php/connect.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/php/delete.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/TODO.md"
+		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/api.php"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
 		"height": 90.0,
 		"where_history":
 		[
+			"/var/www/reergymerej/dev/taskManager/lib/resteasy",
+			"C:\\xampp\\htdocs\\reergymerej.com\\dev\\taskManager\\lib\\resteasy\\",
 			"C:\\xampp\\htdocs\\reergymerej.com\\dev\\taskManager\\",
 			"C:\\xampp\\htdocs\\reergymerej.com\\dev\\taskManager\\js",
 			"C:\\xampp\\htdocs\\reergymerej.com\\dev\\taskManager",
@@ -716,6 +727,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\\[\\]",
+			"[]",
+			"\\[\\]",
+			"[]",
 			"taskCollection",
 			"setVisibilityForCompleted",
 			"TodoView",
@@ -839,11 +854,7 @@
 			"taskReviewerTemplate.html",
 			"taskCollectionTemplate",
 			"taskCollectionTemplate.html",
-			"taskTemplate.html",
-			"taskAdderTemplate.html",
-			"TaskAdderView",
-			"taskAdderTemplate",
-			"\\\\"
+			"taskTemplate.html"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -851,6 +862,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"array()",
 			"\\n",
 			") {",
 			"function (",
@@ -1001,7 +1013,7 @@
 	"project": "taskManager.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1009,6 +1021,58 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"sql",
+				"lib/resteasy/sql-test.php"
+			],
+			[
+				"obje/tas",
+				"lib/resteasy/objects/tasks.php"
+			],
+			[
+				"obje",
+				"lib/resteasy/objects/todotasks.php"
+			],
+			[
+				"obje/toto",
+				"lib/resteasy/objects/todotasks.php"
+			],
+			[
+				"resetea",
+				"lib/resteasy/RestEasy.php"
+			],
+			[
+				"messa",
+				"lib/resteasy/Messageable.php"
+			],
+			[
+				"conf",
+				"lib/resteasy/config.php"
+			],
+			[
+				"requ",
+				"lib/resteasy/Request.php"
+			],
+			[
+				"conn",
+				"lib/resteasy/connect.php"
+			],
+			[
+				".hta",
+				"lib/resteasy/.htaccess"
+			],
+			[
+				"confi",
+				"lib/resteasy/config.php"
+			],
+			[
+				"sqlte",
+				"lib/resteasy/sql-test.php"
+			],
+			[
+				"conne",
+				"lib/resteasy/connect.php"
+			],
 			[
 				"",
 				"taskManager\\.disk_usage"
@@ -1434,10 +1498,6 @@
 				"dev\\resteasy\\connect.php"
 			],
 			[
-				"conne",
-				"auth\\php\\connect.php"
-			],
-			[
 				"a2b/php/test",
 				"dev\\a2b\\php\\test.php"
 			],
@@ -1474,8 +1534,8 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
-	"side_bar_width": 198.0,
+	"side_bar_visible": false,
+	"side_bar_width": 268.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

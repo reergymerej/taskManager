@@ -41,6 +41,9 @@ define([
           el: $('#doing')
         });
         doing.render();
+        doing.on('change:view', function () {
+          console.log('The DoingView changed.');
+        });
 
         done = new DoneView({
           el: $('#done')

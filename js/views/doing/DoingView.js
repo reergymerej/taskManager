@@ -19,10 +19,8 @@ define([
 
     var taskCollection = new TaskCollection();
 
-    taskCollection.on('all', function (eventType) {
-      console.log(eventType);
-      console.log('DoingView collection changed');
-      // We should emit an event to the home view so it can coordinate between views.
+    taskCollection.on('change', function (model, options) {
+      console.log('DoingView: taskCollection changed');
     });
 
     var DoingView = Backbone.View.extend({
@@ -114,15 +112,6 @@ define([
           }
         });
 
-        // this.$el.on('click', '.newChild', function () {
-        //   var parentTaskEl = $(this).closest('.task'),
-        //     parentId = me.getTaskIdFromElement(this),
-        //     el = $('<div>');
-
-        //   parentTaskEl.parent().after(el);
-        //   me.newTask({ parentTaskId: parentId }, el);
-        // });
-
         this.$el.on('click', '.toolIcon', function () {
           var el = $(this);
           el.next('.tools').toggle();
@@ -141,6 +130,7 @@ define([
         taskCollection.each(function (model, index, collection) {
           me.createTaskView(model);
         });
+        this.trigger('change:view');
       },
 
       getTaskIdFromElement: function (el) {
@@ -158,11 +148,17 @@ define([
       },
 
       newTask: function (modelData, viewEl) {
-        var model = new TaskModel(modelData);
+        var me = this,
+          model = new TaskModel(modelData);
 
-        model.save();
-        taskCollection.add(model);
-        this.createTaskView(model);
+        model.save(undefined, {
+          wait: true,
+          success: function (model, response, options) {
+            taskCollection.add(model);
+            me.createTaskView(model);
+            me.trigger('change:view');
+          }
+        });
       },
 
       createTaskView: function (taskModel) {
