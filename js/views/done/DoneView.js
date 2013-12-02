@@ -35,27 +35,12 @@ define([
           from = new Date(from || null);
           to = to ? new Date(to) : new Date();
 
-          // TODO validate form
           if (me.isValidDate(from) && me.isValidDate(to)) {
             from = from.getTime();
             to = to.getTime();
 
             if (from < to) {
-              taskCollection.fetch({
-
-                data: {
-                  from: from,
-                  to: to
-                },
-
-                success: function (collection, response, options) {
-                  var view = new DoneTaskCollectionView({
-                    el: me.$el.find('#tasks')[0],
-                    collection: collection
-                  });
-                }
-              });
-
+              me.loadDoneCollection(from, to);
             } else {
               console.error('invalid date range');
             }
@@ -99,6 +84,30 @@ define([
 
       isValidDate: function (date) {
         return !isNaN(date.getTime());
+      },
+
+      /**
+      * Loads a set of tasks and renders them.
+      * @param {Number} [from]
+      * @param {Number} [to]
+      */
+      loadDoneCollection: function (from, to) {
+        var me = this;
+
+        taskCollection.fetch({
+
+          data: {
+            from: from,
+            to: to
+          },
+
+          success: function (collection, response, options) {
+            var view = new DoneTaskCollectionView({
+              el: me.$el.find('#tasks')[0],
+              collection: collection
+            });
+          }
+        });
       }
     });
 
