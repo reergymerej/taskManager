@@ -20,7 +20,8 @@ define([
     TodoTaskModel
   ) {
 
-    var todoCollection = new TodoCollection();
+    // This is the current collection of TodoTasks.
+    var currentTodoCollection = new TodoCollection();
 
     var TodoView = Backbone.View.extend({
       el: $("#page"),
@@ -32,16 +33,19 @@ define([
 
         // load the collection (either load a saved one or create a new one)
 
-
-        todoCollection.on('add remove', function (model, collection, options) {
+        currentTodoCollection.on('add remove', function (model, collection, options) {
           me.renderTasks();
         });
 
+        currentTodoCollection.on('change add remove', function () {
+          me.triggerViewChange();
+        });
+
         this.$el.on('click', 'button.add', function (event) {
-          if (todoCollection.id) {
-            todoCollection.create(
+          if (currentTodoCollection.id) {
+            currentTodoCollection.create(
               {
-                todoCollectionId: todoCollection.id
+                todoCollectionId: currentTodoCollection.id
               },
               {
                 wait: true
@@ -75,14 +79,15 @@ define([
         });
 
         todoListCollectionView.on('swaplist', function (id) {
-          todoCollection.id = id;
+          currentTodoCollection.id = id;
 
-          todoCollection.fetch({
+          currentTodoCollection.fetch({
             data: {
               todoCollectionId: id
             },
             success: function () {
               me.renderTasks();
+              me.triggerViewChange()
             },
             error: function (collection) {
               // TODO This is probably a new list.  For now, let's
@@ -90,6 +95,7 @@ define([
               // response returned a 404.
               collection.reset();
               me.renderTasks();
+              me.triggerViewChange();
             }
           }, {
             reset: true
@@ -132,7 +138,7 @@ define([
           sorted = [],
           emergency = 10;
 
-        todoCollection.each(function (model) {
+        currentTodoCollection.each(function (model) {
           sorted.push(model);
         });
 
@@ -259,8 +265,8 @@ define([
               if (!isNaN(targetTaskId) && !isNaN(droppedTaskId)) {
 
                 // Make sure we didn't just drop a task on one of it's upstream tasks.
-                droppedTaskModel = todoCollection.get(droppedTaskId);
-                taskPath = todoCollection.getTaskPath(targetTaskId);
+                droppedTaskModel = currentTodoCollection.get(droppedTaskId);
+                taskPath = currentTodoCollection.getTaskPath(targetTaskId);
 
                 if (taskPath.indexOf(droppedTaskId) === -1) {
                   droppedTaskModel.set('downstreamTaskId', targetTaskId);
@@ -290,6 +296,14 @@ define([
         } else {
           taskContainer.addClass(visiblityClass);
         }
+      },
+
+      /**
+      * Trigger a view change event.
+      * @private
+      */
+      triggerViewChange: function () {
+        this.trigger('change:view');
       }
     });
 

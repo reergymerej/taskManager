@@ -36,6 +36,9 @@ define([
           el: $('#todo')
         });
         todo.render();
+        todo.on('change:view', function () {
+          console.log('The TodoView changed.');
+        });
 
         doing = new DoingView({
           el: $('#doing')

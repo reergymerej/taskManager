@@ -29,7 +29,6 @@ define([
           me.trigger('change:view');
         });
 
-        console.log('initialize DoingView');
         this.$el.off().empty();
 
         // set up editable plugin
