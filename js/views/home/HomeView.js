@@ -21,6 +21,7 @@ define([
       el: $("#page"),
 
       initialize: function () {
+        this.$el.off().empty();
       },
 
       render: function () {
@@ -28,7 +29,6 @@ define([
           todo,
           doing,
           done;
-
         
         this.$el.html(compiledTemplate);
 
