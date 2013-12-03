@@ -2,6 +2,10 @@
 	<% for (var i = 0; i < data.parentCount; i++) { %>
 		---
 	<% } %>
+	<span class="toolWrapper">
+		<button class="btn btn-small btn-danger delete"><i class="icon-remove"></i></button>
+		<button class="btn btn-small btn-info clone"><i class="icon-repeat"></i></button>
+	</span>
 	<span name="category" class="editable text"><%= data.category %></span>
 	<span name="description" class="editable text"><%= data.description %></span>
 	<span name="start" class="editable time"><%= data.start %></span>
@@ -12,8 +16,4 @@
 		<button class="btn btn-small stop"><i class="icon-stop"></i></button>
 	<% } %>
 
-	<span class="toolWrapper">
-		<button class="btn btn-small btn-danger delete"><i class="icon-remove"></i></button>
-		<button class="btn btn-small btn-info clone"><i class="icon-repeat"></i></button>
-	</span>
 </div>

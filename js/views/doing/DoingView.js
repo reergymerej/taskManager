@@ -31,15 +31,15 @@ define([
 
         taskCollection = new TaskCollection();
         taskCollection.on('change add remove', function (model, options) {
-          me.trigger('change:view');
+          me.triggerChangeEvent();
         });
-
 
         this.$el.off().empty();
 
         this.$el.on('change', '#show-all-today', function (event) {
-          console.log($(this).prop('checked'));
+          me.fetchTasks($(this).prop('checked'));
         });
+
         // set up editable plugin
         this.$el.editable({
           onBeforeEdit: function () {
@@ -90,19 +90,9 @@ define([
           }
         });
 
-        // fetch the current inprogress tasks
-        taskCollection.fetch({
-          data: {
-            inProgress: true
-          },
-          success: function (collection, response, options) {
-            me.render();
-          },
-          error: function () {
-            console.error('no data');
-            me.render();
-          }
-        });
+        this.fetchTasks();
+
+
 
         this.$el.on('click', '#newTask', function () {
           me.newTask();
@@ -128,6 +118,8 @@ define([
 
         $('.menu li').removeClass('active');
         $('.menu li a[href="' + window.location.hash + '"]').parent().addClass('active');
+
+        this.render();
       },
 
       render: function () {
@@ -135,6 +127,14 @@ define([
           compiledTemplate = _.template(doingTemplate, {});
 
         this.$el.html(compiledTemplate);
+
+        this.renderTasks();
+      },
+
+      renderTasks: function () {
+        var me = this;
+
+        $('#taskHolder').empty().off();
 
         taskCollection.each(function (model, index, collection) {
           me.createTaskView(model);
@@ -191,6 +191,34 @@ define([
           results = hints.getHints(val);
         }
         callback(results);
+      },
+
+      /**
+      * fetch the current inprogress tasks
+      * @param {Boolean} [today=false]
+      */ 
+      fetchTasks: function (today) {
+        var me = this;
+
+        taskCollection.fetch({
+          data: {
+            inProgress: !today,
+            today: today    
+          },
+          success: function (collection, response, options) {
+            me.renderTasks();
+            me.triggerChangeEvent();
+          },
+          error: function () {
+            console.error('no data');
+            me.renderTasks();
+            me.triggerChangeEvent();
+          }
+        });
+      },
+
+      triggerChangeEvent: function () {
+        this.trigger('change:view');   
       }
     });
 

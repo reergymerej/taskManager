@@ -43,7 +43,6 @@ function(
     */
     addHints: function (val) {
 
-      console.log('add', val);
       var me = this;
 
       if (typeof val === 'string') {

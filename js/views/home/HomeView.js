@@ -37,7 +37,7 @@ define([
         });
         todo.render();
         todo.on('change:view', function () {
-          console.log('The TodoView changed.');
+          // console.log('The TodoView changed.');
         });
 
         doing = new DoingView({
@@ -45,7 +45,6 @@ define([
         });
         doing.render();
         doing.on('change:view', function () {
-          console.log('The DoingView changed.');
           done.loadDoneCollection();
         });
 

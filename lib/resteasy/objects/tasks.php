@@ -28,9 +28,16 @@ class Rest extends RestEasy {
 			array_push($params, "start <= " . $this->valueForField($val, 'end'));
 		}
 
-		if (isset($p['inProgress'])) {
-			$val = $p['inProgress'] === 'true';
-			array_push($params, "inProgress = " . $this->valueForField($val, 'inProgress'));
+		// Either show all from today or show those that are in progress.
+		if (isset($p['today']) && $p['today'] !== 'false') {
+			$time = time();
+			$sec = 60 * 60 * 24;
+			$todaySec = $time % $sec;
+			$today = $time - $todaySec;
+			array_push($params, "start >= " . $today);
+		} elseif (isset($p['today'])) {
+			$val = true;
+			array_push($params, "inProgress = " . $this->valueForField($val, 'inProgress'));	
 		}
 
 		return implode(' AND ', $params);
