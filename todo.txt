@@ -1,0 +1,16 @@
+prevent multiple updates when toggling todo task complete
+
+add loading indicator
+
+auto-select the first todo list
+
+add ability to manage todo lists (name/rename/review/delete)
+
+make the done view have a sub-view for the chart  (ChartView?)
+
+add "all tasks today" option on DoingView
+
+get all auto-complete across all tables
+
+update resteasy to allow getsql for read operations
+

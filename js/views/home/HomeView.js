@@ -46,7 +46,6 @@ define([
         doing.render();
         doing.on('change:view', function () {
           console.log('The DoingView changed.');
-          done.loadDoneCollection();
         });
 
         done = new DoneView({

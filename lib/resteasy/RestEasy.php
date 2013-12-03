@@ -176,10 +176,11 @@ class RestEasy {
 	*/
 	public function process($request) {
 		$this->request = $request;
-		$sql = $this->getSQL();
 		
 		require 'connect.php';
 		$con = connect();
+		
+		$sql = $this->getSQL();
 		
 		// TODO encode all these.
 		// $sql = mysql_real_escape_string($sql);
@@ -229,41 +230,54 @@ class RestEasy {
 	* @return {String}
 	*/
 	public function getSQL() {
-		$sql = '';
+		$sql = $this->getCustomSql();
 
-		switch ($this->request->verb) {
-			//	create
-			case 'POST':
-				$sql .= "INSERT INTO $this->table "
-					. $this->getInsertSnippet();
-				break;
+		if (!$sql) {
+			switch ($this->request->verb) {
+				//	create
+				case 'POST':
+					$sql .= "INSERT INTO $this->table "
+						. $this->getInsertSnippet();
+					break;
 
-			//	read
-			case 'GET':
-				$sql .= 'SELECT ' 
-					. $this->getSelectSnippet()
-					. " FROM $this->table";
-				break;
+				//	read
+				case 'GET':
+					$sql .= 'SELECT ' 
+						. $this->getSelectSnippet()
+						. " FROM $this->table";
+					break;
 
-			//	update
-			case 'PUT':
-				$sql .= "UPDATE $this->table SET "
-					. $this->getUpdateSnippet();
-				break;
+				//	update
+				case 'PUT':
+					$sql .= "UPDATE $this->table SET "
+						. $this->getUpdateSnippet();
+					break;
 
-			//	delete
-			case 'DELETE':
-				$sql .= "DELETE FROM $this->table";
-				break;
+				//	delete
+				case 'DELETE':
+					$sql .= "DELETE FROM $this->table";
+					break;
 
-			default:
-				echo "What the hell are you talking about?";
-				break;
+				default:
+					echo "What the hell are you talking about?";
+					break;
+			}
+
+			$sql .= $this->getWhereClause() . $this->getOrderByClause();
 		}
 
-		$sql .= $this->getWhereClause() . $this->getOrderByClause();
-
 		return $sql;
+	}
+
+	/**
+	* Return anything you want to run instead of the standard sql.  If nothing is returned,
+	* SQL will be built as usual.
+	* Use $this->request to help you determine what you want.
+	* @return {String}
+	* @template
+	*/
+	public function getCustomSql () {
+		return;
 	}
 
 	/**
