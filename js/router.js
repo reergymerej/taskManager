@@ -6,7 +6,8 @@ define([
   'views/home/HomeView',
   'views/todo/TodoView',
   'views/doing/DoingView',
-  'views/done/DoneView'
+  'views/done/DoneView',
+  'collections/hints'
 ],
   function (
     $,
@@ -15,7 +16,8 @@ define([
     HomeView,
     TodoView,
     DoingView,
-    DoneView
+    DoneView,
+    hints
   ) {
 
     var AppRouter = Backbone.Router.extend({

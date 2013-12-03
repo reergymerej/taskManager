@@ -5,6 +5,12 @@ define([
 	_,
 	Backbone
 ) {
+
+  var hints;
+
+  require(['collections/hints'], function (h) {
+    hints = h;
+  });
   
   var TaskModel = Backbone.Model.extend({
   	urlRoot: 'lib/resteasy/api/tasks',
@@ -22,17 +28,19 @@ define([
   	},
 
   	initialize: function () {
-  		// DEBUG
-  		window.task = this;
-
       this.on('change', function (model, changeInfo) {
-        var end = this.get('end');
+        var end = this.get('end'),
+          changed = this.changedAttributes();
 
         if (changeInfo.start || changeInfo.end) {
           if (end) {
             this.set('duration', end - this.get('start'));
           }
         }
+
+        if (changed.category || changed.description) {
+          hints.addHints([changed.category, changed.description]);
+        } 
       });
   	},
 
@@ -128,5 +136,4 @@ define([
   });
 
   return TaskModel;
-
 });

@@ -17,7 +17,12 @@ define([
     TaskCollection
   ) {
 
-    var taskCollection;
+    var taskCollection,
+      hints;
+
+    require(['collections/hints'], function (h) {
+      hints = h;
+    });
 
     var DoingView = Backbone.View.extend({
 
@@ -29,8 +34,12 @@ define([
           me.trigger('change:view');
         });
 
+
         this.$el.off().empty();
 
+        this.$el.on('change', '#show-all-today', function (event) {
+          console.log($(this).prop('checked'));
+        });
         // set up editable plugin
         this.$el.editable({
           onBeforeEdit: function () {
@@ -42,10 +51,9 @@ define([
                 value: value
               });
 
-            // TODO Change this to use getAutoComplete
             if (this.is('.text')) {
               editField.autocomplete({
-                source: _.uniq(taskCollection.pluck(fieldName)).sort()
+                source: me.getAutoComplete
               });
             }
 
@@ -131,7 +139,6 @@ define([
         taskCollection.each(function (model, index, collection) {
           me.createTaskView(model);
         });
-        
       },
 
       getTaskIdFromElement: function (el) {
@@ -172,12 +179,18 @@ define([
       },
 
       /**
-      * @param {String} field
+      * @param {Object} req
+      * @param {Function} callback
       * @return {String[]}
       */
-      getAutoComplete: function (field) {
-        return ['a', 'aa', 'bbb', 'aaaa'];
-        // return taskCollection.pluck(field);
+      getAutoComplete: function (req, callback) {
+        var val = req.term,
+          results = [];
+
+        if (hints) {
+          results = hints.getHints(val);
+        }
+        callback(results);
       }
     });
 

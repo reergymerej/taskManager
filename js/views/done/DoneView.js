@@ -94,6 +94,13 @@ define([
       loadDoneCollection: function (from, to) {
         var me = this;
 
+        if (!from) {
+          // TODO Add validation or at least a limit.
+          from = this.$el.find('[name="from"]').val();
+          from = new Date(from || null);
+          from = from.getTime();
+        }
+
         taskCollection.fetch({
 
           data: {
