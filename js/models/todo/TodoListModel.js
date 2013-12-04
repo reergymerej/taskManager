@@ -11,13 +11,15 @@ define([
     	urlRoot: 'lib/resteasy/api/todolists',
 
     	defaults: function () {
+        var now = Date.now();
     		return {
-    			created: Date.now()
+    			created: now,
+          name: 'list - ' + now,
+          archived: false
     		};
     	},
 
-    	initialize: function () {
-      }
+    	initialize: function () {}
     });
 
     return TodoListModel;

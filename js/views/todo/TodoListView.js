@@ -29,6 +29,9 @@ define([
         // These are all the todo lists saved in the db.
         this.todoLists = new TodoListCollection();
         this.todoLists.fetch({
+          data: {
+            archived: false
+          },
           success: function (collection, response, options) {
             me.trigger('loaded:todolists', me);
           },

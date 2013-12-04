@@ -91,3 +91,22 @@ h1 {
     padding: 0 1em; }
   .tasks .todoTask .todoTaskWrapper .buttons {
     margin-left: 5px; }
+
+
+/********************/
+.todo-management #todo-lists .list {
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 4px;
+}
+.todo-management #todo-lists .list:hover {
+  cursor: pointer;
+}
+.todo-management #todo-lists .list.archived {
+  background-color: #999;
+}
+
+.todo-management #todo-lists .list.active {
+  border-color: #09f;
+}

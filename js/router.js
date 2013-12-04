@@ -5,6 +5,7 @@ define([
   'backbone',
   'views/home/HomeView',
   'views/todo/TodoView',
+  'views/todo/TodoManagementView',
   'views/doing/DoingView',
   'views/done/DoneView',
   'collections/hints'
@@ -15,6 +16,7 @@ define([
     Backbone,
     HomeView,
     TodoView,
+    TodoManagementView,
     DoingView,
     DoneView,
     hints
@@ -26,6 +28,8 @@ define([
         todo: 'showTodo',
         doing: 'showTaskAdder',
         done: 'showTaskReviewer',
+        'manage-todo': 'showManageTodo',
+
         // Default
         '*actions': 'showHome'
       }
@@ -53,6 +57,10 @@ define([
       app_router.on('route:showTaskReviewer', function () {
         var view = new DoneView();
         view.render();
+      });
+
+      app_router.on('route:showManageTodo', function () {
+        var view = new TodoManagementView();
       });
 
       Backbone.history.start();

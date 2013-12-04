@@ -1,0 +1,40 @@
+<div class="row-fluid todo-management">
+	<div class="span3" id="todo-lists">
+	<%	_.each(lists, function (list) { %>
+		<div class="list <%= (list.archived) ? 'archived' : '' %>  <%= (list.id === (activeList && activeList.id)) ? 'active' : '' %>" id="list-<%= list.id %>"><%= list.name %></div>
+	<%	}); %>
+	</div>
+	<div class="span9">
+		<div class="row-fluid">
+			<div class="span8" id="tasks">tasks</div>
+
+			<div class="span4" id="info">
+			<%	if (activeList) { %>
+
+				<form id="info-form">
+					<fieldset>
+						<legend>TodoList Info</legend>
+						<label>Name</label>
+						<input type="text" id="name" placeholder="blank not allowed" value="<%= activeList.name %>">
+				    	<label>Created</label>
+				    	<span class="input-xlarge uneditable-input"><%= activeList.created %></span>
+
+				    	<label class="checkbox">
+			    	      <input type="checkbox" id="archive" <%= (activeList.archived) ? 'checked="checked"' : '' %>> archived
+			    	    </label>
+					</fieldset>
+
+					<div class="form-actions">
+					  <button type="submit" class="btn btn-primary">save</button>
+					  <button type="button" id="form-delete" class="btn btn-danger">delete</button>
+					  <button type="button" id="form-cancel" class="btn">Cancel</button>
+					</div>
+				</form>
+
+			<%	} else { %>
+				Select a list.
+			<%	} %>
+			</div>
+		</div>
+	</div>
+</div>

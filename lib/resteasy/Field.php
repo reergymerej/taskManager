@@ -91,7 +91,7 @@ class BooleanField extends Field {
 	}
 
 	public function castForSQL($value) {
-		return $value ? 1 : 0;
+		return ($value && $value !== 'false') ? 1 : 0;
 	}
 
 	public function castForJSON($value) {
