@@ -198,13 +198,17 @@ define([
       * @param {Boolean} [today=false]
       */ 
       fetchTasks: function (today) {
-        var me = this;
+        var me = this,
+          data = {};
+
+        if (today) {
+          data = { today: true };
+        } else {
+          data = { inProgress: true };
+        }
 
         taskCollection.fetch({
-          data: {
-            inProgress: !today,
-            today: today    
-          },
+          data: data,
           success: function (collection, response, options) {
             me.renderTasks();
             me.triggerChangeEvent();

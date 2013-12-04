@@ -2,15 +2,15 @@
 add loading indicator
 
 
-
-add ability to manage todo lists (name/rename/review/delete)
-
 make the done view have a sub-view for the chart  (ChartView?)
 
+fix show all today option in DoingView
 
+make collections with no results return empty array
 
 
 ================================================
+add ability to manage todo lists (name/rename/review/delete)
 auto-select the first todo list
 get all auto-complete across all tables
 add "all tasks today" option on DoingView
