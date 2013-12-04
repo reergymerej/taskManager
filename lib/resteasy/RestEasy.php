@@ -187,12 +187,13 @@ class RestEasy {
 		$result = mysql_query($sql);
 
 		if(mysql_error()){
-			$this->request->setResponseCode(400);
+			$this->request->setResponseCode(500);
 			$this->request->addMessage($sql);
 			$this->request->addMessage(mysql_error());
 		} else {
 			$rows = mysql_affected_rows();
-			if($rows === 0){
+
+			if($rows === 0 && $this->request->verb !== 'GET'){
 				if ($this->request->verb === 'PUT') {
 					$this->request->setResponseCode(204);
 				} else {
@@ -206,9 +207,11 @@ class RestEasy {
 					case 'PUT':
 						$this->request->setResponseCode(204);
 						break;
+
+					// GET/DELETE
 					default:
+						$rows = array();
 						if (mysql_num_rows($result) > 0) {
-							$rows = array();
 							while ($row = mysql_fetch_assoc($result)) {
 								array_push($rows, $this->castRow($row));
 							}
@@ -218,6 +221,8 @@ class RestEasy {
 							} else {
 								$this->response->setBody(json_encode($rows[0]));
 							}
+						} else {
+							$this->response->setBody(json_encode($rows));
 						}
 				}
 			}
