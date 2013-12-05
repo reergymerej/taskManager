@@ -12,7 +12,7 @@ define([
     _,
     Backbone,
     todoTaskTemplate,
-    TodoCollection,
+    TodoList,
     TodoTaskModel
   ) {
 

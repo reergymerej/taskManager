@@ -1,4 +1,6 @@
 // This displays the todo lists saved in the database.
+// The purpose of this is to allow a user to choose which
+// TodoList they want to work with.
 
 define([
   'jquery',
@@ -6,7 +8,7 @@ define([
   'backbone',
   'text!templates/todo/todoListCollectionTemplate.html',
   'models/todo/TodoListModel',
-  'collections/todo/TodoCollection',
+  'collections/todo/TodoList',
   'collections/todo/TodoListCollection'
 ],
   function (
@@ -15,11 +17,11 @@ define([
     Backbone,
     todoListCollectionTemplate,
     TodoListModel,
-    TodoCollection,
+    TodoList,
     TodoListCollection
   ) {
 
-    var TodoListView = Backbone.View.extend({
+    var ListSelector = Backbone.View.extend({
 
       initialize: function () {
         var me = this;
@@ -33,27 +35,25 @@ define([
             archived: false
           },
           success: function (collection, response, options) {
-            me.trigger('loaded:todolists', me);
+            me.render();
           },
           error: function () {
-            // TODO This should not assume that there were just no lists available.
-            console.error('unable to fetch todo lists');
-            me.trigger('loaded:todolists', me);
+            console.error('error loading TodoListCollection');
+            me.render();
           }
         });
 
         this.todoLists.on('sync', function (collection, response, options) {
-          console.log('sync complete');
           me.render();
         });
 
         // This is the currently selected todo list.
-        this.todoCollection = new TodoCollection();
+        this.todoCollection = new TodoList();
 
         this.$el.on('change', '#todo-lists', function (event) {
           var id = parseInt($(this).val(), 10);
           me.currentList = id;
-          me.trigger('swaplist', id);
+          me.trigger('todolist:selected', id);
         });
 
         this.$el.on('click', 'button#new-list', function (event) {
@@ -88,7 +88,7 @@ define([
         } else if (templateData[0]) {
           templateData[0].selected = 'selected="selected"';
           this.currentList = templateData[0].id;
-          me.trigger('swaplist', this.currentList);
+          me.trigger('todolist:selected', this.currentList);
         }
 
         compiledTemplate = _.template(todoListCollectionTemplate, {
@@ -106,5 +106,5 @@ define([
       }
     });
 
-    return TodoListView;
+    return ListSelector;
   });

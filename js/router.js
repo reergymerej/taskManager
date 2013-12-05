@@ -6,6 +6,7 @@ define([
   'views/home/HomeView',
   'views/todo/TodoView',
   'views/todo/TodoManagementView',
+  'views/todo/TodoTaskTreeView',
   'views/doing/DoingView',
   'views/done/DoneView',
   'collections/hints'
@@ -17,6 +18,7 @@ define([
     HomeView,
     TodoView,
     TodoManagementView,
+    TodoTaskTreeView,
     DoingView,
     DoneView,
     hints
@@ -45,7 +47,6 @@ define([
 
       app_router.on('route:showTodo', function () {
         var view = new TodoView();
-        view.render();
       });
 
       app_router.on('route:showTaskAdder', function () {

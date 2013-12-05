@@ -10,12 +10,11 @@ define([
     Backbone,
     TodoTaskModel
   ) {
-    var TodoCollection = Backbone.Collection.extend({
+    var TodoList = Backbone.Collection.extend({
       url: 'lib/resteasy/api/todotasks',
       model: TodoTaskModel,
 
-      initialize: function () {
-      },
+      initialize: function () {},
 
       // TODO These should be optimized or maybe even cached.
       getDownstreamTasks: function (model) {
@@ -80,8 +79,24 @@ define([
         related = related.concat(this.getUpstreamTasks(model));
         related = related.concat(this.getDownstreamTasks(model));
         return related;
+      },
+
+      /**
+      * Load the specified collection.
+      * @param {Number} config.id
+      * @param {Function} config.success
+      * @param {Function} config.error
+      */
+      loadList: function (config) {
+        this.id = config.id;
+        delete config.id;
+        config.data = {
+          todoCollectionId: this.id
+        };
+        
+        this.fetch(config, { reset: true });
       }
     });
 
-    return TodoCollection;
+    return TodoList;
   });

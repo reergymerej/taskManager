@@ -6,21 +6,34 @@ define([
   'underscore',
   'backbone',
   'text!templates/todo/todoManagement.html',
-  'collections/todo/TodoListCollection'
+  'collections/todo/TodoListCollection',
+  'collections/todo/TodoList',
+  'views/todo/TodoTaskTreeView'
 ],
   function (
     $,
     _,
     Backbone,
     todoManagement,
-    TodoListCollection
+    TodoListCollection,
+    TodoList,
+    TodoTaskTreeView
   ) {
 
     var collection = new TodoListCollection(),
       activeList;
 
+    var tasks = new TodoList();
+
     var TodoManagementView = Backbone.View.extend({
       el: $("#page"),
+
+      /*
+      * @property {TodoTaskTreeView}
+      * This view displays the tasks
+      * in the active collection.
+      */
+      taskViewer: undefined,
 
       initialize: function () {
         var me = this;
@@ -82,6 +95,15 @@ define([
           }
           me.stop(event);
         });
+
+        
+      },
+
+      setupViewer: function () {
+        this.taskViewer = new TodoTaskTreeView({
+          el: '#task-viewer',
+          collection: tasks
+        });
       },
 
       render: function () {
@@ -96,6 +118,12 @@ define([
         compiledTemplate = _.template(todoManagement, templateData);
 
         this.$el.html(compiledTemplate);
+
+
+        // TODO Creating this viewer every time we render is wasteful.
+        // Can we render without erasing this or figure out a way
+        // to delegate the viewer's el?
+        this.setupViewer();
       },
 
       /**
@@ -124,7 +152,21 @@ define([
       */
       setActiveList: function (list) {
         activeList = list;
+
+        console.log('fetch the list and pass it to the taskViewer');
+        console.error('Ths tree view is detecting the change, but it is not rendering.');
         this.render();
+        tasks.loadList({
+          id: activeList.get('id'),
+          success: function () {
+            // me.triggerViewChange()
+          },
+          error: function (collection) {
+            console.error('unable to load collection');
+            // me.triggerViewChange();
+          }
+        });
+        
       },
       
       /**
