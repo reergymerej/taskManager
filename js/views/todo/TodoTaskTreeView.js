@@ -56,13 +56,16 @@ define([
       },
 
       render: function () {
-        var me = this,
-          compiledTemplate = _.template(taskViewer, {});
+        var compiledTemplate = _.template(taskViewer, {});
+
+        this.$el.empty();
 
         // render the items in the collection
         this.$el.html(compiledTemplate);
 
-        me.renderTasks();
+        if (this.collection && this.collection.length > 0) {
+          this.renderTasks();
+        }
       },
 
       setCollection: function (c) {

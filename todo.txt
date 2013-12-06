@@ -4,10 +4,10 @@ add loading indicator
 
 make the done view have a sub-view for the chart  (ChartView?)
 
-split TodoView tasks view into its own view
 
 
 ================================================
+split TodoView tasks view into its own view
 make collections with no results return empty array
 fix show all today option in DoingView
 add ability to manage todo lists (name/rename/review/delete)

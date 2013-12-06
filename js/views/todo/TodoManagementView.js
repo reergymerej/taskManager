@@ -21,6 +21,8 @@ define([
   ) {
 
     var collection = new TodoListCollection(),
+
+      // {TodoListModel}
       activeList;
 
     var tasks = new TodoList();
@@ -59,7 +61,20 @@ define([
 
         // form delete button
         this.$el.on('click', '#form-delete', function (event) {
-          console.log('delete');
+          if (confirm('Are you sure?')) {
+            activeList.destroy({
+              success: function (model) {
+                // TODO This should probably be taken care of by the tree.
+                // me.taskViewer.render();
+                debugger;
+                tasks.reset();
+                me.render();
+              },
+              error: function () {
+                console.error('unable to destroy list');
+              }
+            });
+          }
           me.stop(event);
         });
 
@@ -153,8 +168,6 @@ define([
       setActiveList: function (list) {
         activeList = list;
 
-        console.log('fetch the list and pass it to the taskViewer');
-        console.error('Ths tree view is detecting the change, but it is not rendering.');
         this.render();
         tasks.loadList({
           id: activeList.get('id'),
