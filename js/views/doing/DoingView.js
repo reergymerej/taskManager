@@ -36,8 +36,8 @@ define([
 
         this.$el.off().empty();
 
-        this.$el.on('change', '#show-all-today', function (event) {
-          me.fetchTasks($(this).prop('checked'));
+        this.$el.on('change', '#show-all-today, #show-in-progress', function (event) {
+          me.fetchTasks();
         });
 
         // set up editable plugin
@@ -94,8 +94,10 @@ define([
 
 
 
-        this.$el.on('click', '#newTask', function () {
+        this.$el.on('click', '#newTask', function (event) {
           me.newTask();
+          event.preventDefault();
+          event.stopPropagation();
         });
 
         this.$el.on('click', '.clone', function () {
@@ -195,20 +197,15 @@ define([
 
       /**
       * fetch the current inprogress tasks
-      * @param {Boolean} [today=false]
       */ 
-      fetchTasks: function (today) {
-        var me = this,
-          data = {};
-
-        if (today) {
-          data = { today: true };
-        } else {
-          data = { inProgress: true };
-        }
+      fetchTasks: function () {
+        var me = this;
 
         taskCollection.fetch({
-          data: data,
+          data: {
+            today: $('#show-all-today').prop('checked'),
+            inProgress: $('#show-in-progress').prop('checked')
+          },
           success: function (collection, response, options) {
             me.renderTasks();
             me.triggerChangeEvent();

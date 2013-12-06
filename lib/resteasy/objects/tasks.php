@@ -31,7 +31,9 @@ class Rest extends RestEasy {
 		if (isset($p['inProgress'])) {
 			$val = $this->valueForField($p['inProgress'], 'inProgress');
 
-			array_push($params, "inProgress = $val");
+			if ($val) {
+				array_push($params, "inProgress = $val");
+			}
 		}
 
 		// Either show all from today or show those that are in progress.
