@@ -56,7 +56,7 @@ define([
           me.trigger('todolist:selected', id);
         });
 
-        this.$el.on('click', 'button#new-list', function (event) {
+        this.$el.on('click', '#new-list', function (event) {
           var todoList = new TodoListModel();
 
           me.todoLists.add(todoList);
@@ -71,6 +71,8 @@ define([
           //     console.error('unable to save model');
           //   }
           // });
+          event.preventDefault();
+          event.stopPropagation();
         });
       },
 

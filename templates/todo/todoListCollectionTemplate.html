@@ -1,6 +1,8 @@
-<select id="todo-lists">
-	<% _.each(data, function (element, index, list){ %>
-		<option value="<%= element.id %>" <%= element.selected %>><%= element.name %></option>
-	<% }) %>
-</select>
-<button id="new-list" class="btn">new todo list</button>
+<form class="form-inline">
+	<select id="todo-lists">
+		<% _.each(data, function (element, index, list){ %>
+			<option value="<%= element.id %>" <%= element.selected %>><%= element.name %></option>
+		<% }) %>
+	</select>
+	<button id="new-list" class="btn">new todo list</button>
+</form>

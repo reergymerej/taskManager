@@ -64,9 +64,6 @@ define([
           if (confirm('Are you sure?')) {
             activeList.destroy({
               success: function (model) {
-                // TODO This should probably be taken care of by the tree.
-                // me.taskViewer.render();
-                debugger;
                 tasks.reset();
                 me.render();
               },
