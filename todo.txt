@@ -1,7 +1,6 @@
 
 add loading indicator
 
-todo - auto-select new list once created
 
 make the done view have a sub-view for the chart  (ChartView?)
 
@@ -15,6 +14,7 @@ fix sorting
 delete tasks when a todo list is deleted (backend)
 
 ================================================
+todo - auto-select new list once created
 split TodoView tasks view into its own view
 make collections with no results return empty array
 fix show all today option in DoingView

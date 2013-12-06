@@ -23,5 +23,13 @@ class Rest extends RestEasy {
 
 		return implode(' AND ', $params);
 	}
+
+	public function beforeQuery() {
+		if ($this->request->verb === 'DELETE') {
+			$id = $this->request->id;
+			$sql = "delete from todotask where todoCollectionId = $id;";
+			$result = mysql_query($sql);
+		}
+	}
 }
 ?>

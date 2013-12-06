@@ -36,7 +36,11 @@ define([
             archived: false
           },
           success: function (collection, response, options) {
-            me.setActiveList(collection.models[0] && collection.models[0].get('id'));
+            if (collection.length) {
+              me.setActiveList(collection.models[0] && collection.models[0].get('id'));
+            } else {
+              me.render();
+            }
           },
           error: function () {
             console.error('error loading TodoListCollection');
@@ -93,21 +97,11 @@ define([
           templateData = this.todoLists.toJSON(),
           compiledTemplate;
 
-        if (me.selectedListId === undefined) {
-          console.error('need to know what list we are using');
-        } else {
-          _.each(templateData, function (element, index, list) {
-            if (element.id === me.selectedListId) {
-              element.selected = 'selected="selected"';
-            }
-          });
-        }
-
-        // if (me.selectedListId) {
-        // } else if (templateData[0]) {
-        //   templateData[0].selected = 'selected="selected"';
-        //   me.setActiveList(templateData[0].id);
-        // }
+        _.each(templateData, function (element, index, list) {
+          if (element.id === me.selectedListId) {
+            element.selected = 'selected="selected"';
+          }
+        });
 
         compiledTemplate = _.template(todoListCollectionTemplate, {
           data: templateData

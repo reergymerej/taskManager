@@ -179,6 +179,9 @@ class RestEasy {
 		
 		require 'connect.php';
 		$con = connect();
+
+		// TODO need to add a fallback in case this fails.
+		$this->beforeQuery();
 		
 		$sql = $this->getSQL();
 		
@@ -283,6 +286,14 @@ class RestEasy {
 	*/
 	public function getCustomSql () {
 		return;
+	}
+
+	/**
+	* Use this to run custom operations before the query.
+	* The connection is already open.
+	* @template
+	*/
+	public function beforeQuery() {
 	}
 
 	/**
