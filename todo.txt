@@ -1,10 +1,18 @@
 
 add loading indicator
 
+todo - auto-select new list once created
 
 make the done view have a sub-view for the chart  (ChartView?)
 
+move collection sorting logic into collection (TodoView)
 
+fix sorting
+	create new list
+	add task
+	add sub task (this one fails)
+
+delete tasks when a todo list is deleted (backend)
 
 ================================================
 split TodoView tasks view into its own view

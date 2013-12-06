@@ -26,7 +26,8 @@ define([
       initialize: function () {
         var me = this;
 
-        this.currentList = undefined;
+        // {Number}
+        this.selectedListId = undefined;
 
         // These are all the todo lists saved in the db.
         this.todoLists = new TodoListCollection();
@@ -35,11 +36,10 @@ define([
             archived: false
           },
           success: function (collection, response, options) {
-            me.render();
+            me.setActiveList(collection.models[0] && collection.models[0].get('id'));
           },
           error: function () {
             console.error('error loading TodoListCollection');
-            me.render();
           }
         });
 
@@ -52,28 +52,40 @@ define([
 
         this.$el.on('change', '#todo-lists', function (event) {
           var id = parseInt($(this).val(), 10);
-          me.currentList = id;
-          me.trigger('todolist:selected', id);
+          me.setActiveList(id);
         });
 
         this.$el.on('click', '#new-list', function (event) {
           var todoList = new TodoListModel();
 
           me.todoLists.add(todoList);
-          todoList.save();
-
-          // TODO These aren't firing for some reason.
-          // todoList.save({
-          //   success: function (model, response, options) {
-          //     console.log('new list saved');
-          //   },
-          //   error: function (model, xhr, options) {
-          //     console.error('unable to save model');
-          //   }
-          // });
+          todoList.save({}, {
+            success: function (model, response, options) {
+              me.setActiveList(model.get('id'));
+              me.render();
+            },
+            error: function (model, xhr, options) {
+              console.error('unable to save model');
+            }
+          });
           event.preventDefault();
           event.stopPropagation();
         });
+      },
+
+      /**
+      * Set the selected list.
+      * @param {Number} id
+      * @private
+      */
+      setActiveList: function (id) {
+        if (typeof id !== 'number') {
+          console.error('tried to set list with no id');
+        } else {
+          this.selectedListId = id;
+          this.render();
+          this.trigger('todolist:selected', this.selectedListId);
+        }
       },
 
       render: function () {
@@ -81,17 +93,21 @@ define([
           templateData = this.todoLists.toJSON(),
           compiledTemplate;
 
-        if (me.currentList) {
+        if (me.selectedListId === undefined) {
+          console.error('need to know what list we are using');
+        } else {
           _.each(templateData, function (element, index, list) {
-            if (element.id === me.currentList) {
+            if (element.id === me.selectedListId) {
               element.selected = 'selected="selected"';
             }
           });
-        } else if (templateData[0]) {
-          templateData[0].selected = 'selected="selected"';
-          this.currentList = templateData[0].id;
-          me.trigger('todolist:selected', this.currentList);
         }
+
+        // if (me.selectedListId) {
+        // } else if (templateData[0]) {
+        //   templateData[0].selected = 'selected="selected"';
+        //   me.setActiveList(templateData[0].id);
+        // }
 
         compiledTemplate = _.template(todoListCollectionTemplate, {
           data: templateData
