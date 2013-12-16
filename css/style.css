@@ -110,3 +110,11 @@ h1 {
 .todo-management #todo-lists .list.active {
   border-color: #09f;
 }
+
+.clickable {
+  opacity: .5;
+}
+.clickable:hover {
+  cursor: pointer;
+  opacity: 1;
+}

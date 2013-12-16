@@ -38,11 +38,11 @@ define([
           }
         });
 
-        this.$el.on('click', 'button.destroy', function (event) {
+        this.$el.on('click', '.destroy', function (event) {
           me.model.destroy();
         });
 
-        this.$el.on('click', 'button.upstream', function (event) {
+        this.$el.on('click', '.upstream', function (event) {
           me.model.collection.create({
             downstreamTaskId: me.model.get('id'),
             todoCollectionId: me.model.get('todoCollectionId')
@@ -51,7 +51,7 @@ define([
 
         // Create a new model in place of this one.  Add this model
         // as an upstream model.
-        this.$el.on('click', 'button.downstream', function (event) {
+        this.$el.on('click', '.downstream', function (event) {
 
           require(['models/todo/TodoTaskModel'], function (TodoTaskModel) {
             var newModel = new TodoTaskModel();

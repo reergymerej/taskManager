@@ -1,6 +1,4 @@
-
 add loading indicator
-
 
 make the done view have a sub-view for the chart  (ChartView?)
 
@@ -11,16 +9,31 @@ fix sorting
 	add task
 	add sub task (this one fails)
 
-delete tasks when a todo list is deleted (backend)
+hook up Jasmine
+
+add order to TodoTasks
+	update client model
+
+
+new child TodoTasks PUT twice
+	in todo management, load a list
+		add a task, add an upstream task
+	load list again
+		add a sub task (will PUT 3 times)
+	each time you reload the same list, it PUTs another time	
+
+add age to TodoTasks
+add completed date to TodoTasks
+store active TodoList in cookies so it keeps across pages
+allow changing order of TodoTasks
+order TodoLists by name
+show incomplete count in TodoLists
+tab to edit next field
+create components and grey out until ready
+only auto-complete on same category
+add error indicator for XHR
+create offline mode
+start adding summary info
 
 ================================================
-todo - auto-select new list once created
-split TodoView tasks view into its own view
-make collections with no results return empty array
-fix show all today option in DoingView
-add ability to manage todo lists (name/rename/review/delete)
-auto-select the first todo list
-get all auto-complete across all tables
-add "all tasks today" option on DoingView
-update resteasy to allow getsql for read operations
-prevent multiple updates when toggling todo task complete
+delete tasks when a todo list is deleted (backend)

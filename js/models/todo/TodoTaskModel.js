@@ -17,7 +17,8 @@ define([
     			created: Date.now(),
           isComplete: false,
     			downstreamTaskId: undefined,
-          todoCollectionId: undefined
+          todoCollectionId: undefined,
+          taskOrder: 0
     		};
     	},
 

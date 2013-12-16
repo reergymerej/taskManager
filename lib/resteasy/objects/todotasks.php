@@ -13,6 +13,7 @@ class Rest extends RestEasy {
 		$this->add('isComplete', 'boolean', true);
 		$this->add('downstreamTaskId', 'number');
 		$this->add('todoCollectionId', 'number', true);
+		$this->add('taskOrder', 'number', true);
 	}
 
 	public function getWhereParams () {
