@@ -31,15 +31,21 @@ define([
       },
 
       getTemplateData: function () {
-        var data = this.toJSON();
-        _.extend(data, {
-          cls: data.isComplete ? 'complete' : '',
-          checked: data.isComplete ? 'checked="checked"' : '',
-          downstreamCount: this.collection.getDownstreamTasks(this).length,
+        var me = this,
+          data = this.toJSON();
 
-          // Highlight those with no upstream incomplete which are incomplete themselves.
-          highlight: this.collection.getUpstreamIncomplete(this).length === 0 && !data.isComplete
-        });
+        if (this.collection) {
+          _.extend(data, {
+            cls: data.isComplete ? 'complete' : '',
+            checked: data.isComplete ? 'checked="checked"' : '',
+            downstreamCount: me.collection.getDownstreamTasks(me).length,
+
+            // Highlight those with no upstream incomplete which are incomplete themselves.
+            highlight: this.collection.getUpstreamIncomplete(this).length === 0 && !data.isComplete
+          });
+        } else {
+          console.warn('no collection for this model');
+        }
 
         return data;
       }
