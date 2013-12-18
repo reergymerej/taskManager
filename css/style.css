@@ -81,7 +81,6 @@ h1 {
 .tasks .todoTask .todoTaskWrapper {
   background-color: #a3a8a2;
   display: inline-block;
-  min-width: 200px;
   border: 1px solid #666666;
   border-radius: 4px;
   padding: 5px; }
@@ -117,4 +116,12 @@ h1 {
 .clickable:hover {
   cursor: pointer;
   opacity: 1;
+}
+
+.toolsWrapper {
+  display: inline-block;
+}
+
+.buttons {
+  display: none;
 }

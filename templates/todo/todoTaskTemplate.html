@@ -8,12 +8,15 @@
 		<%= data.taskOrder %>
 		<input type="checkbox" <%= data.checked %> />
 		<span class="task-label editable <%= data.cls %>"><%= data.label %></span>
-		<span class="buttons">
-			<i class="clickable taskOrderUp icon-arrow-up"></i>
-			<i class="clickable taskOrderDown icon-arrow-down"></i>
-			<i class="clickable downstream icon-chevron-left"></i>
-			<i class="clickable upstream icon-chevron-right"></i>
-			<i class="clickable destroy icon-remove"></i>
-		</span>
+		<div class="toolsWrapper">
+			<i class="showTools icon-wrench"></i>
+			<span class="buttons">
+				<i class="clickable taskOrderUp icon-arrow-up"></i>
+				<i class="clickable taskOrderDown icon-arrow-down"></i>
+				<i class="clickable downstream icon-chevron-left"></i>
+				<i class="clickable upstream icon-chevron-right"></i>
+				<i class="clickable destroy icon-remove"></i>
+			</span>
+		</div>
 	</span>
 </div>
