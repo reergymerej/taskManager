@@ -38,7 +38,8 @@ define([
           if (me.collection.id) {
             me.collection.create(
               {
-                todoCollectionId: me.collection.id
+                todoCollectionId: me.collection.id,
+                taskOrder: me.collection.getNextTaskOrder(0)
               },
               {
                 wait: true

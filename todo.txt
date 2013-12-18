@@ -11,8 +11,6 @@ fix sorting
 
 hook up Jasmine
 
-add order to TodoTasks
-	update client model
 
 
 new child TodoTasks PUT twice
@@ -37,3 +35,12 @@ start adding summary info
 
 ================================================
 delete tasks when a todo list is deleted (backend)
+
+add order to TodoTasks
+	update client model
+	add ability to change order in UI
+	when adding a new task, calculate the order
+	when deleting, update tasks after deleted
+	when moving to another downstream, update order in removed and new
+	add comparator to keep models in order
+		layout tasks in tree according to order

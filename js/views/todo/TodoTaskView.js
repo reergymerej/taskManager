@@ -38,6 +38,11 @@ define([
           }
         });
 
+        this.$el.on('click', '.taskOrderUp, .taskOrderDown', function (event) {
+          var direction = $(event.target).is('.taskOrderUp') ? -1 : 1;
+          me.model.changeTaskOrder(direction);
+        });
+
         this.$el.on('click', '.destroy', function (event) {
           me.model.destroy();
         });

@@ -16,10 +16,10 @@ define([
     			notes: '',
     			created: Date.now(),
           isComplete: false,
-    			downstreamTaskId: undefined,
+    			downstreamTaskId: 0,
           todoCollectionId: undefined,
           taskOrder: 0
-    		};
+    		};    
     	},
 
     	initialize: function () {
@@ -49,6 +49,17 @@ define([
         }
 
         return data;
+      },
+
+      /**
+      * Change this task's order.  If part of a collection, update the affected tasks too.
+      * @param {Number} [direction] -1 to move up, 1 to move down
+      */
+      changeTaskOrder: function (direction) {
+        // getSiblingTasks
+        if (this.collection) {
+          this.collection.changeOrder(this, direction);
+        }
       }
     });
 
