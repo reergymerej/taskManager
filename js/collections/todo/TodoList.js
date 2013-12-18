@@ -188,6 +188,36 @@ define([
         });
       },
 
+      refreshTaskOrders: function (dsTaskId) {
+        var tasks = this.getTasksByAttrs({downstreamTaskId: dsTaskId}),
+          missingOrder,
+          orders = [],
+          i;
+
+        if (tasks.length > 0) {
+          _.each(tasks, function (t) {
+            orders.push(t.get('taskOrder'));
+          });
+
+          orders.sort();
+
+          for (i = 0; i < orders.length; i++) {
+            if (orders[i] !== i) {
+              missingOrder = i;
+            }
+          }
+
+          if (missingOrder !== undefined) {
+            _.each(tasks, function (t) {
+              var order = t.get('taskOrder');
+              if (order > missingOrder) {
+                t.set('taskOrder', order - 1);
+              }
+            });
+          }
+        }
+      },
+
       /**
       * Move a task (by taskOrder) up or down.  Moves sibling tasks as well.
       * @param {TodoTaskModel} task

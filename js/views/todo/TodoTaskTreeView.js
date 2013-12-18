@@ -229,7 +229,8 @@ define([
               var targetTaskId = $(this).find('.todoTask').attr('id'),
                 droppedTaskId = ui.draggable.find('.todoTask').attr('id'),
                 droppedTaskModel,
-                taskPath;
+                taskPath,
+                oldDsTaskId;
 
               targetTaskId = parseInt(targetTaskId, 10);
               droppedTaskId = parseInt(droppedTaskId, 10);
@@ -240,11 +241,27 @@ define([
                 droppedTaskModel = me.collection.get(droppedTaskId);
                 taskPath = me.collection.getTaskPath(targetTaskId);
 
-                if (taskPath.indexOf(droppedTaskId) === -1) {
-                  droppedTaskModel.set('downstreamTaskId', targetTaskId);
-                  me.renderTasks();
+                // Make sure we're not just dropping it where it already belongs.
+                if (droppedTaskModel.get('downstreamTaskId') !== targetTaskId) {
+                  if (taskPath.indexOf(droppedTaskId) === -1) {
+
+                    oldDsTaskId = droppedTaskModel.get('downstreamTaskId');
+
+                    droppedTaskModel.set({
+                      downstreamTaskId: targetTaskId,
+                      taskOrder: me.collection.getNextTaskOrder(targetTaskId)
+                    });
+
+                    // Let the collection know we just removed a task.
+                    me.collection.refreshTaskOrders(oldDsTaskId);
+
+                    me.renderTasks();
+                  } else {
+                    console.error('You cannot drop it on its own upstream task.');
+                    // TODO change this to revert.
+                    ui.draggable.css({top: 0, left: 0});
+                  }
                 } else {
-                  console.error('You cannot drop it on its own upstream task.');
                   // TODO change this to revert.
                   ui.draggable.css({top: 0, left: 0});
                 }

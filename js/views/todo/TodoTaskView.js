@@ -90,10 +90,8 @@ define([
         this.$el.on('mouseenter mouseleave', '.toolsWrapper', function (event) {
           var $buttons = $('.buttons', this);
           if (event.type === 'mouseenter') {
-            console.log('show', this);
             $buttons.show();
           } else {
-            console.log('hide');
             $buttons.hide();
           }
         });
