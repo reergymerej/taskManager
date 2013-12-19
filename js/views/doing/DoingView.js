@@ -26,6 +26,8 @@ define([
 
     var DoingView = Backbone.View.extend({
 
+      taskViews: [],
+
       initialize: function () {
         var me = this;
 
@@ -82,24 +84,54 @@ define([
           onChanged: function (value, oldValue) {
             var id = me.getTaskIdFromElement(this),
               taskModel = id && taskCollection.get(id),
-              field = taskModel && this.attr('name');
+              view = me.getTaskViewById(id),
+              field = taskModel && this.attr('name'),
+              fieldObject = {};
 
-            console.log('onChanged');
             if (field) {
-              taskModel.set(field, value);
+              if (view.editMode) {
+                view.cachedValues = view.cachedValues || {};
+                view.cachedValues[field] = value;
+              } else {
+                if (view.cachedValues) {
+                  fieldObject[field] = value;
+                  _.extend(view.cachedValues, fieldObject);
+                  taskModel.set(view.cachedValues);
+                  view.cachedValues = null;
+                } else {
+                  taskModel.set(field, value);
+                }
+              }
             }
           },
           onFinish: function (lastKey) {
-            // If tab, don't change the value yet.
-            if (lastKey === 9) {
-              console.log(lastKey);
+            var taskId,
+              taskView,
+              nextField;
+
+            taskId = me.getTaskIdFromElement(this);
+            taskView = me.getTaskViewById(taskId);
+
+            if (taskView) {
+
+              if (lastKey === 9) {
+                nextField = this.nextAll('.editable');
+
+                if (nextField.length > 0) {
+                  nextField = nextField[0];
+                  taskView.editMode = true;
+                  nextField.click();
+                } else {
+                  taskView.editMode = false;
+                }
+              } else {
+                taskView.editMode = false;
+              }
             }
           }
         });
 
         this.fetchTasks();
-
-
 
         this.$el.on('click', '#newTask', function (event) {
           me.newTask();
@@ -144,6 +176,7 @@ define([
         var me = this;
 
         $('#taskHolder').empty().off();
+        this.taskViews = [];
 
         taskCollection.each(function (model, index, collection) {
           me.createTaskView(model);
@@ -178,13 +211,16 @@ define([
       },
 
       createTaskView: function (taskModel) {
-        var viewEl = $('<div>');
+        var viewEl = $('<div>'),
+          view;
 
         viewEl.prependTo('#taskHolder');
         view = new TaskView({
           el: viewEl,
           model: taskModel
         });
+
+        this.taskViews.push(view);
       },
 
       /**
@@ -227,6 +263,16 @@ define([
 
       triggerChangeEvent: function () {
         this.trigger('change:view');   
+      },
+
+      getTaskViewById: function (id) {
+        var taskView;
+        _.each(this.taskViews, function (view) {
+          if (!taskView && view.model.get('id') === id) {
+            taskView = view;
+          }
+        });
+        return taskView;
       }
     });
 

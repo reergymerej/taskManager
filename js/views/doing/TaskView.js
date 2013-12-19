@@ -14,6 +14,7 @@ define([
     var TaskView = Backbone.View.extend({
 
       inEditMode: false,
+      cachedValues: {},
 
       initialize: function (config) {
         var me = this;
