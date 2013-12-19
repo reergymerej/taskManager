@@ -26,13 +26,22 @@ store active TodoList in cookies so it keeps across pages
 allow changing order of TodoTasks
 order TodoLists by name
 show incomplete count in TodoLists
-tab to edit next field
 create components and grey out until ready
 only auto-complete on same category
 add error indicator for XHR
 create offline mode
 start adding summary info
 
+		layout tasks in tree according to order
+================================================
+in progress
+================================================
+
+tab to edit next field
+
+
+================================================
+done
 ================================================
 delete tasks when a todo list is deleted (backend)
 
@@ -43,4 +52,3 @@ add order to TodoTasks
 	when deleting, update tasks after deleted
 	when moving to another downstream, update order in removed and new
 	add comparator to keep models in order
-		layout tasks in tree according to order

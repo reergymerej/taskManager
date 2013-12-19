@@ -84,8 +84,15 @@ define([
               taskModel = id && taskCollection.get(id),
               field = taskModel && this.attr('name');
 
+            console.log('onChanged');
             if (field) {
               taskModel.set(field, value);
+            }
+          },
+          onFinish: function (lastKey) {
+            // If tab, don't change the value yet.
+            if (lastKey === 9) {
+              console.log(lastKey);
             }
           }
         });
