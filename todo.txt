@@ -37,13 +37,13 @@ start adding summary info
 in progress
 ================================================
 
-tab to edit next field
 
 
 ================================================
 done
 ================================================
 delete tasks when a todo list is deleted (backend)
+tab to edit next field
 
 add order to TodoTasks
 	update client model

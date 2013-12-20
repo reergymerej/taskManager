@@ -1,4 +1,3 @@
-// Filename: router.js
 define([
   'jquery',
   'underscore',
@@ -9,7 +8,8 @@ define([
   'views/todo/TodoTaskTreeView',
   'views/doing/DoingView',
   'views/done/DoneView',
-  'collections/hints'
+  'collections/hints',
+  'views/account/AccountSignupView'
 ],
   function (
     $,
@@ -21,7 +21,8 @@ define([
     TodoTaskTreeView,
     DoingView,
     DoneView,
-    hints
+    hints,
+    AccountSignupView
   ) {
 
     var AppRouter = Backbone.Router.extend({
@@ -31,6 +32,7 @@ define([
         doing: 'showTaskAdder',
         done: 'showTaskReviewer',
         'manage-todo': 'showManageTodo',
+        'account-signup': 'showAccountSignup',
 
         // Default
         '*actions': 'showHome'
@@ -38,30 +40,36 @@ define([
     });
 
     var initialize = function () {
-      var app_router = new AppRouter();
+      var router = new AppRouter();
 
-      app_router.on('route:showHome', function () {
+      router.on('route:showHome', function () {
         var view = new HomeView();
         view.render();
       });
 
-      app_router.on('route:showTodo', function () {
+      router.on('route:showTodo', function () {
         var view = new TodoView();
       });
 
-      app_router.on('route:showTaskAdder', function () {
+      router.on('route:showTaskAdder', function () {
         var doingView = new DoingView({
           el: $('#page')
         });
       });
 
-      app_router.on('route:showTaskReviewer', function () {
+      router.on('route:showTaskReviewer', function () {
         var view = new DoneView();
         view.render();
       });
 
-      app_router.on('route:showManageTodo', function () {
+      router.on('route:showManageTodo', function () {
         var view = new TodoManagementView();
+      });
+
+      router.on('route:showAccountSignup', function () {
+        var view = new AccountSignupView({
+          el: $('#container')
+        });
       });
 
       Backbone.history.start();
