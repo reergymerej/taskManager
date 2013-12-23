@@ -23,13 +23,14 @@ if (!$_SESSION['uid']) {
 function loginWithRememberMe () {
 	$success = false;
 	$token = $_COOKIE['token'];
+	$uid = $_COOKIE['uid'];
 
-	if ($token) {
+	if ($token && $uid) {
 		require '../lib/resteasy/config.php';
 		require '../lib/resteasy/connect.php';
 		$con = connect();
 
-		$sql = "SELECT user_id FROM token WHERE token = '$token'";
+		$sql = "SELECT user_id FROM token WHERE token = '$token' AND user_id = $uid";
 		$result = mysql_query($sql);
 
 		if ($result && mysql_num_rows($result) === 1) {

@@ -4,6 +4,86 @@
 		"selected_items":
 		[
 			[
+				"err",
+				"error"
+			],
+			[
+				"cong",
+				"controlGroup"
+			],
+			[
+				"eor",
+				"errorContainer"
+			],
+			[
+				"cont",
+				"controlGroup"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"erro",
+				"errorMessage"
+			],
+			[
+				"vali",
+				"validateField"
+			],
+			[
+				"tab",
+				"tabbedOut"
+			],
+			[
+				"miss",
+				"missingOrder"
+			],
+			[
+				"downstreamTaskI",
+				"downstreamTaskId"
+			],
+			[
+				"tas",
+				"taskOrder"
+			],
+			[
+				"remoT",
+				"removedTaskOrder"
+			],
+			[
+				"si",
+				"siblings"
+			],
+			[
+				"sibl",
+				"siblings"
+			],
+			[
+				"sib",
+				"sibling"
+			],
+			[
+				"down",
+				"downstreamTaskId"
+			],
+			[
+				"star",
+				"startDate"
+			],
+			[
+				"mem",
+				"memories"
+			],
+			[
+				"memo",
+				"memory"
+			],
+			[
+				"dayS",
+				"daysSince"
+			],
+			[
 				"activ",
 				"activeList"
 			],
@@ -102,14 +182,6 @@
 			[
 				"downT",
 				"downstreamTaskIndex"
-			],
-			[
-				"downstreamTaskI",
-				"downstreamTaskIndex"
-			],
-			[
-				"down",
-				"downstreamTaskId"
 			],
 			[
 				"downs",
@@ -262,10 +334,6 @@
 			[
 				"where",
 				"getWhereClause"
-			],
-			[
-				"res",
-				"responseCode"
 			],
 			[
 				"setRe",
@@ -446,108 +514,62 @@
 			[
 				"cli",
 				"clickableTaskElementSelectors"
-			],
-			[
-				"tas",
-				"taskHeight"
-			],
-			[
-				"ed",
-				"edgeWidth"
-			],
-			[
-				"che",
-				"checkWidth"
-			],
-			[
-				"but",
-				"buttonWidth"
-			],
-			[
-				"in",
-				"inline-table"
-			],
-			[
-				"inline",
-				"inline-block"
-			],
-			[
-				"getCu",
-				"getCubesOfType"
-			],
-			[
-				"C",
-				"CENTER"
-			],
-			[
-				"prot",
-				"prototype"
-			],
-			[
-				"midel",
-				"middleAxis2"
-			],
-			[
-				"mide",
-				"middleAxis1"
-			],
-			[
-				"border-co",
-				"border-color"
-			],
-			[
-				"ques",
-				"questions"
-			],
-			[
-				"ans",
-				"answer"
-			],
-			[
-				"answe",
-				"answers"
-			],
-			[
-				"shuf",
-				"shuffle"
-			],
-			[
-				"rand",
-				"randXFromArr"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
+			"contents": "add loading indicator\n\nmake the done view have a sub-view for the chart  (ChartView?)\n\nmove collection sorting logic into collection (TodoView)\n\nfix sorting\n	create new list\n	add task\n	add sub task (this one fails)\n\nhook up Jasmine\n\n\n\nnew child TodoTasks PUT twice\n	in todo management, load a list\n		add a task, add an upstream task\n	load list again\n		add a sub task (will PUT 3 times)\n	each time you reload the same list, it PUTs another time	\n\nadd age to TodoTasks\nadd completed date to TodoTasks\nstore active TodoList in cookies so it keeps across pages\nallow changing order of TodoTasks\norder TodoLists by name\nshow incomplete count in TodoLists\ncreate components and grey out until ready\nonly auto-complete on same category\nadd error indicator for XHR\ncreate offline mode\nstart adding summary info\n\n		layout tasks in tree according to order\n\nmake a login page\nmake an account management page\n================================================\nin progress\n================================================\n\nmake an account creation page\n\n\n================================================\ndone\n================================================\ndelete tasks when a todo list is deleted (backend)\ntab to edit next field\n\nadd order to TodoTasks\n	update client model\n	add ability to change order in UI\n	when adding a new task, calculate the order\n	when deleting, update tasks after deleted\n	when moving to another downstream, update order in removed and new\n	add comparator to keep models in order",
 			"file": "todo.txt",
+			"file_size": 1411,
+			"file_write_time": 130319473705719913,
 			"settings":
 			{
-				"buffer_size": 559,
+				"buffer_size": 1492,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "js/views/doing/DoingView.js",
+			"contents": "define([\n  'jquery',\n  'underscore',\n  'backbone',\n  'text!templates/account/accountSignupTemplate.html'\n],\n  function (\n    $,\n    _,\n    Backbone,\n    template\n  ) {\n\n    var AccountSignupView = Backbone.View.extend({\n      initialize: function () {\n        var me = this;\n\n        this.$el.empty().off();\n\n        this.$el.on('keyup', '#email, #password', function (event) {\n          var $this = $(this);\n          if ($this.val()) {\n            me.validateField($this);\n          }\n        });\n\n        this.$el.on('submit', 'form', function (event) {\n\n          event.stopPropagation();\n          event.preventDefault();\n          me.submitForm($(this));\n        });\n\n        this.render();\n      },\n\n      render: function () {\n        this.$el.html(this.template());\n        $('#email').focus();\n      },\n\n      /**\n      * @return {String}\n      */\n      template: function () {\n        var compiledTemplate = '',\n          data = {};\n\n        try {\n          compiledTemplate = _.template(template, data);\n        } catch (e) {\n          compiledTemplate = String(e);\n        }\n\n        return compiledTemplate;\n      },\n\n      /**\n      * Adds error if field is invalid.\n      * @param {$} field\n      * @return {Boolean}\n      */\n      validateField: function (field) {\n        var errorMessage,\n          value = field.val();\n\n        if (field.is('#email')) {\n          errorMessage = this.validateEmail(value);\n        } else {\n          errorMessage = this.validatePassword(value);\n        }\n\n        this.showFieldError(field, errorMessage);\n\n        return !errorMessage;\n      },\n\n      /**\n      * @param {String} value\n      * @return {String} error message\n      */\n      validateEmail: function (value) {\n\n        if (!value) {\n          return 'What the hell?';\n        } else if (!/^[a-z]+@[a-z0-9]+\\.[\\w\\.]+$/i.test(value)){\n          return 'That doesn\\'t appear to be real email.';\n        }\n      },\n\n      /**\n      * @param {String} value\n      * @return {String} error message\n      */\n      validatePassword: function (value) {\n        if (!value) {\n          return 'That is not a very secure password.';\n        }\n      },\n\n      /**\n      * Show an error for a field.\n      * @param {$} field\n      * @param {String} [error] If undefined, clear error indicators.\n      */\n      showFieldError: function (field, error) {\n        var $controlGroup = field.closest('.control-group'),\n          $errorContainer = $controlGroup && $controlGroup.find('.help-inline');\n\n        if ($controlGroup) {\n\n          if (error) {\n            $controlGroup.addClass('error');\n          } else {\n            $controlGroup.removeClass('error');\n          }\n\n          if ($errorContainer) {\n            $errorContainer.html(error || '');\n          }\n        }\n      },\n\n      /**\n      * Submits the form if it is valid.\n      * @param {$} form\n      */\n      submitForm: function (form) {\n        if (this.validateForm(form)) {\n          console.log('good');\n          \n        }\n      },\n\n      /**\n      * Validate the form.\n      * @param {$} form\n      * @return {Boolean} is valid\n      */\n      validateForm: function (form) {\n        var me = this,\n          invalid = false,\n          fields = ['email', 'password'],\n          error;\n\n        $.each(fields, function (index, fieldName) {\n          \n          var $field = $('#' + fieldName),\n            value = $field.val();\n\n          if ($field.is('#email')) {\n            error = me.validateEmail(value);\n          } else {\n            error = me.validatePassword(value);\n          }\n\n          if (error) {\n            me.showFieldError($field, error);\n            invalid = true;\n          }\n        });\n\n\n        return !invalid;\n      }\n    });\n\n    return AccountSignupView;\n  });",
+			"file": "js/views/account/AccountSignupView.js",
+			"file_size": 3756,
+			"file_write_time": 130322942929650303,
 			"settings":
 			{
-				"buffer_size": 5561,
+				"buffer_size": 3767,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lib/resteasy/objects/tasks.php",
+			"file": "js/models/account/User.js",
 			"settings":
 			{
-				"buffer_size": 1313,
+				"buffer_size": 220,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "templates/doing/doingTemplate.html",
+			"file": "templates/account/accountSignupTemplate.html",
 			"settings":
 			{
-				"buffer_size": 315,
+				"buffer_size": 666,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/resteasy/objects/users.php",
+			"settings":
+			{
+				"buffer_size": 199,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/resteasy/objects/todotasks.php",
+			"settings":
+			{
+				"buffer_size": 757,
 				"line_ending": "Unix"
 			}
 		}
@@ -555,9 +577,21 @@
 	"build_system": "Packages/JSLint/JSLint.sublime-build",
 	"command_palette":
 	{
-		"height": 138.0,
+		"height": 117.0,
 		"selected_items":
 		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"jav",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
 			[
 				"rem",
 				"Package Control: Remove Package"
@@ -571,20 +605,12 @@
 				"JSHint"
 			],
 			[
-				"insta",
-				"Package Control: Install Package"
-			],
-			[
 				"isnt",
 				"Package Control: Install Package"
 			],
 			[
 				"is pa",
 				"Package Control: List Packages"
-			],
-			[
-				"javas",
-				"Set Syntax: JavaScript"
 			],
 			[
 				"instal",
@@ -627,7 +653,7 @@
 				"Preferences: Browse Packages"
 			]
 		],
-		"width": 449.0
+		"width": 404.0
 	},
 	"console":
 	{
@@ -649,60 +675,75 @@
 	},
 	"file_history":
 	[
-		"/var/www/reergymerej/dev/taskManager/templates/todo/taskViewer.html",
-		"/var/www/reergymerej/dev/taskManager/js/views/todo/ListSelector.js",
-		"/var/www/reergymerej/dev/taskManager/templates/todo/todoTemplate.html",
-		"/var/www/reergymerej/dev/taskManager/templates/todo/todoListCollectionTemplate.html",
-		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoManagementView.js",
-		"/var/www/reergymerej/dev/taskManager/index.html",
+		"/var/www/reergymerej/dev/taskManager/php/test.php",
+		"/var/www/reergymerej/dev/taskManager/php/locked.php",
+		"/var/www/reergymerej/dev/taskManager/php/authenticate.php",
+		"/var/www/reergymerej/dev/taskManager/php/logout.php",
+		"/var/www/reergymerej/dev/taskManager/js/main.js",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/config.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/connect.php",
+		"/var/www/reergymerej/dev/taskManager/templates/account/accountSignupTemplate.html",
+		"/var/www/reergymerej/dev/taskManager/js/views/account/AccountSignupView.js",
 		"/var/www/reergymerej/dev/taskManager/js/router.js",
-		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoView.js",
-		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoTaskTreeView.js",
-		"/var/www/reergymerej/dev/taskManager/templates/todo/todoManagement.html",
+		"/var/www/reergymerej/dev/taskManager/js/views/doing/DoingView.js",
+		"/var/www/reergymerej/dev/taskManager/index.html",
+		"/var/www/reergymerej/dev/taskManager/js/app.js",
+		"/var/www/reergymerej/dev/taskManager/templates/doing/doingTaskTemplate.html",
+		"/var/www/reergymerej/dev/taskManager/lib/editable.js",
+		"/var/www/reergymerej/dev/taskManager/js/views/doing/TaskView.js",
 		"/var/www/reergymerej/dev/taskManager/js/collections/todo/TodoList.js",
 		"/var/www/reergymerej/dev/taskManager/templates/todo/todoTaskTemplate.html",
-		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoListView.js",
-		"/var/www/reergymerej/dev/taskManager/js/models/todo/TodoTaskModel.js",
 		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoTaskView.js",
-		"/var/www/reergymerej/dev/taskManager/js/collections/todo/TodoListCollection.js",
-		"/var/www/reergymerej/dev/taskManager/js/collections/todo/TodoCollection.js",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/RestEasy.php",
-		"/var/www/reergymerej/dev/taskManager/js/views/doing/DoingView.js",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/tasks.php",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Field.php",
+		"/var/www/reergymerej/dev/taskManager/js/models/todo/TodoTaskModel.js",
+		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoTaskTreeView.js",
+		"/var/www/reergymerej/dev/taskManager/css/style.css",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/todotasks.php",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/todolists.php",
-		"/var/www/reergymerej/dev/taskManager/js/views/done/DoneView.js",
-		"/var/www/reergymerej/dev/taskManager/css/style.css",
-		"/var/www/reergymerej/dev/taskManager/js/models/todo/TodoListModel.js",
-		"/var/www/reergymerej/dev/taskManager/js/views/home/HomeView.js",
-		"/var/www/reergymerej/dev/taskManager/js/collections/hints.js",
+		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoManagementView.js",
+		"/var/www/reergymerej/dev/taskManager/js/views/todo/ListSelector.js",
 		"/var/www/reergymerej/dev/taskManager/templates/doing/doingTemplate.html",
-		"/var/www/reergymerej/dev/taskManager/templates/doing/doingTaskTemplate.html",
-		"/var/www/reergymerej/dev/taskManager/test.php",
+		"/var/www/reergymerej/dev/taskManager/templates/todo/todoListCollectionTemplate.html",
+		"/var/www/reergymerej/dev/taskManager/templates/todo/taskViewer.html",
+		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoView.js",
+		"/var/www/reergymerej/dev/taskManager/js/views/home/HomeView.js",
+		"/var/www/reergymerej/dev/ihak/test.php",
+		"/var/www/reergymerej/dev/ihak/index.php",
+		"/var/www/reergymerej/dev/ihak/jquery-ui-1.9.2.custom/js/jquery-1.8.3.js",
+		"/var/www/reergymerej/dev/ihak/memories.json",
+		"/var/www/reergymerej/dev/ihak/knife.css",
+		"/var/www/reergymerej/dev/ihak/knife.js",
+		"/var/www/reergymerej/dev/ihak/img.php",
+		"/var/www/reergymerej/dev/ihak/.htaccess",
 		"/var/www/reergymerej/dev/taskManager/todo.txt",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/RestEasy.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/hints.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/tasks.php",
+		"/var/www/reergymerej/dev/taskManager/templates/todo/todoTemplate.html",
+		"/var/www/reergymerej/dev/taskManager/templates/todo/todoManagement.html",
+		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoListView.js",
+		"/var/www/reergymerej/dev/taskManager/js/collections/todo/TodoListCollection.js",
+		"/var/www/reergymerej/dev/taskManager/js/collections/todo/TodoCollection.js",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Field.php",
+		"/var/www/reergymerej/dev/taskManager/js/views/done/DoneView.js",
+		"/var/www/reergymerej/dev/taskManager/js/models/todo/TodoListModel.js",
+		"/var/www/reergymerej/dev/taskManager/js/collections/hints.js",
+		"/var/www/reergymerej/dev/taskManager/test.php",
 		"/var/www/reergymerej/dev/taskManager/js/models/doing/TaskModel.js",
 		"/home/grizzle/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/hints.php",
 		"/var/www/reergymerej/dev/taskManager/templates/done/doneTemplate.html",
 		"/var/www/reergymerej/dev/taskManager/templates/done/taskCollectionTemplate.html",
 		"/var/www/reergymerej/dev/taskManager/js/models/HintModel.js",
-		"/var/www/reergymerej/dev/taskManager/js/main.js",
-		"/var/www/reergymerej/dev/taskManager/js/app.js",
 		"/var/www/reergymerej/dev/taskManager/.gitignore",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/api.php",
 		"/home/grizzle/.config/sublime-text-3/Packages/JSHint Gutter/JSHint.sublime-settings",
 		"/var/www/reergymerej/dev/taskManager/templates/home/homeTemplate.html",
 		"/var/www/reergymerej/dev/taskManager/css/style.scss",
 		"/var/www/reergymerej/dev/taskManager/js/libs/backbone/backbone-min.js",
-		"/var/www/reergymerej/dev/taskManager/js/views/doing/TaskView.js",
 		"/home/grizzle/.gvfs/SFTP for wordtoth on wordtotheblurd.com/home/wordtoth/access-logs/dev.wordtotheblurd.com",
 		"/home/grizzle/.gvfs/SFTP for wordtoth on wordtotheblurd.com/home/wordtoth/access-logs/ftp.wordtotheblurd.com-ftp_log",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/sql-test.php",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Messageable.php",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/config.php",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Request.php",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/connect.php",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/.htaccess",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/.disk_usage",
 		"/C/Users/blurd/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
@@ -761,22 +802,7 @@
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/api.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/Messageable.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/Response.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/Request.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/.gitignore",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/views/FooView.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/js/main.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/editable.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/foo/taskTemplate.html",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/foo/fooTemplate.html",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/css/style.css",
-		"/C/xampp/htdocs/reergymerej.com/dev/modular-backbone/templates/foo/taskTemplate.html",
-		"/C/xampp/htdocs/reergymerej.com/dev/modular-backbone/js/views/FooView.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/a2b/resteasy/objects/tasks.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/modular-backbone/js/main.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/modular-backbone/js/models/TaskModel.js",
-		"/C/xampp/htdocs/reergymerej.com/dev/modular-backbone/css/style.css",
-		"/C/xampp/htdocs/reergymerej.com/dev/modular-backbone/index.html",
-		"/C/xampp/htdocs/reergymerej.com/dev/editable/editable.js"
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/Request.php"
 	],
 	"find":
 	{
@@ -787,6 +813,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"/var/www/reergymerej/dev/taskManager/js",
 			"/var/www/reergymerej/dev/taskManager/",
 			"/var/www/reergymerej/dev/taskManager/js",
 			"/var/www/reergymerej/dev/taskManager/lib/resteasy",
@@ -805,6 +832,98 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"TaskModel",
+			"good",
+			"validateForm",
+			"this",
+			"showFieldError",
+			"showField",
+			"validateEmail",
+			"validateForm",
+			"validateField",
+			"validateEmail",
+			"email",
+			"Email",
+			"showFieldError",
+			"validateEmail",
+			"exp",
+			"cookieDays",
+			"valid",
+			"validateEmail",
+			"app_router",
+			"});\n",
+			"cachedValues",
+			"inEditMode",
+			"view",
+			"createTaskView",
+			"getTaskIdFromElement",
+			"onChanged",
+			"onFinish",
+			"getEditField",
+			"getEditFied",
+			"onFinish",
+			"onFinishEditHandler",
+			"lastKey",
+			"tabbedOut",
+			"getContainer",
+			"getEditFied",
+			"onBeforeBlur",
+			"onBlurHandler",
+			"onChanged",
+			"oldDsTaskId",
+			"getSiblingTasks",
+			"attachTaskView",
+			"shiftTaskOrderAfterTaskRemoved",
+			"task",
+			"downstream",
+			"getTemplateData",
+			"attachTaskView",
+			"setupCollection",
+			"render",
+			"renderTasks",
+			"attachTaskView",
+			"TodoView",
+			"this",
+			"endDate",
+			"setMemoryText",
+			"getMidnightMs",
+			"daysSince",
+			"to",
+			"from",
+			"\\n",
+			"\"",
+			"talent",
+			"Nepente's",
+			"planetarium",
+			"\\n",
+			"\"",
+			"dental",
+			"start",
+			"daysSince",
+			"laugh",
+			"naming",
+			"talent",
+			"taletn",
+			"ghool",
+			"soft",
+			"$img_dir . DIRECTORY_SEPARATOR",
+			"setMemoryText",
+			"showMemory",
+			"50",
+			"div",
+			"\n			",
+			"data",
+			"var ",
+			"msPerDay",
+			"beforeQuery",
+			"getSQL",
+			"setActiveList",
+			"selectedListId",
+			"setActiveList",
+			"me",
+			"setActiveList",
+			"selectedListId",
+			"currentList",
 			"fetchTasks",
 			"button",
 			"tasks",
@@ -840,99 +959,7 @@
 			"todoCollection",
 			"render",
 			"trigger",
-			"selected",
-			"todoListCollectionView",
-			"trigger",
-			"loaded:todolists",
-			"todoListCollectionView",
-			"swaplist",
-			"todoListCollectionView",
-			"TodoTaskTreeView",
-			"collection = ",
-			"collection =",
-			"TodoTaskModel",
-			"TodoCollection",
-			"todoListCollectionView",
-			"swaplist",
-			"currentList",
-			"todoListCollection",
-			"todoListCollectionView",
-			"render",
-			"triggerViewChange",
-			"attachTaskView",
-			"swapPositions",
-			"areAllDownstreamFirst",
-			"sortCollectionWithDownstreamFirst",
-			"describe",
-			"describeCollection",
-			"currentTodoCollection",
-			"this",
-			"setVisibilityForCompleted",
-			"todoTemplate",
-			"todoListCollectionView",
-			"this.collection",
-			"triggerViewChange",
-			"currentTodoCollection",
-			"showTodo",
-			"TodoCollection",
-			"TodoTaskModel",
-			"TodoListView",
-			"fetchTasks",
-			"castForSQL",
-			"from",
-			"\\.fetch\\(",
-			"fetch",
-			"templateData",
-			"todoListCollectionTemplate",
-			"activeList",
-			"validateForm",
-			"formIsValid",
-			"inputPassword",
-			"inputEmail",
-			"activeList",
-			"me",
-			"setActiveList",
-			"getIdFromListEl",
-			"setActiveListClass",
-			"getIdFromListEl",
-			"getListFromListEl",
-			"getIdFromListEl",
-			"setActiveList",
-			"todoListCollectionView",
-			"TodoListView",
-			"span6",
-			"todoTemplate",
-			"TodoView",
-			"swaplist",
-			"swap",
-			"currentTodoCollection",
-			"TodoCollection",
-			"trigger",
-			"TodoCollection",
-			"triggerChangeEvent",
-			"loadDoneCollection",
-			"renderTasks",
-			"trigger",
-			"createTaskView",
-			"renderTasks",
-			"fetchTasks",
-			"doingTemplate",
-			"setVisibilityForCompleted",
-			"changeInfo.changes",
-			"getAutoComplete",
-			"isValidDate",
-			"TodoListModel",
-			"TodoListCollection",
-			"AS text",
-			"castRow",
-			"getSQL",
-			"getSelectSnippet",
-			"getSQL",
-			"process",
-			"getSQL",
-			"loadDoneCollection",
-			"taskCollection",
-			"DoneTaskCollectionView"
+			"selected"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -940,6 +967,18 @@
 		"regex": true,
 		"replace_history":
 		[
+			"User",
+			"expiration",
+			"COOKIE_DAYS",
+			"router",
+			"lastKey",
+			"\",\\n\"",
+			"\\\\\"",
+			"\\n\"",
+			"\",\\n",
+			"\\\\\"",
+			"\\\"",
+			"selectedListId",
 			"taskViewer",
 			"ListSelector",
 			"listSelector",
@@ -1054,7 +1093,7 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": true,
+		"whole_word": false,
 		"wrap": true
 	},
 	"groups":
@@ -1069,15 +1108,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 559,
+						"buffer_size": 1492,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								24,
-								24
+								1025,
+								1025
 							]
 						],
 						"settings":
@@ -1085,26 +1124,26 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 14.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "js/views/doing/DoingView.js",
+					"file": "js/views/account/AccountSignupView.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5561,
+						"buffer_size": 3767,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2510,
-								2510
+								2989,
+								2989
 							]
 						],
 						"settings":
@@ -1114,26 +1153,83 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 286.0,
+						"translation.y": 1227.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "lib/resteasy/objects/tasks.php",
+					"file": "js/models/account/User.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1313,
+						"buffer_size": 220,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								853,
-								853
+								200,
+								200
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "templates/account/accountSignupTemplate.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 666,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								471,
+								471
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "lib/resteasy/objects/users.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 199,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								154,
+								154
 							]
 						],
 						"settings":
@@ -1142,37 +1238,32 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 30.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 3,
-					"file": "templates/doing/doingTemplate.html",
+					"buffer": 5,
+					"file": "lib/resteasy/objects/todotasks.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 315,
+						"buffer_size": 757,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								315,
-								315
+								128,
+								128
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1200,18 +1291,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":
@@ -1237,6 +1321,142 @@
 		"selected_items":
 		[
 			[
+				"restea/obje",
+				"lib/resteasy/objects/hints.php"
+			],
+			[
+				"templ/accou",
+				"templates/account/accountSignupTemplate.html"
+			],
+			[
+				"main",
+				"js/main.js"
+			],
+			[
+				"conne",
+				"lib/resteasy/connect.php"
+			],
+			[
+				"index",
+				"index.html"
+			],
+			[
+				"inde",
+				"index.html"
+			],
+			[
+				"app",
+				"js/app.js"
+			],
+			[
+				"temp/doing/ta",
+				"templates/doing/doingTaskTemplate.html"
+			],
+			[
+				"temp/todota",
+				"templates/todo/todoTaskTemplate.html"
+			],
+			[
+				"lib/ed",
+				"lib/editable.js"
+			],
+			[
+				"view/doing",
+				"js/views/doing/DoingView.js"
+			],
+			[
+				"views/doing",
+				"js/views/doing/TaskView.js"
+			],
+			[
+				"view/todot",
+				"js/views/todo/TodoTaskView.js"
+			],
+			[
+				"sty",
+				"css/style.css"
+			],
+			[
+				"templ/todot",
+				"templates/todo/todoTaskTemplate.html"
+			],
+			[
+				"colle/todo",
+				"js/collections/todo/TodoList.js"
+			],
+			[
+				"model/todota",
+				"js/models/todo/TodoTaskModel.js"
+			],
+			[
+				"view/todota",
+				"js/views/todo/TodoTaskView.js"
+			],
+			[
+				"template/todo",
+				"templates/todo/todoTaskTemplate.html"
+			],
+			[
+				"rest/obj/",
+				"lib/resteasy/objects/todotasks.php"
+			],
+			[
+				"lib/rest/todo",
+				"lib/resteasy/objects/todolists.php"
+			],
+			[
+				"lib/edi",
+				"lib/editable.js"
+			],
+			[
+				"templ/todo",
+				"templates/todo/taskViewer.html"
+			],
+			[
+				"templa/doing",
+				"templates/doing/doingTemplate.html"
+			],
+			[
+				"templ/too",
+				"templates/todo/todoListCollectionTemplate.html"
+			],
+			[
+				"model/todot",
+				"js/models/todo/TodoTaskModel.js"
+			],
+			[
+				"view/todotaskv",
+				"js/views/todo/TodoTaskView.js"
+			],
+			[
+				"view/todotaskt",
+				"js/views/todo/TodoTaskTreeView.js"
+			],
+			[
+				"view/hom",
+				"js/views/home/HomeView.js"
+			],
+			[
+				"memori.txt",
+				"ihak/memories.txt"
+			],
+			[
+				".hta",
+				"ihak/.htaccess"
+			],
+			[
+				"rest/op",
+				"lib/resteasy/objects/todolists.php"
+			],
+			[
+				"rest",
+				"lib/resteasy/RestEasy.php"
+			],
+			[
+				"view/todo/",
+				"js/views/todo/ListSelector.js"
+			],
+			[
 				"restea/obj/",
 				"lib/resteasy/objects/tasks.php"
 			],
@@ -1249,24 +1469,12 @@
 				"templates/doing/doingTemplate.html"
 			],
 			[
-				"view/doing",
-				"js/views/doing/DoingView.js"
-			],
-			[
 				"view/todoma",
 				"js/views/todo/TodoManagementView.js"
 			],
 			[
 				"view/todo/ma",
 				"js/views/todo/TodoManagementView.js"
-			],
-			[
-				"view/todo/",
-				"js/views/todo/ListSelector.js"
-			],
-			[
-				"index",
-				"index.html"
 			],
 			[
 				"templ/todo/",
@@ -1297,14 +1505,6 @@
 				"js/views/todo/ListSelector.js"
 			],
 			[
-				"templ/todo",
-				"templates/todo/todoTemplate.html"
-			],
-			[
-				"colle/todo",
-				"js/collections/todo/TodoList.js"
-			],
-			[
 				"temp/todotem",
 				"templates/todo/todoTemplate.html"
 			],
@@ -1323,10 +1523,6 @@
 			[
 				"view/todov",
 				"js/views/todo/TodoView.js"
-			],
-			[
-				"model/todota",
-				"js/models/todo/TodoTaskModel.js"
 			],
 			[
 				"router",
@@ -1445,10 +1641,6 @@
 				"lib/resteasy/objects/tasks.php"
 			],
 			[
-				"templa/doing",
-				"templates/doing/doingTemplate.html"
-			],
-			[
 				"model/doin",
 				"js/models/doing/TaskModel.js"
 			],
@@ -1493,16 +1685,8 @@
 				"lib/resteasy/RestEasy.php"
 			],
 			[
-				"inde",
-				"index.html"
-			],
-			[
 				"temp/homet",
 				"templates/home/homeTemplate.html"
-			],
-			[
-				"view/hom",
-				"js/views/home/HomeView.js"
 			],
 			[
 				"template/ho",
@@ -1573,20 +1757,12 @@
 				"lib/resteasy/connect.php"
 			],
 			[
-				".hta",
-				"lib/resteasy/.htaccess"
-			],
-			[
 				"confi",
 				"lib/resteasy/config.php"
 			],
 			[
 				"sqlte",
 				"lib/resteasy/sql-test.php"
-			],
-			[
-				"conne",
-				"lib/resteasy/connect.php"
 			],
 			[
 				"temp/hom",
@@ -1599,10 +1775,6 @@
 			[
 				"templa/todot",
 				"taskManager\\templates\\todo\\todoTaskTemplate.html"
-			],
-			[
-				"sty",
-				"taskManager\\css\\style.scss"
 			],
 			[
 				"templ/done",
@@ -1637,10 +1809,6 @@
 				"templates\\todo\\todoTaskTemplate.html"
 			],
 			[
-				"template/todo",
-				"templates\\todo\\todoTaskTemplate.html"
-			],
-			[
 				"collection/",
 				"js\\collections\\todo\\TodoCollection.js"
 			],
@@ -1657,96 +1825,12 @@
 				"js\\collections\\todo\\TodoCollection.js"
 			],
 			[
-				"templ/todot",
-				"templates\\todo\\todoTaskTemplate.html"
-			],
-			[
 				"stys",
 				"css\\style.scss"
 			],
 			[
-				"model/todot",
-				"js\\models\\todo\\TodoTaskModel.js"
-			],
-			[
-				"view/todota",
-				"js\\views\\todo\\TodoTaskView.js"
-			],
-			[
 				"todoview",
 				"js\\views\\todo\\TodoView.js"
-			],
-			[
-				"restea/re",
-				"lib\\resteasy\\RestEasy.php"
-			],
-			[
-				"view/todotas",
-				"js\\views\\todo\\TodoTaskView.js"
-			],
-			[
-				"todo/todotemplate",
-				"templates\\todo\\todoTemplate.html"
-			],
-			[
-				"view/done",
-				"js\\views\\done\\DoneView.js"
-			],
-			[
-				"temp/don",
-				"templates\\done\\doneTemplate.html"
-			],
-			[
-				"css/sty.sc",
-				"css\\style.scss"
-			],
-			[
-				"donetaskco",
-				"js\\views\\done\\DoneTaskCollectionView.js"
-			],
-			[
-				"temp/todo",
-				"templates\\todo\\todoTaskTemplate.html"
-			],
-			[
-				"stye.sc",
-				"css\\style.scss"
-			],
-			[
-				"model/ta",
-				"js\\models\\doing\\TaskModel.js"
-			],
-			[
-				"doing/taskvi",
-				"js\\views\\doing\\TaskView.js"
-			],
-			[
-				"rest/obje",
-				"lib\\resteasy\\objects\\tasks.php"
-			],
-			[
-				"lib/rese/task",
-				"lib\\resteasy\\objects\\tasks.php"
-			],
-			[
-				"view/todv",
-				"js\\views\\todo\\TodoView.js"
-			],
-			[
-				"donetask",
-				"js\\views\\done\\DoneTaskCollectionView.js"
-			],
-			[
-				"view/todovi",
-				"js\\views\\todo\\TodoView.js"
-			],
-			[
-				"templ/todotemplate",
-				"templates\\todo\\todoTemplate.html"
-			],
-			[
-				"todocol",
-				"js\\collections\\todo\\TodoCollection.js"
 			]
 		],
 		"width": 0.0
@@ -1773,7 +1857,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 268.0,
 	"status_bar_visible": true,
 	"template_settings":

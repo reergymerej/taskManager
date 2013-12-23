@@ -17,6 +17,7 @@ $expiration = time() + 60 * 60 * 24 * $COOKIE_DAYS;
 
 // TODO Add a series and counter so we can detect hijacked cookies.
 setcookie('token', $token, $expiration);
+setcookie('uid', $userId, $expiration);
 
 /**
 * Gets random string of integers.

@@ -33,11 +33,16 @@ create offline mode
 start adding summary info
 
 		layout tasks in tree according to order
+
+make a login page
+make an account management page
 ================================================
 in progress
 ================================================
 
-
+make an account creation page
+	hash the password
+	
 
 ================================================
 done

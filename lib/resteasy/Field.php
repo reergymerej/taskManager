@@ -44,6 +44,7 @@ class Field {
 				$value = $value ? 1 : 0;
 				break;
 			case 'string':
+			case 'text':
 			default:
 				$value = "'$value'";
 				break;
