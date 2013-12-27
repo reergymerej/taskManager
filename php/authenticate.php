@@ -17,8 +17,8 @@ $COOKIE_DAYS = 30;
 $con = connect();
 
 // What is the user POSTing to us?
-$email = mysql_real_escape_string($_GET['email']);
-$password = mysql_real_escape_string($_GET['password']);
+$email = mysql_real_escape_string($_POST['email']);
+$password = mysql_real_escape_string($_POST['password']);
 
 // Check password
 $sql = "SELECT id
@@ -45,8 +45,15 @@ if ($result = mysql_query($sql)) {
 		setcookie('token', $token, $expiration);
 		setcookie('uid', $userId, $expiration);
 
+		$resp = "{\"uid\":\"$userId\",\"token\":\"$token\",\"days\":$COOKIE_DAYS}";
+
+		echo $resp;
+
 	} else {
 		header('HTTP/1.0 401 Unauthorized');
+		$resp = "{\"error\":\"You suck.\"}";
+
+		echo $resp;
 	}
 }
 

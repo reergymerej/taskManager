@@ -9,7 +9,8 @@ define([
   'views/doing/DoingView',
   'views/done/DoneView',
   'collections/hints',
-  'views/account/AccountSignupView'
+  'views/account/AccountSignupView',
+  'views/account/LoginView'
 ],
   function (
     $,
@@ -22,7 +23,8 @@ define([
     DoingView,
     DoneView,
     hints,
-    AccountSignupView
+    AccountSignupView,
+    LoginView
   ) {
 
     var AppRouter = Backbone.Router.extend({
@@ -33,6 +35,7 @@ define([
         done: 'showTaskReviewer',
         'manage-todo': 'showManageTodo',
         'account-signup': 'showAccountSignup',
+        'account-login': 'showLogin',
 
         // Default
         '*actions': 'showHome'
@@ -68,6 +71,12 @@ define([
 
       router.on('route:showAccountSignup', function () {
         var view = new AccountSignupView({
+          el: $('#container')
+        });
+      });
+
+      router.on('route:showLogin', function () {
+        var view = new LoginView({
           el: $('#container')
         });
       });
