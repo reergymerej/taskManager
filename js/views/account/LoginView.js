@@ -2,13 +2,15 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/account/loginTemplate.html'
+  'text!templates/account/loginTemplate.html',
+  'util'
 ],
   function (
     $,
     _,
     Backbone,
-    template
+    template,
+    util
   ) {
 
     var LoginView = Backbone.View.extend({
@@ -125,16 +127,15 @@ define([
 
           $.ajax({
             method: 'POST',
-            url: 'php/authenticate',
+            url: 'php/authenticate.php',
             data: {
               email: $('#email').val(),
               password: $('#password').val()
             },
             dataType: 'json',
             success: function (response) {
-              var ms = (1000 * 60 * 60 * 24 * response.days);
-              me.setCookie('token', response.token, ms);
-              me.setCookie('uid', response.uid, ms);
+              util.setCookie('token', response.token, response.days);
+              util.setCookie('uid', response.uid, response.days);
             },
             error: function () {
               console.log('boo', arguments);

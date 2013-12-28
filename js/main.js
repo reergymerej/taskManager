@@ -4,7 +4,8 @@ require.config({
     underscore: 'libs/underscore/underscore-min',
     backbone: 'libs/backbone/backbone-min',
     // backbone: 'libs/backbone/backbone',
-    templates: '../templates'
+    templates: '../templates',
+    util: 'util/util'
   },
   urlArgs: (window.location.search.match('bust')) ? ('bust=' + Date.now()) : undefined
 });

@@ -5,7 +5,8 @@ define([
   'text!templates/doing/doingTemplate.html',
   'views/doing/TaskView',
   'models/doing/TaskModel',
-  'collections/doing/TaskCollection'
+  'collections/doing/TaskCollection',
+  'util'
 ],
   function (
     $,
@@ -14,7 +15,8 @@ define([
     doingTemplate,
     TaskView,
     TaskModel,
-    TaskCollection
+    TaskCollection,
+    util
   ) {
 
     var taskCollection,
@@ -39,6 +41,8 @@ define([
         this.$el.off().empty();
 
         this.$el.on('change', '#show-all-today, #show-in-progress', function (event) {
+          var id = $(this).attr('id');
+          util.setCookie(id, $(this).prop('checked'));
           me.fetchTasks();
         });
 
@@ -169,6 +173,9 @@ define([
 
         this.$el.html(compiledTemplate);
 
+        $('#show-all-today').prop('checked', util.getCookie('show-all-today'));
+        $('#show-in-progress').prop('checked', util.getCookie('show-in-progress'));
+
         this.renderTasks();
       },
 
@@ -247,7 +254,8 @@ define([
         taskCollection.fetch({
           data: {
             today: $('#show-all-today').prop('checked'),
-            inProgress: $('#show-in-progress').prop('checked')
+            today: util.getCookie('show-all-today'),
+            inProgress: util.getCookie('show-in-progress')
           },
           success: function (collection, response, options) {
             me.renderTasks();

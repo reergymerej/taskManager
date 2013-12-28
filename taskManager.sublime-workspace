@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"mysq_fe_a",
+				"mysql_fetch_assoc"
+			],
+			[
+				"mysNu",
+				"mysql_num_rows"
+			],
+			[
 				"err",
 				"error"
 			],
@@ -506,54 +514,24 @@
 			[
 				"ign",
 				"ignoreClick"
-			],
-			[
-				"clic",
-				"clickableTaskElementSelectors"
-			],
-			[
-				"cli",
-				"clickableTaskElementSelectors"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "add loading indicator\n\nmake the done view have a sub-view for the chart  (ChartView?)\n\nmove collection sorting logic into collection (TodoView)\n\nfix sorting\n	create new list\n	add task\n	add sub task (this one fails)\n\nhook up Jasmine\n\n\n\nnew child TodoTasks PUT twice\n	in todo management, load a list\n		add a task, add an upstream task\n	load list again\n		add a sub task (will PUT 3 times)\n	each time you reload the same list, it PUTs another time	\n\nadd age to TodoTasks\nadd completed date to TodoTasks\nstore active TodoList in cookies so it keeps across pages\nallow changing order of TodoTasks\norder TodoLists by name\nshow incomplete count in TodoLists\ncreate components and grey out until ready\nonly auto-complete on same category\nadd error indicator for XHR\ncreate offline mode\nstart adding summary info\n\n		layout tasks in tree according to order\n\nmake a login page\nmake an account management page\n================================================\nin progress\n================================================\n\nmake an account creation page\n\n\n================================================\ndone\n================================================\ndelete tasks when a todo list is deleted (backend)\ntab to edit next field\n\nadd order to TodoTasks\n	update client model\n	add ability to change order in UI\n	when adding a new task, calculate the order\n	when deleting, update tasks after deleted\n	when moving to another downstream, update order in removed and new\n	add comparator to keep models in order",
 			"file": "todo.txt",
-			"file_size": 1411,
-			"file_write_time": 130319473705719913,
 			"settings":
 			{
-				"buffer_size": 1492,
+				"buffer_size": 1512,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "define([\n  'jquery',\n  'underscore',\n  'backbone',\n  'text!templates/account/accountSignupTemplate.html'\n],\n  function (\n    $,\n    _,\n    Backbone,\n    template\n  ) {\n\n    var AccountSignupView = Backbone.View.extend({\n      initialize: function () {\n        var me = this;\n\n        this.$el.empty().off();\n\n        this.$el.on('keyup', '#email, #password', function (event) {\n          var $this = $(this);\n          if ($this.val()) {\n            me.validateField($this);\n          }\n        });\n\n        this.$el.on('submit', 'form', function (event) {\n\n          event.stopPropagation();\n          event.preventDefault();\n          me.submitForm($(this));\n        });\n\n        this.render();\n      },\n\n      render: function () {\n        this.$el.html(this.template());\n        $('#email').focus();\n      },\n\n      /**\n      * @return {String}\n      */\n      template: function () {\n        var compiledTemplate = '',\n          data = {};\n\n        try {\n          compiledTemplate = _.template(template, data);\n        } catch (e) {\n          compiledTemplate = String(e);\n        }\n\n        return compiledTemplate;\n      },\n\n      /**\n      * Adds error if field is invalid.\n      * @param {$} field\n      * @return {Boolean}\n      */\n      validateField: function (field) {\n        var errorMessage,\n          value = field.val();\n\n        if (field.is('#email')) {\n          errorMessage = this.validateEmail(value);\n        } else {\n          errorMessage = this.validatePassword(value);\n        }\n\n        this.showFieldError(field, errorMessage);\n\n        return !errorMessage;\n      },\n\n      /**\n      * @param {String} value\n      * @return {String} error message\n      */\n      validateEmail: function (value) {\n\n        if (!value) {\n          return 'What the hell?';\n        } else if (!/^[a-z]+@[a-z0-9]+\\.[\\w\\.]+$/i.test(value)){\n          return 'That doesn\\'t appear to be real email.';\n        }\n      },\n\n      /**\n      * @param {String} value\n      * @return {String} error message\n      */\n      validatePassword: function (value) {\n        if (!value) {\n          return 'That is not a very secure password.';\n        }\n      },\n\n      /**\n      * Show an error for a field.\n      * @param {$} field\n      * @param {String} [error] If undefined, clear error indicators.\n      */\n      showFieldError: function (field, error) {\n        var $controlGroup = field.closest('.control-group'),\n          $errorContainer = $controlGroup && $controlGroup.find('.help-inline');\n\n        if ($controlGroup) {\n\n          if (error) {\n            $controlGroup.addClass('error');\n          } else {\n            $controlGroup.removeClass('error');\n          }\n\n          if ($errorContainer) {\n            $errorContainer.html(error || '');\n          }\n        }\n      },\n\n      /**\n      * Submits the form if it is valid.\n      * @param {$} form\n      */\n      submitForm: function (form) {\n        if (this.validateForm(form)) {\n          console.log('good');\n          \n        }\n      },\n\n      /**\n      * Validate the form.\n      * @param {$} form\n      * @return {Boolean} is valid\n      */\n      validateForm: function (form) {\n        var me = this,\n          invalid = false,\n          fields = ['email', 'password'],\n          error;\n\n        $.each(fields, function (index, fieldName) {\n          \n          var $field = $('#' + fieldName),\n            value = $field.val();\n\n          if ($field.is('#email')) {\n            error = me.validateEmail(value);\n          } else {\n            error = me.validatePassword(value);\n          }\n\n          if (error) {\n            me.showFieldError($field, error);\n            invalid = true;\n          }\n        });\n\n\n        return !invalid;\n      }\n    });\n\n    return AccountSignupView;\n  });",
-			"file": "js/views/account/AccountSignupView.js",
-			"file_size": 3756,
-			"file_write_time": 130322942929650303,
+			"file": "js/views/account/LoginView.js",
 			"settings":
 			{
-				"buffer_size": 3767,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/models/account/User.js",
-			"settings":
-			{
-				"buffer_size": 220,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templates/account/accountSignupTemplate.html",
-			"settings":
-			{
-				"buffer_size": 666,
+				"buffer_size": 4544,
 				"line_ending": "Unix"
 			}
 		},
@@ -561,15 +539,75 @@
 			"file": "lib/resteasy/objects/users.php",
 			"settings":
 			{
-				"buffer_size": 199,
+				"buffer_size": 722,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lib/resteasy/objects/todotasks.php",
+			"file": "php/authenticate.php",
 			"settings":
 			{
-				"buffer_size": 757,
+				"buffer_size": 1545,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "php/util.php",
+			"settings":
+			{
+				"buffer_size": 314,
+				"line_ending": "Unix",
+				"name": "<?php"
+			}
+		},
+		{
+			"contents": "<?php\n// This script is to be included at the top of all \n// locked pages.  It checks authentication and, if\n// not logged in, will login if a login token is\n// present in the cookies.  If unable to login, a\n// 401 request is returned.\n\n// When a session has uid, it is considered authenticated.\n\nsession_start();\n\n// Check for the presense of uid, which is set on authentication.\nif (!$_SESSION['uid']) {\n\n	if (!loginWithRememberMe()) {\n		header('HTTP/1.0 401 Unauthorized');\n		exit;\n	}\n}\n\n/**\n* Attempts to authenticate user with remember me.\n* @return {Boolean}\n*/\nfunction loginWithRememberMe () {\n	$success = false;\n	$token = $_COOKIE['token'];\n	$uid = $_COOKIE['uid'];\n\n	if ($token && $uid) {\n		require '../lib/resteasy/config.php';\n		require '../lib/resteasy/connect.php';\n		$con = connect();\n\n		$sql = \"SELECT user_id FROM token WHERE token = '$token' AND user_id = $uid\";\n		$result = mysql_query($sql);\n\n		if ($result && mysql_num_rows($result) === 1) {\n			$row = mysql_fetch_assoc($result);\n			$_SESSION['uid'] = $row['user_id'];\n			$success = true;\n		}\n	}\n\n	return $success;\n}\n\n?>",
+			"file": "php/locked.php",
+			"file_size": 1031,
+			"file_write_time": 130322925424011319,
+			"settings":
+			{
+				"buffer_size": 1091,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/account/loginTemplate.html",
+			"settings":
+			{
+				"buffer_size": 688,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/resteasy/RestEasy.php",
+			"settings":
+			{
+				"buffer_size": 7418,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/resteasy/api.php",
+			"settings":
+			{
+				"buffer_size": 786,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/resteasy/Response.php",
+			"settings":
+			{
+				"buffer_size": 912,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/resteasy/Messageable.php",
+			"settings":
+			{
+				"buffer_size": 3146,
 				"line_ending": "Unix"
 			}
 		}
@@ -675,19 +713,28 @@
 	},
 	"file_history":
 	[
+		"/var/www/reergymerej/dev/taskManager/js/models/account/UserModel.js",
+		"/var/www/reergymerej/dev/taskManager/index.html",
+		"/var/www/reergymerej/dev/taskManager/js/router.js",
 		"/var/www/reergymerej/dev/taskManager/php/test.php",
+		"/var/www/reergymerej/dev/taskManager/php/testlocked.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/RestEasy.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Request.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Field.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/hints.php",
+		"/var/www/reergymerej/dev/taskManager/js/models/todo/TodoListModel.js",
+		"/var/www/reergymerej/dev/taskManager/templates/account/accountSignupTemplate.html",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/todotasks.php",
+		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/users.php",
+		"/var/www/reergymerej/dev/taskManager/js/main.js",
+		"/var/www/reergymerej/dev/taskManager/js/app.js",
 		"/var/www/reergymerej/dev/taskManager/php/locked.php",
 		"/var/www/reergymerej/dev/taskManager/php/authenticate.php",
 		"/var/www/reergymerej/dev/taskManager/php/logout.php",
-		"/var/www/reergymerej/dev/taskManager/js/main.js",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/config.php",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/connect.php",
-		"/var/www/reergymerej/dev/taskManager/templates/account/accountSignupTemplate.html",
 		"/var/www/reergymerej/dev/taskManager/js/views/account/AccountSignupView.js",
-		"/var/www/reergymerej/dev/taskManager/js/router.js",
 		"/var/www/reergymerej/dev/taskManager/js/views/doing/DoingView.js",
-		"/var/www/reergymerej/dev/taskManager/index.html",
-		"/var/www/reergymerej/dev/taskManager/js/app.js",
 		"/var/www/reergymerej/dev/taskManager/templates/doing/doingTaskTemplate.html",
 		"/var/www/reergymerej/dev/taskManager/lib/editable.js",
 		"/var/www/reergymerej/dev/taskManager/js/views/doing/TaskView.js",
@@ -697,7 +744,6 @@
 		"/var/www/reergymerej/dev/taskManager/js/models/todo/TodoTaskModel.js",
 		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoTaskTreeView.js",
 		"/var/www/reergymerej/dev/taskManager/css/style.css",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/todotasks.php",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/todolists.php",
 		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoManagementView.js",
 		"/var/www/reergymerej/dev/taskManager/js/views/todo/ListSelector.js",
@@ -715,17 +761,13 @@
 		"/var/www/reergymerej/dev/ihak/img.php",
 		"/var/www/reergymerej/dev/ihak/.htaccess",
 		"/var/www/reergymerej/dev/taskManager/todo.txt",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/RestEasy.php",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/hints.php",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/objects/tasks.php",
 		"/var/www/reergymerej/dev/taskManager/templates/todo/todoTemplate.html",
 		"/var/www/reergymerej/dev/taskManager/templates/todo/todoManagement.html",
 		"/var/www/reergymerej/dev/taskManager/js/views/todo/TodoListView.js",
 		"/var/www/reergymerej/dev/taskManager/js/collections/todo/TodoListCollection.js",
 		"/var/www/reergymerej/dev/taskManager/js/collections/todo/TodoCollection.js",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Field.php",
 		"/var/www/reergymerej/dev/taskManager/js/views/done/DoneView.js",
-		"/var/www/reergymerej/dev/taskManager/js/models/todo/TodoListModel.js",
 		"/var/www/reergymerej/dev/taskManager/js/collections/hints.js",
 		"/var/www/reergymerej/dev/taskManager/test.php",
 		"/var/www/reergymerej/dev/taskManager/js/models/doing/TaskModel.js",
@@ -743,7 +785,6 @@
 		"/home/grizzle/.gvfs/SFTP for wordtoth on wordtotheblurd.com/home/wordtoth/access-logs/ftp.wordtotheblurd.com-ftp_log",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/sql-test.php",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Messageable.php",
-		"/var/www/reergymerej/dev/taskManager/lib/resteasy/Request.php",
 		"/var/www/reergymerej/dev/taskManager/lib/resteasy/.htaccess",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/.disk_usage",
 		"/C/Users/blurd/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
@@ -799,10 +840,7 @@
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/fooTemplate.html",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/Response.php",
 		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/templates/foo/taskReviewerTemplate.html",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/api.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/Messageable.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/resteasy/Response.php",
-		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/Request.php"
+		"/C/xampp/htdocs/reergymerej.com/dev/taskManager/lib/resteasy/api.php"
 	],
 	"find":
 	{
@@ -832,6 +870,28 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"setResponse",
+			"http://localhost/reergymerej/dev/taskManager/?bust=1#/account-login",
+			"setResponse",
+			"validateForm",
+			"validatePassword",
+			"AccountSignupView",
+			"showAccountSignup",
+			"LoginView",
+			"AccountSignupView",
+			"UserModel",
+			"_GET",
+			"email",
+			"getToken",
+			"token",
+			"test",
+			"sql",
+			"^[^\\s]+ ",
+			"http",
+			"email",
+			"insert",
+			"text",
+			"TextField",
 			"TaskModel",
 			"good",
 			"validateForm",
@@ -937,29 +997,7 @@
 			"activeList",
 			"currentTodoCollection",
 			"TodoList",
-			"setActiveList",
-			"renderTasks",
-			"this.collection",
-			"collection",
-			"activeList",
-			"setVisibilityForCompleted",
-			"todoTemplate",
-			"currentTodoCollection",
-			"triggerViewChange",
-			"renderTasks",
-			"collection",
-			"todoTemplate",
-			"TodoTaskModel",
-			"tree",
-			"TodoListView",
-			"listSelector",
-			"todoListCollectionView",
-			"todoCollection",
-			"render",
-			"todoCollection",
-			"render",
-			"trigger",
-			"selected"
+			"setActiveList"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -967,6 +1005,8 @@
 		"regex": true,
 		"replace_history":
 		[
+			"LoginView",
+			"",
 			"User",
 			"expiration",
 			"COOKIE_DAYS",
@@ -1093,13 +1133,13 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1108,15 +1148,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1492,
+						"buffer_size": 1512,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1025,
-								1025
+								183,
+								183
 							]
 						],
 						"settings":
@@ -1131,19 +1171,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "js/views/account/AccountSignupView.js",
+					"file": "js/views/account/LoginView.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3767,
+						"buffer_size": 4544,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2989,
-								2989
+								3218,
+								3218
 							]
 						],
 						"settings":
@@ -1153,33 +1193,31 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1227.0,
+						"translation.y": 819.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "js/models/account/User.js",
+					"file": "lib/resteasy/objects/users.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 220,
+						"buffer_size": 722,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								200,
-								200
+								567,
+								567
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1189,19 +1227,103 @@
 				},
 				{
 					"buffer": 3,
-					"file": "templates/account/accountSignupTemplate.html",
+					"file": "php/authenticate.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 666,
+						"buffer_size": 1545,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								471,
-								471
+								1195,
+								1195
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 169.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "php/util.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 314,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								90,
+								90
+							]
+						],
+						"settings":
+						{
+							"auto_name": "<?php",
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "php/locked.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1091,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								476,
+								476
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "templates/account/loginTemplate.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 688,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								199,
+								199
 							]
 						],
 						"settings":
@@ -1216,20 +1338,48 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "lib/resteasy/objects/users.php",
+					"buffer": 7,
+					"file": "lib/resteasy/RestEasy.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 199,
+						"buffer_size": 7418,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								154,
-								154
+								5087,
+								5087
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1076.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "lib/resteasy/api.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 786,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								469,
+								469
 							]
 						],
 						"settings":
@@ -1244,20 +1394,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "lib/resteasy/objects/todotasks.php",
+					"buffer": 9,
+					"file": "lib/resteasy/Response.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 757,
+						"buffer_size": 912,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								128,
-								128
+								599,
+								599
 							]
 						],
 						"settings":
@@ -1267,6 +1417,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "lib/resteasy/Messageable.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3146,
+								3146
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 985.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1321,16 +1499,72 @@
 		"selected_items":
 		[
 			[
-				"restea/obje",
-				"lib/resteasy/objects/hints.php"
+				"reset/resp",
+				"lib/resteasy/Response.php"
+			],
+			[
+				"res",
+				"lib/resteasy/RestEasy.php"
 			],
 			[
 				"templ/accou",
 				"templates/account/accountSignupTemplate.html"
 			],
 			[
+				"router",
+				"js/router.js"
+			],
+			[
+				"index.html",
+				"index.html"
+			],
+			[
+				"view/accou",
+				"js/views/account/AccountSignupView.js"
+			],
+			[
+				"loc",
+				"php/locked.php"
+			],
+			[
+				"php/",
+				"php/authenticate.php"
+			],
+			[
+				"reste",
+				"lib/resteasy/RestEasy.php"
+			],
+			[
+				"reste/obj/",
+				"lib/resteasy/objects/hints.php"
+			],
+			[
+				"rest/obj/us",
+				"lib/resteasy/objects/users.php"
+			],
+			[
+				"resea/fi",
+				"lib/resteasy/Field.php"
+			],
+			[
+				"reset/obje/",
+				"lib/resteasy/objects/todotasks.php"
+			],
+			[
+				"todomo",
+				"js/models/todo/TodoListModel.js"
+			],
+			[
 				"main",
 				"js/main.js"
+			],
+			[
+				"appjs",
+				"js/app.js"
+			],
+			[
+				"restea/obje",
+				"lib/resteasy/objects/hints.php"
 			],
 			[
 				"conne",
@@ -1523,10 +1757,6 @@
 			[
 				"view/todov",
 				"js/views/todo/TodoView.js"
-			],
-			[
-				"router",
-				"js/router.js"
 			],
 			[
 				"view/todolis",
@@ -1779,58 +2009,6 @@
 			[
 				"templ/done",
 				"taskManager\\templates\\done\\taskCollectionTemplate.html"
-			],
-			[
-				"sty.sc",
-				"taskManager\\css\\style.scss"
-			],
-			[
-				"templ/home",
-				"taskManager\\templates\\home\\homeTemplate.html"
-			],
-			[
-				"collec/todo",
-				"taskManager\\js\\collections\\todo\\TodoCollection.js"
-			],
-			[
-				"todo/todov",
-				"taskManager\\js\\views\\todo\\TodoView.js"
-			],
-			[
-				"coll/todo",
-				"js\\collections\\todo\\TodoCollection.js"
-			],
-			[
-				"modl/todo",
-				"js\\models\\todo\\TodoTaskModel.js"
-			],
-			[
-				"temp/tod",
-				"templates\\todo\\todoTaskTemplate.html"
-			],
-			[
-				"collection/",
-				"js\\collections\\todo\\TodoCollection.js"
-			],
-			[
-				"templ/todod",
-				"templates\\todo\\todoTaskTemplate.html"
-			],
-			[
-				".scs",
-				"css\\style.scss"
-			],
-			[
-				"collection",
-				"js\\collections\\todo\\TodoCollection.js"
-			],
-			[
-				"stys",
-				"css\\style.scss"
-			],
-			[
-				"todoview",
-				"js\\views\\todo\\TodoView.js"
 			]
 		],
 		"width": 0.0

@@ -6,13 +6,15 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/todo/taskViewer.html'
+  'text!templates/todo/taskViewer.html',
+  'util'
 ],
   function (
     $,
     _,
     Backbone,
-    taskViewer
+    taskViewer,
+    util
   ) {
 
     var TodoView = Backbone.View.extend({
@@ -32,7 +34,6 @@ define([
           this.setupCollection();
         }
         
-
         // add new task on click
         this.$el.on('click', 'button.add', function (event) {
           if (me.collection.id) {
@@ -50,19 +51,26 @@ define([
 
         // toggle visibility of completed tasks
         this.$el.on('change', '#hide-complete', function (event) {
-          me.setVisibilityForCompleted(!$(this).prop('checked'));
+          var checked = $(this).prop('checked');
+          me.setVisibilityForCompleted(!checked);
+          util.setCookie('hide-complete', checked, 30);
         });
 
         this.render();
       },
 
       render: function () {
-        var compiledTemplate = _.template(taskViewer, {});
+        var compiledTemplate = _.template(taskViewer, {}),
+          hideComplete;
 
         this.$el.empty();
 
         // render the items in the collection
         this.$el.html(compiledTemplate);
+
+        hideComplete = util.getCookie('hide-complete');
+        $('#hide-complete').prop('checked', hideComplete);
+        this.setVisibilityForCompleted(!hideComplete);
 
         if (this.collection && this.collection.length > 0) {
           this.renderTasks();
