@@ -18,7 +18,7 @@ define([
 
 		/**
 		* @param {String} name
-		* @return {String}
+		* @return {Object} Attempts to convert value from string.
 		*/
 		getCookie: function (name) {
 			var c = document.cookie,
@@ -39,6 +39,34 @@ define([
 				} catch (e) {}
 			}
 
+			return val;
+		},
+
+		/**
+		* Save to localStorage.
+		* @param {String} name
+		* @param {String} value
+		*/		
+		set: function (name, value) {
+			if (value !== undefined && value !== null) {
+				localStorage.setItem(name, value);
+			} else {
+				localStorage.removeItem(name);
+			}
+		},
+
+		/**
+		* Save to localStorage.
+		* @param {String} name
+		* @return {Object} Attempts to convert value.
+		*/		
+		get: function (name) {
+			var val = localStorage.getItem(name);
+			if (val) {
+				try {
+					val = JSON.parse(val);
+				} catch (e) {}
+			}
 			return val;
 		}
 	};

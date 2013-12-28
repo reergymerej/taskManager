@@ -42,7 +42,7 @@ define([
 
         this.$el.on('change', '#show-all-today, #show-in-progress', function (event) {
           var id = $(this).attr('id');
-          util.setCookie(id, $(this).prop('checked'));
+          util.set(id, $(this).prop('checked'));
           me.fetchTasks();
         });
 
@@ -173,8 +173,8 @@ define([
 
         this.$el.html(compiledTemplate);
 
-        $('#show-all-today').prop('checked', util.getCookie('show-all-today'));
-        $('#show-in-progress').prop('checked', util.getCookie('show-in-progress'));
+        $('#show-all-today').prop('checked', util.get('show-all-today'));
+        $('#show-in-progress').prop('checked', util.get('show-in-progress'));
 
         this.renderTasks();
       },
@@ -254,8 +254,8 @@ define([
         taskCollection.fetch({
           data: {
             today: $('#show-all-today').prop('checked'),
-            today: util.getCookie('show-all-today'),
-            inProgress: util.getCookie('show-in-progress')
+            today: util.get('show-all-today'),
+            inProgress: util.get('show-in-progress')
           },
           success: function (collection, response, options) {
             me.renderTasks();

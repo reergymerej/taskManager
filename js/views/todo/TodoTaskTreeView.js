@@ -53,7 +53,7 @@ define([
         this.$el.on('change', '#hide-complete', function (event) {
           var checked = $(this).prop('checked');
           me.setVisibilityForCompleted(!checked);
-          util.setCookie('hide-complete', checked, 30);
+          util.set('hide-complete', checked);
         });
 
         this.render();
@@ -68,7 +68,7 @@ define([
         // render the items in the collection
         this.$el.html(compiledTemplate);
 
-        hideComplete = util.getCookie('hide-complete');
+        hideComplete = util.get('hide-complete');
         $('#hide-complete').prop('checked', hideComplete);
         this.setVisibilityForCompleted(!hideComplete);
 
