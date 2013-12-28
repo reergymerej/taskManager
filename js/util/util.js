@@ -1,8 +1,9 @@
 define([
   'jquery',
   'underscore',
-  'backbone'
-], function ($, _, Backbone) {
+  'backbone',
+  'text!templates/util/message.html',
+], function ($, _, Backbone, messageTemplate) {
 	return {
 		test: true,
 
@@ -68,6 +69,56 @@ define([
 				} catch (e) {}
 			}
 			return val;
+		},
+
+		/**
+		* @param {String} text
+		* @param {String} title
+		*/
+		dialog: function (text, title) {
+			$('<div>', {
+				html: text
+			}).dialog({
+				title: title,
+				modal: true,
+				dialogClass: 'dialog',
+				buttons: [
+					{
+						text: 'Ok',
+						click: function () {
+							$(this).dialog('close');
+						}
+					}
+				],
+				close: function () {
+					$(this).dialog('destroy').remove();
+				}
+			});
+		},
+
+		/**
+		* Show a message to the user.
+		* @param {String} text
+		* @param {String} [title]
+		*/
+		message: function (text, title) {
+
+			// TODO Change this to use a proper view
+			var msg = $('<div />', {
+				id: 'message',
+				class: 'message',
+				html: _.template(messageTemplate, {
+					title: title || 'Message for you, sir...',
+					message: text
+				})
+			});
+
+			msg.appendTo('body');
+			setTimeout(function () {
+				msg.slideUp('slow', function () {
+					msg.remove();
+				});
+			}, 3000);
 		}
 	};
 });

@@ -125,3 +125,11 @@ h1 {
 .buttons {
   display: none;
 }
+
+.message {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1em;
+}
